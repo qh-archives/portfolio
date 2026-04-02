@@ -24,26 +24,26 @@ const ease = [0.22, 1, 0.36, 1];
 
 /** Every image/video under public/images/play (flat order: creative-coding → Vid → fashion → graphic-design) */
 const creativeCodingVidFolder = [
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145379/track_lscvkf.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145370/2_ofieiu.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145369/3_pwkyji.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145369/5_rrdttw.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145369/6_mc7xue.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145368/7_jpicnc.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145368/8_eg3gps.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145377/9_fhfxw8.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145376/10_iwrmro.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145375/11_mxznsj.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145375/12_zf6ihe.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145379/13_v7k9yo.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145374/14_lph1c8.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145372/16_ohcl1b.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145375/17_aoumzl.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145375/12_zf6ihe.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145371/19_znhiyb.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145379/track_lscvkf.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145366/Test_oh08am.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145379/track_lscvkf.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145379/track_lscvkf.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145370/2_ofieiu.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145369/3_pwkyji.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145369/5_rrdttw.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145369/6_mc7xue.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145368/7_jpicnc.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145368/8_eg3gps.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145377/9_fhfxw8.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145376/10_iwrmro.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145375/11_mxznsj.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145375/12_zf6ihe.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145379/13_v7k9yo.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145374/14_lph1c8.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145372/16_ohcl1b.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145375/17_aoumzl.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145375/12_zf6ihe.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145371/19_znhiyb.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145379/track_lscvkf.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145366/Test_oh08am.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145379/track_lscvkf.mp4",
 ];
 
 const fashionImages = [
@@ -152,7 +152,7 @@ function LazyGalleryVideo({ src, darkMode }) {
 }
 
 const creativeItems = [
-  galleryItemFromSrc("https://res.cloudinary.com/dugdaifzh/video/upload/v1775146692/1_vty7jm.mp4"),
+  galleryItemFromSrc("https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775146692/1_vty7jm.mp4"),
   ...creativeCodingVidFolder.map(galleryItemFromSrc),
 ];
 const fashionItems = fashionImages.map(galleryItemFromSrc);
@@ -167,14 +167,14 @@ const playItems = [
 
 /** Hero loop clips from public/images/play/creative-coding/Vid */
 const heroVideos = [
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145379/track_lscvkf.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145370/2_ofieiu.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145369/3_pwkyji.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145369/5_rrdttw.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145369/6_mc7xue.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145368/7_jpicnc.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145368/8_eg3gps.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145377/9_fhfxw8.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145379/track_lscvkf.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145370/2_ofieiu.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145369/3_pwkyji.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145369/5_rrdttw.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145369/6_mc7xue.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145368/7_jpicnc.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145368/8_eg3gps.mp4",
+  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145377/9_fhfxw8.mp4",
 ];
 
 const CARD_W = 120;
