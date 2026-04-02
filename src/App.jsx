@@ -677,7 +677,7 @@ const projects = [
 
 function LazyVideo({ src, className, style, ...props }) {
   const videoRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -685,8 +685,8 @@ function LazyVideo({ src, className, style, ...props }) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
         if (entry.isIntersecting) {
+          setHasLoaded(true);
           video.play().catch(() => {});
         } else {
           video.pause();
@@ -704,7 +704,7 @@ function LazyVideo({ src, className, style, ...props }) {
       ref={videoRef}
       className={className}
       style={style}
-      src={isVisible ? src : undefined}
+      src={hasLoaded ? src : undefined}
       preload="none"
       {...props}
     />
@@ -804,6 +804,11 @@ function HorizontalNavLinks({ darkMode, skipIntro = false }) {
           <motion.a
             key={link}
             href={`#${link}`}
+            onClick={(e) => {
+              e.preventDefault();
+              history.replaceState(null, "", `${window.location.pathname}#${link}`);
+              window.dispatchEvent(new HashChangeEvent("hashchange"));
+            }}
             className="text-[16px] font-bold tracking-[-0.32px] leading-[1.4] no-underline flex items-center justify-center absolute"
             style={{
               backgroundColor: darkMode ? "#0F0F0F" : "#F7F7F7",
@@ -1196,7 +1201,7 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
   const tagTransition = (delay) =>
     skipIntro ? { duration: 0 } : { duration: 0.5, delay: 0.55 + delay, ease };
   return (
-    <div id="home" className="shrink-0 relative scroll-mt-0" style={{ width: "100vw", height: "100%" }}>
+    <div className="shrink-0 relative scroll-mt-0" style={{ width: "100vw", height: "100%" }}>
       {/* Canvas guide lines */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
         <line x1="50%" y1="0" x2="50%" y2="100%" stroke={darkMode ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"} strokeWidth="1" strokeDasharray="4 8" />
@@ -1934,7 +1939,7 @@ function AboutResumeRow({ leftBold, leftMuted, date, fg, muted }) {
   );
 }
 
-function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, mobile = false, vScale = 1 }) {
+function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, mobile = false, vScale = 1, id }) {
   const accent = darkMode ? "#a78bfa" : ABOUT_ACCENT_LIGHT;
   const muted = darkMode ? "rgba(255,255,255,0.55)" : ABOUT_MUTED;
   const fg = darkMode ? "#fff" : "#000";
@@ -1962,7 +1967,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
     };
 
     return (
-      <section id="about" style={{ padding: "40px 24px 64px", fontFamily: font, backgroundColor: darkMode ? "#0F0F0F" : "#f7f7f7" }}>
+      <section id={id} style={{ padding: "40px 24px 64px", fontFamily: font, backgroundColor: darkMode ? "#0F0F0F" : "#f7f7f7" }}>
         <div className="relative" style={{ border: `1.5px solid ${PURPLE}`, backgroundColor: bg, padding: "28px 24px" }}>
           {corners.map((pos, i) => (
             <span key={i} className="absolute" style={{ ...cornerStyle, ...pos }} />
@@ -2025,7 +2030,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
 
   return (
     <motion.section
-      id="about"
+      id={id}
       className="box-border shrink-0 scroll-mt-0"
       style={{
         width: "fit-content",
@@ -2706,8 +2711,13 @@ function scrollHomeStripToHash(container, hashId, behavior = "smooth") {
   if (h === "play") return;
   const allowed = new Set(["home", "projects", "about"]);
   if (!allowed.has(h)) return;
+  if (!container) return;
+  if (h === "home") {
+    container.scrollTo({ left: 0, behavior: "smooth" });
+    return;
+  }
   const el = document.getElementById(h);
-  if (!container || !el) return;
+  if (!el) return;
   const cRect = container.getBoundingClientRect();
   const eRect = el.getBoundingClientRect();
   const delta = eRect.left - cRect.left + container.scrollLeft;
@@ -2912,7 +2922,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
       </div>
 
       {/* ── About ── */}
-      <div id="about" className="px-5 pb-10 pt-10" style={{ overflow: "visible" }}>
+      <div className="px-5 pb-10 pt-10" style={{ overflow: "visible" }}>
         <img src="/images/about/me.png" alt="Queenie" className="w-full object-contain mb-4" />
         <div className="relative" style={{ border: "1.5px solid #8A38F5", backgroundColor: darkMode ? "#141414" : "#fff", padding: "24px", overflow: "visible" }}>
           {[{ top: -6, left: -6 }, { top: -6, right: -6 }, { bottom: -6, left: -6 }, { bottom: -6, right: -6 }].map((pos, i) => (
@@ -3155,7 +3165,7 @@ export default function App() {
     if (!["home", "projects", "about"].includes(section)) return;
     const container = homeHorizontalScrollRef.current;
     if (container) {
-      scrollHomeStripToHash(container, hash || `#${section}`, "auto");
+      scrollHomeStripToHash(container, hash || `#${section}`, "smooth");
     }
   }, []);
 
@@ -3199,6 +3209,7 @@ export default function App() {
         />
       ) : revealContent ? (
         <motion.div
+          id="home"
           key="home-page"
           className={isMobile ? "min-h-screen flex flex-col overflow-y-auto" : "h-screen min-h-0 flex flex-col"}
           style={{
@@ -3245,12 +3256,12 @@ export default function App() {
                 />
               </div>
 
-              {!isMobile && <AboutMeStripSection mobile={false} darkMode={darkMode} skipIntro={skipLandingAnimations} scrollContainerRef={homeHorizontalScrollRef} vScale={vScale} />}
+              {!isMobile && <AboutMeStripSection id="about" mobile={false} darkMode={darkMode} skipIntro={skipLandingAnimations} scrollContainerRef={homeHorizontalScrollRef} vScale={vScale} />}
 
             </div>
           </div>
 
-          {isMobile && <AboutMeStripSection mobile={true} darkMode={darkMode} skipIntro={skipLandingAnimations} scrollContainerRef={homeHorizontalScrollRef} />}
+          {isMobile && <AboutMeStripSection id="about" mobile={true} darkMode={darkMode} skipIntro={skipLandingAnimations} scrollContainerRef={homeHorizontalScrollRef} />}
 
           <GlassCursor darkMode={darkMode} />
           <CanvasContextMenu darkMode={darkMode} />
