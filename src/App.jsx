@@ -1357,10 +1357,10 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
                 style={{ backgroundColor: "#0055ff", color: "white", padding: "2px 6px", fontWeight: "bold" }}
               >
                 I think, then I build.
-                <span className="absolute" style={{ top: -5, left: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
-                <span className="absolute" style={{ top: -5, right: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
-                <span className="absolute" style={{ bottom: -5, left: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
-                <span className="absolute" style={{ bottom: -5, right: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
+                <motion.span className="absolute" initial={skipIntro ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={tagTransition(0.18)} style={{ top: -5, left: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
+                <motion.span className="absolute" initial={skipIntro ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={tagTransition(0.18)} style={{ top: -5, right: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
+                <motion.span className="absolute" initial={skipIntro ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={tagTransition(0.18)} style={{ bottom: -5, left: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
+                <motion.span className="absolute" initial={skipIntro ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={tagTransition(0.18)} style={{ bottom: -5, right: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
               </span>
             </motion.span>
           </span>
