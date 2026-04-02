@@ -152,7 +152,7 @@ function LazyGalleryVideo({ src, darkMode }) {
 }
 
 const creativeItems = [
-  galleryItemFromSrc("https://res.cloudinary.com/dugdaifzh/video/upload/v1775145379/track_lscvkf.mp4"),
+  galleryItemFromSrc("https://res.cloudinary.com/dugdaifzh/video/upload/v1775146692/1_vty7jm.mp4"),
   ...creativeCodingVidFolder.map(galleryItemFromSrc),
 ];
 const fashionItems = fashionImages.map(galleryItemFromSrc);
