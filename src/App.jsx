@@ -3227,11 +3227,11 @@ export default function App() {
             backgroundSize: "20px 20px",
             transition: "background-color 0.2s ease",
           }}
-          initial={skipLandingAnimations ? false : { opacity: 0 }}
+          initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 0.97, y: -20 }}
           transition={{
-            duration: skipLandingAnimations ? 0 : 0.6,
+            duration: 0.5,
             ease: [0.22, 1, 0.36, 1],
           }}
         >
