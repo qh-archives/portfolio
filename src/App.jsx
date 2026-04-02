@@ -1975,11 +1975,11 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
           <div className="flex flex-col gap-8">
             {/* Bio */}
             <div className="flex flex-col gap-3">
-              <p className="text-lg tracking-[-0.36px] leading-[1.2]" style={{ color: fg }}>Hello (: I&apos;m Queenie.</p>
+              <p className="text-lg tracking-[-0.36px] leading-[1.2]" style={{ color: fg }}>Hello I&apos;m Queenie (:</p>
               <div className="text-sm tracking-[-0.28px] leading-[1.6]" style={{ color: fg }}>
                 <p className="mb-2">I&apos;m an interdisciplinary designer with a love for motion, creative tools, and the small moments that make a product feel delightful.</p>
                 <p className="mb-2">I&apos;m currently pursuing my Master&apos;s in HCI at NYU and I&apos;ve brought my craft to companies like Uber, designing experiences that connect people and culture.</p>
-                <p className="mb-1">Outside of design I&apos;m:</p>
+                <p className="mb-1">Outside of design I&apos;m</p>
                 <ul className="list-disc pl-5 flex flex-col gap-0.5">
                   <li>Sending problems up a bouldering wall</li>
                   <li>Chasing the perfect matcha</li>
@@ -2070,7 +2070,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
         <AboutTextPanel accent={accent} paperA={paper} paperB={paperAlt} bg={bg} marginTop={240} marginLeft={120} vScale={vScale}>
           <div className="flex w-full max-w-full flex-col gap-3" style={{ fontFamily: font }}>
             <p className="w-full text-lg tracking-[-0.36px] leading-[1.2]" style={{ color: fg }}>
-              Hello (: I&apos;m Queenie.
+              Hello I&apos;m Queenie (:
             </p>
             <div className="w-full text-[14px] tracking-[-0.32px] leading-[1.4]" style={{ color: fg }}>
               <p className="mb-0">
@@ -2930,14 +2930,14 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
           ))}
           <div className="flex flex-col gap-6">
             <div>
-              <p className="text-[18px] tracking-[-0.3px] leading-[1.3] mb-3" style={{ color: fg }}>Hello (: I'm Queenie.</p>
+              <p className="text-[18px] tracking-[-0.3px] leading-[1.3] mb-3" style={{ color: fg }}>Hello I'm Queenie (:</p>
               <p className="text-[14px] leading-[1.6]" style={{ color: fg }}>
                 I'm an interdisciplinary designer with a love for motion, creative tools, and the small moments that make a product feel delightful.
               </p>
               <p className="text-[14px] leading-[1.6] mt-2" style={{ color: fg }}>
                 I'm currently pursuing my Master's in HCI at NYU and I've brought my craft to companies like Uber, designing experiences that connect people and culture.
               </p>
-              <p className="text-[14px] leading-[1.6] mt-2" style={{ color: fg }}>Outside of design I'm: sending problems up a bouldering wall, chasing the perfect matcha, building interactive worlds with code, and finding beauty in things that move me.</p>
+              <p className="text-[14px] leading-[1.6] mt-2" style={{ color: fg }}>Outside of design I'm sending problems up a bouldering wall, chasing the perfect matcha, building interactive worlds with code, and finding beauty in things that move me.</p>
               <p className="text-[14px] leading-[1.6] mt-3" style={{ color: fg }}>
                 You can see more of my work on{" "}
                 <a href="https://x.com/queenie_hsiao" target="_blank" rel="noopener noreferrer" className="underline underline-offset-[3px]" style={{ color: fg }}>X</a>

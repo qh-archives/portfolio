@@ -158,12 +158,18 @@ const creativeItems = [
 const fashionItems = fashionImages.map(galleryItemFromSrc);
 const graphicItems = graphicDesignItems.map(galleryItemFromSrc);
 
-/** Flat list of every asset (order fixed; gallery shuffles a copy on mount) */
-const playItems = [
-  ...creativeItems,
-  ...fashionItems,
-  ...graphicItems,
-];
+/** Interleave all categories so they're visually mixed across columns */
+function interleaveItems(...arrays) {
+  const result = [];
+  const maxLen = Math.max(...arrays.map((a) => a.length));
+  for (let i = 0; i < maxLen; i++) {
+    for (const arr of arrays) {
+      if (i < arr.length) result.push(arr[i]);
+    }
+  }
+  return result;
+}
+const playItems = interleaveItems(creativeItems, fashionItems, graphicItems);
 
 /** Hero loop clips from public/images/play/creative-coding/Vid */
 const heroVideos = [
@@ -199,6 +205,10 @@ const STACK_STAGGER = 0.07;
 const CIRCLE_DUR = 0.62;
 const CIRCLE_STAGGER = 0.022;
 const PHASE_GAP = 0.1;
+
+function getThumbnail(videoUrl) {
+  return videoUrl.replace("/video/upload/q_auto,f_auto/", "/video/upload/so_0,w_240,c_fill/").replace(/\.mp4$/, ".png");
+}
 
 function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
   const radius = isMobile ? RADIUS_MOBILE : RADIUS;
@@ -278,6 +288,7 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
           >
             <video
               src={src}
+              poster={getThumbnail(src)}
               className="w-full h-full object-cover"
               style={{ display: "block" }}
               autoPlay
@@ -366,7 +377,7 @@ function PlayCircleHero({ darkMode, onBack }) {
           <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
             <path d="M10 2L4 8L10 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <span className="text-xs uppercase tracking-[0.08em]">Back to projects</span>
+          <span className="text-xs uppercase tracking-[0.08em]">Back</span>
         </motion.button>
       )}
 
@@ -425,6 +436,26 @@ function PlayCircleHero({ darkMode, onBack }) {
           >
             (2019 - 2026)
           </motion.span>
+          <motion.div
+            className="flex flex-col items-center gap-1 mt-6 cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.5, ease }}
+            onClick={() => {
+              window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+            }}
+          >
+            <span style={{ fontSize: isMobile ? 10 : 12, letterSpacing: "0.1em", color: darkMode ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)", fontFamily: "'Instrument Sans', sans-serif" }}>
+              Scroll
+            </span>
+            <motion.span
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)", fontSize: isMobile ? 14 : 16 }}
+            >
+              ↓
+            </motion.span>
+          </motion.div>
         </div>
       </div>
     </div>
