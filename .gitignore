@@ -12,11 +12,6 @@ dist
 dist-ssr
 *.local
 
-# Large video files (>100MB — host externally on Cloudinary/CDN)
-public/images/case-studies/dandi/videos/connect_1.mp4
-public/images/landing/lume-card.mp4
-public/images/play/creative-coding/1.mp4
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
