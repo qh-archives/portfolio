@@ -864,7 +864,7 @@ function StickyTopRuler({ darkMode, scrollRef, skipIntro = false }) {
   }, [scrollRef]);
 
   const W = typeof window !== "undefined" ? window.innerWidth : 1440;
-  const totalWidth = Math.max(W * 8, 9000);
+  const totalWidth = Math.max(W * 20, 30000);
   const tickSpacing = 10;
   const tickCount = Math.ceil(totalWidth / tickSpacing);
   const color = darkMode ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)";
