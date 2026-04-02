@@ -66,7 +66,7 @@ function PasswordGate({ darkMode, onUnlock, isMobile }) {
         <svg width={isMobile ? 20 : 24} height={isMobile ? 20 : 24} viewBox="0 0 24 24" fill="none">
           <rect x="3" y="11" width="18" height="11" rx="2" stroke={mutedText} strokeWidth="1.5" />
           <path d="M7 11V7C7 4.24 9.24 2 12 2C14.76 2 17 4.24 17 7V11" stroke={mutedText} strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
+      </svg>
       </div>
 
       <div className="flex flex-col gap-3">
@@ -79,8 +79,8 @@ function PasswordGate({ darkMode, onUnlock, isMobile }) {
           }}
         >
           This work is confidential
-        </h3>
-        <p
+      </h3>
+      <p
           style={{
             fontSize: isMobile ? 16 : 16,
             letterSpacing: "-0.2px",
@@ -648,7 +648,7 @@ function PersonaSection({ section, darkMode, isMobile }) {
               const gidCCW = `persona-ccw-${i}`;
               return (
                 <motion.div
-                  key={i}
+              key={i}
                   className={isMobile ? "relative w-full" : "flex-1 relative"}
                   style={{ height: cardH }}
                   initial={{ opacity: 0, y: 20 }}
@@ -675,12 +675,12 @@ function PersonaSection({ section, darkMode, isMobile }) {
                     }}
                   >
                     <img
-                      src={darkMode ? img.dark : img.light}
-                      alt=""
+              src={darkMode ? img.dark : img.light}
+              alt=""
                       className="object-contain pointer-events-none"
                       style={{ height: 200 }}
-                    />
-                  </div>
+            />
+        </div>
                 </motion.div>
               );
             })}
@@ -721,7 +721,7 @@ function PersonaSection({ section, darkMode, isMobile }) {
 
 function StatsSection({ section, darkMode, isMobile }) {
   if (section.cards) {
-    return (
+  return (
       <div className="flex flex-col gap-7">
         {section.heading && (
           <h3
@@ -892,7 +892,7 @@ function MediaCollageSection({ section, darkMode, isMobile }) {
             ) : (
               <img src={section.pairingImage} alt="" className="w-full h-auto pointer-events-none block" />
             )}
-          </div>
+        </div>
         </div>
       ) : (
       <div
@@ -1067,19 +1067,19 @@ function SafeguardsSection({ section, darkMode, isMobile }) {
                   color: darkMode ? "white" : "black",
                   fontFamily: "'Instrument Sans', sans-serif",
                 }}
-              >
-                {item.question}
-              </h4>
-              <p
+            >
+              {item.question}
+            </h4>
+            <p
                 className="text-base leading-[1.6] tracking-[-0.32px]"
                 style={{
                   color: darkMode ? "rgba(255,255,255,0.7)" : "#555",
                   fontFamily: "'Instrument Sans', sans-serif",
                 }}
-              >
-                {item.answer}
-              </p>
-            </div>
+            >
+              {item.answer}
+            </p>
+          </div>
             {item.image && (
               <motion.img
                 src={item.image}
@@ -1187,29 +1187,29 @@ function WhatIfSection({ section, darkMode, isMobile }) {
           const colors = ["#AEDFF7", "#AEDFF7", "#AEDFF7"];
           const colorsDark = ["rgba(174,223,247,0.15)", "rgba(174,223,247,0.15)", "rgba(174,223,247,0.15)"];
           return section.items.map((item, i) => (
-            <motion.div
-              key={i}
+          <motion.div
+            key={i}
               className="rounded-[12px] px-8 py-5 flex items-start gap-4"
-              style={{
+            style={{
                 backgroundColor: darkMode ? colorsDark[i % colorsDark.length] : colors[i % colors.length],
-              }}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <span
+            }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span
                 className="text-sm font-medium shrink-0 mt-1"
                 style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)" }}
-              >
-                {i + 1}
-              </span>
-              <p
+            >
+              {i + 1}
+            </span>
+            <p
                 className="font-medium leading-[1.4] tracking-[-0.48px]"
                 style={{ fontSize: isMobile ? 18 : 24, color: darkMode ? "white" : "black" }}
-                dangerouslySetInnerHTML={{ __html: item }}
-              />
-            </motion.div>
+              dangerouslySetInnerHTML={{ __html: item }}
+            />
+          </motion.div>
           ));
         })()}
       </div>
@@ -1364,28 +1364,28 @@ function ConceptCollage({ section, darkMode, isMobile }) {
           ))}
         </div>
       ) : (
-        <div className="w-full relative" style={{ height: 900 }}>
-          {section.images.map((img, i) => {
-            const p = positions[i] || positions[0];
-            return (
-              <div
-                key={i}
-                className="absolute"
-                style={{
-                  width: p.width,
-                  top: p.top,
-                  left: p.left,
-                  right: p.right,
-                  zIndex: p.zIndex,
-                  transform: `rotate(${p.rotate}deg)`,
-                  filter: "drop-shadow(0 6px 20px rgba(0,0,0,0.12))",
-                }}
-              >
-                <PreviewCard image={img.src} name={img.name} darkMode={darkMode} naturalRatio />
-              </div>
-            );
-          })}
-        </div>
+      <div className="w-full relative" style={{ height: 900 }}>
+        {section.images.map((img, i) => {
+          const p = positions[i] || positions[0];
+          return (
+            <div
+              key={i}
+              className="absolute"
+              style={{
+                width: p.width,
+                top: p.top,
+                left: p.left,
+                right: p.right,
+                zIndex: p.zIndex,
+                transform: `rotate(${p.rotate}deg)`,
+                filter: "drop-shadow(0 6px 20px rgba(0,0,0,0.12))",
+              }}
+            >
+              <PreviewCard image={img.src} name={img.name} darkMode={darkMode} naturalRatio />
+            </div>
+          );
+        })}
+      </div>
       )}
     </div>
   );
@@ -1597,51 +1597,51 @@ function FeatureGridSection({ section, darkMode, isMobile }) {
   const useProcessLayout = !!(kicker || introHeading || introBody || cta?.label);
 
   if (!useProcessLayout) {
-    return (
+  return (
       <div className={isMobile ? "flex flex-col gap-3" : "grid grid-cols-2 gap-5"}>
         {cards.map((card, i) => (
-          <motion.div
-            key={i}
+        <motion.div
+          key={i}
             className="rounded-[12px] relative overflow-hidden"
-            style={{
-              backgroundColor: darkMode ? "#1a1a1a" : "#fff",
-              border: darkMode ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)",
-              boxShadow: darkMode ? "none" : "0 2px 16px rgba(0,0,0,0.04)",
-            }}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="p-10 flex flex-col gap-5" style={{ minHeight: 240 }}>
-              <div className="flex items-center gap-3">
-                <span
-                  className="text-xs font-bold"
-                  style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999", fontFamily: "'Inter', sans-serif" }}
-                >
-                  0{i + 1}
-                </span>
-              </div>
-              <h4
-                className="text-2xl font-bold leading-[1.25] tracking-[-0.5px]"
-                style={{ color: darkMode ? "white" : "black" }}
+          style={{
+            backgroundColor: darkMode ? "#1a1a1a" : "#fff",
+            border: darkMode ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)",
+            boxShadow: darkMode ? "none" : "0 2px 16px rgba(0,0,0,0.04)",
+          }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="p-10 flex flex-col gap-5" style={{ minHeight: 240 }}>
+            <div className="flex items-center gap-3">
+              <span
+                className="text-xs font-bold"
+                style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999", fontFamily: "'Inter', sans-serif" }}
               >
-                {card.title}
-              </h4>
-              <div className="mt-auto">
-                <p
-                  className="text-base leading-[1.6] tracking-[-0.32px]"
-                  style={{ color: darkMode ? "rgba(255,255,255,0.55)" : "#777" }}
-                >
-                  {card.body}
-                </p>
-              </div>
+                0{i + 1}
+              </span>
             </div>
-          </motion.div>
-        ))}
-      </div>
-    );
-  }
+            <h4
+              className="text-2xl font-bold leading-[1.25] tracking-[-0.5px]"
+              style={{ color: darkMode ? "white" : "black" }}
+            >
+              {card.title}
+            </h4>
+            <div className="mt-auto">
+              <p
+                className="text-base leading-[1.6] tracking-[-0.32px]"
+                style={{ color: darkMode ? "rgba(255,255,255,0.55)" : "#777" }}
+              >
+                {card.body}
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
   return (
     <div
@@ -1649,13 +1649,13 @@ function FeatureGridSection({ section, darkMode, isMobile }) {
     >
       <div className="flex flex-col gap-10" style={{ width: isMobile ? "100%" : "clamp(200px, 35vw, 550px)", flexShrink: 0 }}>
         {kicker && (
-          <h3
-            className="text-xs font-medium uppercase tracking-[0.1em] leading-[1.3]"
+        <h3
+          className="text-xs font-medium uppercase tracking-[0.1em] leading-[1.3]"
             style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999", fontFamily: "'Instrument Sans', sans-serif" }}
-          >
+        >
             {kicker}
-          </h3>
-        )}
+        </h3>
+      )}
         {introHeading && (
           <p
             className="font-medium leading-[1.4] tracking-[-0.48px]"
@@ -1713,16 +1713,16 @@ function FeatureGridSection({ section, darkMode, isMobile }) {
 
       <div className="flex-1 min-w-0 flex flex-col gap-3">
           {cards.map((card, i) => (
-            <motion.div
-              key={i}
+          <motion.div
+            key={i}
               className="rounded-[14px] px-6 py-6 sm:px-8 sm:py-7"
-              style={{
+            style={{
                 backgroundColor: darkMode ? "rgba(255,255,255,0.03)" : "#ffffff",
-                border: darkMode ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)",
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              border: darkMode ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)",
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
               transition={{ duration: 0.45, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="flex justify-between items-start gap-6">
@@ -1732,12 +1732,12 @@ function FeatureGridSection({ section, darkMode, isMobile }) {
                 >
                   {card.title}
                 </h3>
-                <span
+              <span
                   className="text-sm shrink-0 tabular-nums pt-0.5"
                   style={{ color: darkMode ? "rgba(255,255,255,0.35)" : "#aaa", fontFamily: "'Instrument Sans', sans-serif" }}
-                >
+              >
                   {i + 1}
-                </span>
+              </span>
               </div>
               <p
                 className="mt-4 text-base leading-[1.65] tracking-[-0.02em]"
@@ -1747,7 +1747,7 @@ function FeatureGridSection({ section, darkMode, isMobile }) {
               </p>
             </motion.div>
           ))}
-      </div>
+            </div>
     </div>
   );
 }
@@ -1811,15 +1811,15 @@ function PersonaCardsSection({ section, darkMode, isMobile }) {
                 </div>
                 <div className="flex-1 flex flex-col gap-4 justify-center">
                   {card.pointsLabel && <h5 className="text-base font-bold tracking-[-0.3px]" style={{ color: "black" }}>{card.pointsLabel}</h5>}
-                  <ul className="flex flex-col gap-3">
-                    {card.points.map((point, j) => (
+              <ul className="flex flex-col gap-3">
+                {card.points.map((point, j) => (
                       <li key={j} className="text-sm leading-[1.6] tracking-[-0.28px] flex gap-3 items-start" style={{ color: "#555" }}>
-                        <span className="shrink-0 mt-1.5 w-[5px] h-[5px] rounded-full" style={{ backgroundColor: "#FF522A" }} />
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                    <span className="shrink-0 mt-1.5 w-[5px] h-[5px] rounded-full" style={{ backgroundColor: "#FF522A" }} />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
               </div>
             )}
           </motion.div>
@@ -1866,13 +1866,13 @@ function InsightCardsSection({ section, darkMode, isMobile }) {
           ) : (
             <>
               <h4 className="text-3xl font-bold leading-[1.2] tracking-[-0.6px]" style={{ color: "black", whiteSpace: "pre-line" }}>{card.title}</h4>
-              <div className="flex justify-center mt-10 mb-12">
-                {card.icon ? (
-                  <img src={card.icon} alt="" className="h-[90px] w-auto object-contain" />
-                ) : (
-                  <ShapeDecoration shape={card.shape} color={card.shapeColor} />
-                )}
-              </div>
+          <div className="flex justify-center mt-10 mb-12">
+            {card.icon ? (
+              <img src={card.icon} alt="" className="h-[90px] w-auto object-contain" />
+            ) : (
+              <ShapeDecoration shape={card.shape} color={card.shapeColor} />
+            )}
+          </div>
               <p className="text-xl leading-[1.5] tracking-[-0.3px]" style={{ color: "#666" }}>{card.body}</p>
             </>
           )}
@@ -1939,8 +1939,8 @@ function ImageSection({ section }) {
 function TwoColumnSection({ section, darkMode, isMobile }) {
   if (section.layout === "stacked") {
     if (isMobile) {
-      return (
-        <>
+  return (
+    <>
           {section.leftHeading && (
             <h3
               className="text-[10px] font-medium uppercase tracking-[0.1em] leading-[1.3]"
@@ -2540,11 +2540,11 @@ export default function ProjectPage({ project, darkMode, onBack }) {
           </div>
 
           {renderSections()}
-        </div>
-      </div>
+                    </div>
+          </div>
       <div style={{ padding: "0 clamp(24px, 4vw, 60px)" }}>
         <Footer darkMode={darkMode} />
-      </div>
+        </div>
       <GlassCursor darkMode={darkMode} />
     </motion.div>
   );

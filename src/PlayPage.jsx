@@ -491,41 +491,41 @@ export default function PlayPage({ darkMode, onBack }) {
         <motion.div
           className="w-full"
           style={{ columnCount: isMobile ? 2 : 3, columnGap: isMobile ? 8 : 12 }}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease }}
-        >
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease }}
+          >
           {galleryItems.map((item, i) => (
-            <motion.div
+              <motion.div
               key={`${item.src}-${i}`}
-              className="rounded-[12px] overflow-hidden"
-              style={{ breakInside: "avoid", marginBottom: 12 }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 + i * 0.03, ease }}
-            >
-              {item.type === "image" ? (
-                <img
-                  className="w-full h-auto block"
-                  src={item.src}
-                  alt=""
-                  loading="lazy"
-                />
+                className="rounded-[12px] overflow-hidden"
+                style={{ breakInside: "avoid", marginBottom: 12 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 + i * 0.03, ease }}
+              >
+                {item.type === "image" ? (
+                  <img
+                    className="w-full h-auto block"
+                    src={item.src}
+                    alt=""
+                    loading="lazy"
+                  />
               ) : isMobile ? (
                 <LazyGalleryVideo src={item.src} darkMode={darkMode} />
-              ) : (
-                <video
-                  className="w-full h-auto block"
-                  src={item.src}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                />
-              )}
-            </motion.div>
-          ))}
-        </motion.div>
+                ) : (
+                  <video
+                    className="w-full h-auto block"
+                    src={item.src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
       </div>
 
       <div className={isMobile ? "px-5" : "px-[60px]"}>

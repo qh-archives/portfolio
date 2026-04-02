@@ -3043,10 +3043,47 @@ export default function App() {
 
   const skipLandingAnimations = skipHomeHeroIntro || suppressLandingIntro;
 
+  const CASE_STUDY_TITLES = ["Uber", "Dandi", "Lume", "Flow-Fi"];
+  const [visitedStudies, setVisitedStudies] = useState(() => new Set());
+  const [justCompletedAll, setJustCompletedAll] = useState(false);
+
+  useEffect(() => {
+    if (!justCompletedAll) return;
+    const link = document.querySelector("link[rel='icon']");
+    if (link) {
+      link.href = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>";
+    }
+    const base = "⭐ You've seen all of Queenie's case studies! ⭐  ";
+    let offset = 0;
+    const interval = setInterval(() => {
+      document.title = base.slice(offset) + base.slice(0, offset);
+      offset = (offset + 1) % base.length;
+    }, 200);
+    const timeout = setTimeout(() => {
+      clearInterval(interval);
+      document.title = "Queenie's Portfolio";
+      const l = document.querySelector("link[rel='icon']");
+      if (l) l.href = "/logo.png";
+      setJustCompletedAll(false);
+    }, 20000);
+    return () => { clearInterval(interval); clearTimeout(timeout); };
+  }, [justCompletedAll]);
+
   const selectProject = useCallback((project) => {
     if (project.externalUrl) {
       setExternalOverlay(project.externalUrl);
       return;
+    }
+    if (CASE_STUDY_TITLES.includes(project.title)) {
+      setVisitedStudies((prev) => {
+        const next = new Set(prev);
+        next.add(project.title);
+        try { localStorage.setItem("portfolio:visited", JSON.stringify([...next])); } catch {}
+        if (CASE_STUDY_TITLES.every((t) => next.has(t)) && !CASE_STUDY_TITLES.every((t) => prev.has(t))) {
+          setJustCompletedAll(true);
+        }
+        return next;
+      });
     }
     setCurrentPage({ page: "project", project });
     window.location.hash = `project/${encodeURIComponent(project.title.toLowerCase())}`;
