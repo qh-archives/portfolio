@@ -96,7 +96,7 @@ const projects = [
         type: "two-column-video",
         locked: true,
         leftHeading: "The Solution",
-        video: "/images/case-studies/uber/videos/slow-final.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145424/slow-final_eblntl.mp4",
         rightHeading: "Surface market comparison features to help consumers confidently recognize\u00A0value.",
         rightBody: "By highlighting when an item is priced lower than usual or compared to nearby stores, the feature reduces second-guessing, builds trust, and supports smarter\u00A0decision-making.",
       },
@@ -148,7 +148,7 @@ const projects = [
         type: "two-column-video",
         locked: true,
         leftHeading: "Adding Motion",
-        video: "/images/case-studies/uber/videos/vid.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145421/vid_d8zz1c.mp4",
         videoSide: "right",
         videoFrame: true,
         videoRadius: 12,
@@ -159,7 +159,7 @@ const projects = [
         type: "two-column-video",
         locked: true,
         leftHeading: "How It Works",
-        video: "/images/case-studies/uber/videos/uberfinal.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145421/uberfinal_qmqq7l.mp4",
         videoFrame: true,
         videoRadius: 12,
         rightHeading: "Compare your grocery prices with other stores within your\u00A0vicinity.",
@@ -204,7 +204,7 @@ const projects = [
   {
     title: "Dandi",
     year: "2026",
-    video: "/images/case-studies/dandi/hero.mp4",
+    video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775146464/hero_ty418e.mp4",
     description: "A bio-smart ear cuff and companion app for PCOS.",
     meta: [
       { label: "Timeline", value: "March 7 - 9, 2026" },
@@ -213,7 +213,7 @@ const projects = [
       { label: "Award", value: "FigBuild 2026 Winner\nMost Impact" },
     ],
     caseStudy: [
-      { type: "hero", video: "/images/case-studies/dandi/hero.mp4", height: "auto", heroAspect: "16 / 9" },
+      { type: "hero", video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775146464/hero_ty418e.mp4", height: "auto", heroAspect: "16 / 9" },
       {
         type: "persona",
         heading: "The Problem",
@@ -278,7 +278,7 @@ const projects = [
         marginTop: -35,
         heading: "Your Supplements, Delivered\u00A0Hands-Free",
         body: "Dandi reads your body and delivers what it needs. No pills. No\u00A0thinking.",
-        video: "/images/case-studies/dandi/videos/connect_1.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145393/connect_1_yh0zzl.mp4",
         mobileVideoBg: "#f4e7d8",
       },
       {
@@ -287,7 +287,7 @@ const projects = [
         marginTop: -35,
         heading: "Care that Adapts to\u00A0You",
         body: "AI assistant that learns your body\u2019s patterns and adjusts your supplement schedule in real\u00A0time.",
-        video: "/images/case-studies/dandi/videos/realtime-data.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145397/realtime-data_lxx93f.mp4",
         mobileVideoBg: "#eef2f8",
       },
       {
@@ -296,7 +296,7 @@ const projects = [
         marginTop: -35,
         heading: "You\u2019re Not\u00A0Alone",
         body: "Connect with your community, get expert-backed answers, and find support for what you\u2019re going\u00A0through.",
-        video: "/images/case-studies/dandi/videos/community.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145396/community_vclcws.mp4",
         mobileVideoBg: "#f5ede8",
       },
       {
@@ -305,7 +305,7 @@ const projects = [
         marginTop: -35,
         heading: "Share With Your\u00A0Provider",
         body: "All of your health data shared, walk into an appointment backed with evidence instead of \u201CI just feel\u00A0off.\u201D",
-        video: "/images/case-studies/dandi/videos/share.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145392/share_qkgfln.mp4",
         mobileVideoBg: "#eaf3ee",
       },
       {
@@ -372,7 +372,7 @@ const projects = [
   {
     title: "Lume",
     year: "2025",
-    video: "/images/landing/lume-card.mp4",
+    video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145474/lume-card_sftzqm.mp4",
     imageStyle: { objectPosition: "center 40%" },
     description: "Helping fashion designers gain visibility and reach the right audience organically.",
     meta: [
@@ -382,7 +382,7 @@ const projects = [
       { label: "Tool", value: "Figma\nFigJam" },
     ],
     caseStudy: [
-      { type: "hero", video: "/images/case-studies/lume/videos/hero.mp4", height: "auto", heroAspect: "16 / 9" },
+      { type: "hero", video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145445/hero_ht0jkz.mp4", height: "auto", heroAspect: "16 / 9" },
       { type: "text", heading: "The Problem", body: "Finding the right audience is hard\u2026", subtext: "Independent fashion designers struggle to gain visibility in a saturated market and without the same resources, marketing power, or established platforms as larger brands, their work often goes unseen by potential\u00A0customers." },
       {
         type: "stats",
@@ -495,7 +495,7 @@ const projects = [
         marginTop: -80,
         heading: "Easily discover designers from style\u00A0tags.",
         body: "Filter and narrow through by material, color, or concept to find niche and aligned styles. For You works like a social media feed \u2014 post your outfits, tag your designers and explore\u00A0styles.",
-        video: "/images/case-studies/lume/videos/style-tags.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145443/style-tags_shj4sm.mp4",
         mobileVideoBg: "#f5ede8",
         mobileMarginTop: 0,
       },
@@ -505,7 +505,7 @@ const projects = [
         marginTop: -35,
         heading: "Post your style creation and tag\u00A0designers.",
         body: "Post your style creations, tag designers and stylized keywords for easier searching. A social media feed to explore and get\u00A0inspired.",
-        video: "/images/case-studies/lume/videos/post.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145439/post_vhzfwl.mp4",
         mobileVideoBg: "#f0ece8",
         mobileMarginTop: 0,
       },
@@ -515,7 +515,7 @@ const projects = [
         marginTop: -35,
         heading: "Create moodboards and get\u00A0inspired.",
         body: "Turn inspiration into action with shoppable, style-matched suggestions. Create custom moodboards and pin your favorite pieces to organize and share your style\u00A0vision.",
-        video: "/images/case-studies/lume/videos/moodboard.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145436/moodboard_u5ts0q.mp4",
         mobileVideoBg: "#ede8f0",
         mobileMarginTop: 0,
       },
@@ -525,7 +525,7 @@ const projects = [
         marginTop: -35,
         heading: "Simplify sales and track\u00A0performances.",
         body: "Monitor orders and revenue in real-time, identify your best-selling styles at a glance and get insights to improve and grow your\u00A0brand.",
-        video: "/images/case-studies/lume/videos/insights.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145432/insights_oyq156.mp4",
         mobileVideoBg: "#e8edf0",
         mobileMarginTop: 0,
       },
@@ -554,7 +554,7 @@ const projects = [
   {
     title: "Flow-Fi",
     year: "2025",
-    video: "/images/landing/flowfi.mp4",
+    video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145461/flowfi_xv31eg.mp4",
     imageStyle: { objectPosition: "center center" },
     description: "AI-powered DeFi platform that automates liquidity management.",
     meta: [
@@ -564,10 +564,10 @@ const projects = [
       { label: "Tool", value: "Spline\nFigma" },
     ],
     caseStudy: [
-      { type: "hero", video: "/images/case-studies/flow-fi/Flowfi_1.mp4", height: "auto", heroAspect: "16 / 9" },
+      { type: "hero", video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145415/Flowfi_1_sfj20o.mp4", height: "auto", heroAspect: "16 / 9" },
       { type: "text", heading: "The Problem", body: "DeFi users struggle with complex platforms and manual capital management, leading to costly mistakes and missed\u00A0opportunities.", subtext: "Managing liquidity across multiple protocols requires constant monitoring, rebalancing, and risk assessment\u2014tasks that are time-consuming and error-prone. Even experienced users often face impermanent loss, inefficient capital allocation, or missed yield opportunities due to the manual nature of the\u00A0process." },
       { type: "text", heading: "The Challenge" },
-      { type: "image", image: "/images/case-studies/flow-fi/keychallenges.png", timelineHidden: true, marginTop: -80 },
+      { type: "image", image: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775145412/keychallenges_gbcpmt.png", timelineHidden: true, marginTop: -80 },
       { type: "text", heading: "The Solution", body: "Flow-Fi automates the entire process. An AI agent handles rebalancing and capital allocation in real time, so users never have\u00A0to." },
       {
         type: "text-with-video",
@@ -575,7 +575,7 @@ const projects = [
         marginTop: -80,
         heading: "A landing page built to convert Flow-Fi\u2019s Web3-native design leads with\u00A0clarity",
         body: "A clean, futuristic interface with two focused CTAs that get users oriented and moving fast, without overwhelming them on\u00A0arrival.",
-        video: "/images/case-studies/flow-fi/Flowfi_1.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145415/Flowfi_1_sfj20o.mp4",
         mobileVideoBg: "#e8ecf5",
         mobileMarginTop: 0,
       },
@@ -585,7 +585,7 @@ const projects = [
         marginTop: -48,
         heading: "Onboarding built for\u00A0first-timers",
         body: "A guided tutorial and \u201CFirst-Time User\u201D mode breaks down DeFi jargon into plain language, walking new users through key concepts step by step. Investing feels approachable from the very first\u00A0tap.",
-        video: "/images/case-studies/flow-fi/FlowfiOnboarding.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145416/FlowfiOnboarding_rzgsgl.mp4",
         mobileVideoBg: "#eaebf5",
         mobileMarginTop: 0,
       },
@@ -595,7 +595,7 @@ const projects = [
         marginTop: -48,
         heading: "Personalized risk\u00A0preferences",
         body: "Users choose their own risk level \u2014 low, medium, or high \u2014 giving the AI a clear lens to optimize liquidity strategies in real time. It keeps users in control while letting the automation do the heavy\u00A0lifting.",
-        video: "/images/case-studies/flow-fi/FlowfiPersonalizeRisk.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145412/FlowfiPersonalizeRisk_lcbd0w.mp4",
         mobileVideoBg: "#ebebf5",
         mobileMarginTop: 0,
       },
@@ -605,7 +605,7 @@ const projects = [
         marginTop: -48,
         heading: "AI-powered liquidity\u00A0recommendations",
         body: "Live market data from CoinGecko, Alchemy, and DeFi Llama is processed and surfaced as clear, actionable guidance \u2014 so users always know what\u2019s happening with their positions without needing to read raw pool\u00A0data.",
-        video: "/images/case-studies/flow-fi/AIOptimizedFlowfi.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145415/AIOptimizedFlowfi_v3m7ee.mp4",
         mobileVideoBg: "#e8eef5",
         mobileMarginTop: 0,
       },
@@ -615,7 +615,7 @@ const projects = [
   {
     title: "Hand Gesture Carousel",
     year: "2026",
-    video: "/images/landing/hands.mp4",
+    video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145464/hands_nnhfnf.mp4",
     imageStyle: { objectPosition: "center 75%" },
     description: "Coded with Three.JS and React",
     externalUrl: "https://project21-zeta.vercel.app/",
@@ -628,7 +628,7 @@ const projects = [
   {
     title: "Liquid Glass Cursor",
     year: "2025",
-    video: "/images/landing/project-4.mp4",
+    video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145464/project-4_wmxpf4.mp4",
     imageStyle: { objectPosition: "center center" },
     externalUrl: "https://refractionlens-sb1g.vercel.app/",
     description: "Coded with React Three Fiber",
@@ -644,7 +644,7 @@ const projects = [
   {
     title: "Digital Inspo Diary",
     year: "2026",
-    video: "/images/landing/inspo.mp4",
+    video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145470/inspo_xyejpx.mp4",
     imageStyle: { objectPosition: "center center" },
     externalUrl: "https://queenieinspo.com/",
     description: "Try it out at queenieinspo.com",
@@ -660,7 +660,7 @@ const projects = [
   {
     title: "Gravity Letters",
     year: "2025",
-    video: "/images/landing/gravity.mp4",
+    video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775145465/gravity_kruj0k.mp4",
     imageStyle: { objectPosition: "center center" },
     externalUrl: "https://day15new.vercel.app/",
     description: "Coded with Three.JS",
@@ -2226,7 +2226,7 @@ function HorizontalProjectsStrip({ darkMode, onSelectProject, skipIntro = false,
           {i === 1 && (
             <div className="shrink-0 relative" style={{ width: sc(400), height: sc(520) }}>
               <HangingScrollVideo
-                src="/Vid/1.mp4"
+                src="https://res.cloudinary.com/dugdaifzh/video/upload/v1775145379/track_lscvkf.mp4"
                 darkMode={darkMode}
                 scrollContainerRef={scrollContainerRef}
                 skipIntro={skipIntro}
@@ -2236,7 +2236,7 @@ function HorizontalProjectsStrip({ darkMode, onSelectProject, skipIntro = false,
                 height={sc(370)}
               />
               <HangingScrollVideo
-                src="/Vid/7.mp4"
+                src="https://res.cloudinary.com/dugdaifzh/video/upload/v1775145368/7_jpicnc.mp4"
                 darkMode={darkMode}
                 scrollContainerRef={scrollContainerRef}
                 skipIntro={skipIntro}
@@ -2251,7 +2251,7 @@ function HorizontalProjectsStrip({ darkMode, onSelectProject, skipIntro = false,
           {project.title === "Gravity Letters" && (
             <div className="shrink-0 relative" style={{ width: sc(632), minHeight: sc(640), marginLeft: sc(8) }}>
               <HangingScrollVideo
-                src="/images/play/creative-coding/Vid/track.mp4"
+                src="https://res.cloudinary.com/dugdaifzh/video/upload/v1775145379/track_lscvkf.mp4"
                 darkMode={darkMode}
                 scrollContainerRef={scrollContainerRef}
                 skipIntro={skipIntro}
@@ -2262,7 +2262,7 @@ function HorizontalProjectsStrip({ darkMode, onSelectProject, skipIntro = false,
                 zIndex={1}
               />
               <HangingScrollVideo
-                src="/images/play/creative-coding/Vid/5.mp4"
+                src="https://res.cloudinary.com/dugdaifzh/video/upload/v1775145369/5_rrdttw.mp4"
                 darkMode={darkMode}
                 scrollContainerRef={scrollContainerRef}
                 skipIntro={skipIntro}
