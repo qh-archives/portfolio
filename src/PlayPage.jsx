@@ -1,0 +1,506 @@
+import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import GlassCursor from "./GlassCursor";
+import { Footer, MobileTopNav } from "./App";
+
+function isTouchTablet() {
+  const hasTouch = navigator.maxTouchPoints > 0 || "ontouchstart" in window;
+  return hasTouch && window.innerWidth < 1400;
+}
+
+function useIsMobile(breakpoint = 1024) {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < breakpoint || isTouchTablet());
+  useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth < breakpoint || isTouchTablet());
+    const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    mq.addEventListener("change", update);
+    window.addEventListener("resize", update);
+    return () => { mq.removeEventListener("change", update); window.removeEventListener("resize", update); };
+  }, [breakpoint]);
+  return isMobile;
+}
+
+const ease = [0.22, 1, 0.36, 1];
+
+/** Every image/video under public/images/play (flat order: creative-coding → Vid → fashion → graphic-design) */
+const creativeCodingVidFolder = [
+  "/images/play/creative-coding/Vid/1.mp4",
+  "/images/play/creative-coding/Vid/2.mp4",
+  "/images/play/creative-coding/Vid/3.mp4",
+  "/images/play/creative-coding/Vid/5.mp4",
+  "/images/play/creative-coding/Vid/6.mp4",
+  "/images/play/creative-coding/Vid/7.mp4",
+  "/images/play/creative-coding/Vid/8.mp4",
+  "/images/play/creative-coding/Vid/9.MP4",
+  "/images/play/creative-coding/Vid/10.mp4",
+  "/images/play/creative-coding/Vid/11.mp4",
+  "/images/play/creative-coding/Vid/12.mp4",
+  "/images/play/creative-coding/Vid/13.mp4",
+  "/images/play/creative-coding/Vid/14.mp4",
+  "/images/play/creative-coding/Vid/16.mp4",
+  "/images/play/creative-coding/Vid/17.mp4",
+  "/images/play/creative-coding/Vid/18.mp4",
+  "/images/play/creative-coding/Vid/19.mp4",
+  "/images/play/creative-coding/Vid/20.MP4",
+  "/images/play/creative-coding/Vid/Test.mp4",
+  "/images/play/creative-coding/Vid/track.mp4",
+];
+
+const fashionImages = [
+  "/images/play/fashion/Queenie-11.jpg",
+  "/images/play/fashion/Queenie-15.jpg",
+  "/images/play/fashion/Queenie-16.jpg",
+  "/images/play/fashion/Queenie-17.jpg",
+  "/images/play/fashion/Queenie-18.jpg",
+  "/images/play/fashion/Queenie-19.jpg",
+  "/images/play/fashion/Queenie-20.jpg",
+  "/images/play/fashion/Queenie-21.jpg",
+  "/images/play/fashion/Queenie-4.jpg",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-4.17.46-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-4.23.52-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.01.48-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.01.57-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.02.09-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.03.08-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.03.16-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.03.30-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.03.39-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.03.54-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.04.04-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.04.18-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.05.05-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.05.25-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.05.55-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.06.13-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.06.34-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.06.48-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.06.56-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.07.04-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-09-at-5.07.22-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-11-at-3.59.41-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-13-at-3.09.58-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-17-at-4.19.31-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-17-at-4.19.42-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-17-at-4.41.51-PM.png",
+  "/images/play/fashion/Screen-Shot-2023-09-17-at-4.42.07-PM.png",
+  "/images/play/fashion/XDwxKav2yVqvQ7VDBueuNb3ChHM-1.avif",
+  "/images/play/fashion/cPUhWtzYlRfwnqOqqeIYhN9Pas-1.avif",
+  "/images/play/fashion/zlI1FG63ZYMutiV532ToTlBVD4A-1.avif",
+];
+
+const graphicDesignItems = [
+  "/images/play/graphic-design/23.png",
+  "/images/play/graphic-design/all-artboard-4.png",
+  "/images/play/graphic-design/comp-1.mp4",
+  "/images/play/graphic-design/untitled-4.png",
+  "/images/play/graphic-design/ux.png",
+  "/images/play/graphic-design/winter-show-poster.png",
+];
+
+function galleryItemFromSrc(src) {
+  const isImage = /\.(png|jpe?g|gif|webp|avif|bmp|svg)$/i.test(src);
+  return isImage ? { src, type: "image" } : { src };
+}
+
+/** Loads and plays a video only when it enters the viewport */
+function LazyGalleryVideo({ src, darkMode }) {
+  const ref = useRef(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.src = src;
+          el.load();
+          el.play().catch(() => {});
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [src]);
+
+  return (
+    <div style={{ position: "relative", width: "100%", minHeight: 80 }}>
+      {!loaded && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundColor: darkMode ? "#1a1a1a" : "#e8e8e8",
+            minHeight: 80,
+          }}
+        />
+      )}
+      <video
+        ref={ref}
+        className="w-full h-auto block"
+        loop
+        muted
+        playsInline
+        preload="none"
+        onCanPlay={() => setLoaded(true)}
+        style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.3s ease" }}
+      />
+    </div>
+  );
+}
+
+const creativeItems = [
+  galleryItemFromSrc("/images/play/creative-coding/1.mp4"),
+  ...creativeCodingVidFolder.map(galleryItemFromSrc),
+];
+const fashionItems = fashionImages.map(galleryItemFromSrc);
+const graphicItems = graphicDesignItems.map(galleryItemFromSrc);
+
+/** Flat list of every asset (order fixed; gallery shuffles a copy on mount) */
+const playItems = [
+  ...creativeItems,
+  ...fashionItems,
+  ...graphicItems,
+];
+
+/** Hero loop clips from public/images/play/creative-coding/Vid */
+const heroVideos = [
+  "/images/play/creative-coding/Vid/1.mp4",
+  "/images/play/creative-coding/Vid/2.mp4",
+  "/images/play/creative-coding/Vid/3.mp4",
+  "/images/play/creative-coding/Vid/5.mp4",
+  "/images/play/creative-coding/Vid/6.mp4",
+  "/images/play/creative-coding/Vid/7.mp4",
+  "/images/play/creative-coding/Vid/8.mp4",
+  "/images/play/creative-coding/Vid/9.MP4",
+];
+
+const CARD_W = 120;
+const CARD_H = 176;
+const CARD_W_MOBILE = 60;
+const CARD_H_MOBILE = 88;
+const RADIUS = 278;
+const RADIUS_MOBILE = 130;
+const NUM_CARDS = 8;
+/** Only this many cards do the upward stack before the full ring forms */
+const STACK_NUM = 4;
+/** Vertical offset between card centers while stacked (overlap reads like Grove cluster) */
+const STACK_STEP = 46;
+const STACK_STEP_MOBILE = 24;
+/** Bottom card (index 0) sits lowest; stack builds upward */
+const STACK_BOTTOM_Y = 240;
+const STACK_BOTTOM_Y_MOBILE = 120;
+
+const STACK_DUR = 0.52;
+const STACK_DELAY0 = 0.06;
+const STACK_STAGGER = 0.07;
+const CIRCLE_DUR = 0.62;
+const CIRCLE_STAGGER = 0.022;
+const PHASE_GAP = 0.1;
+
+function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
+  const radius = isMobile ? RADIUS_MOBILE : RADIUS;
+  const angle = (index / NUM_CARDS) * Math.PI * 2 - Math.PI / 2;
+  const xCircle = Math.cos(angle) * radius;
+  const yCircle = Math.sin(angle) * radius;
+  const w = isMobile ? CARD_W_MOBILE : CARD_W;
+  const h = isMobile ? CARD_H_MOBILE : CARD_H;
+  const rotationCircle = (angle * 180) / Math.PI + 90;
+  const inStack = index < STACK_NUM;
+  const stackY = (isMobile ? STACK_BOTTOM_Y_MOBILE : STACK_BOTTOM_Y) - index * (isMobile ? STACK_STEP_MOBILE : STACK_STEP);
+
+  const isCircle = phase === "circle";
+
+  return (
+    <motion.div
+      className="absolute"
+      style={{
+        width: w,
+        height: h,
+        left: "50%",
+        top: "50%",
+        marginLeft: -w / 2,
+        marginTop: -h / 2,
+      }}
+      initial={{ x: 0, y: 920, opacity: 0, scale: 0.5, rotate: 0 }}
+      animate={
+        isCircle
+          ? { x: xCircle, y: yCircle, opacity: 1, scale: 1, rotate: rotationCircle }
+          : inStack
+            ? { x: 0, y: stackY, opacity: 1, scale: 1, rotate: 0 }
+            : { x: 0, y: 920, opacity: 0, scale: 0.5, rotate: 0 }
+      }
+      transition={
+        isCircle
+          ? {
+              duration: CIRCLE_DUR,
+              delay: index * CIRCLE_STAGGER,
+              ease: [0.22, 1, 0.36, 1],
+            }
+          : inStack
+            ? {
+                duration: STACK_DUR,
+                delay: STACK_DELAY0 + index * STACK_STAGGER,
+                ease: [0.16, 1, 0.3, 1],
+              }
+            : { duration: 0 }
+      }
+    >
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          transformOrigin: "center center",
+          perspective: 900,
+        }}
+      >
+        <motion.div
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "relative",
+            transformStyle: "preserve-3d",
+            borderRadius: 0,
+            overflow: "hidden",
+          }}
+          animate={{ rotateY: flipped ? 180 : 0 }}
+          transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+            }}
+          >
+            <video
+              src={src}
+              className="w-full h-full object-cover"
+              style={{ display: "block" }}
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              transform: "rotateY(180deg)",
+            }}
+          >
+            <video
+              src={src}
+              className="w-full h-full object-cover"
+              style={{ display: "block", filter: "hue-rotate(28deg) saturate(1.15) contrast(1.05)" }}
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
+
+function PlayCircleHero({ darkMode, onBack }) {
+  const isMobile = useIsMobile();
+  const [flippedIndex, setFlippedIndex] = useState(-1);
+  const [settled, setSettled] = useState(false);
+  const [phase, setPhase] = useState("stack");
+  const flipTimerRef = useRef(null);
+
+  useEffect(() => {
+    const stackLastEnd = STACK_DELAY0 + (STACK_NUM - 1) * STACK_STAGGER + STACK_DUR;
+    const toCircle = window.setTimeout(() => setPhase("circle"), (stackLastEnd + PHASE_GAP) * 1000);
+    return () => window.clearTimeout(toCircle);
+  }, []);
+
+  useEffect(() => {
+    if (phase !== "circle") return;
+    const circleLastEnd = (NUM_CARDS - 1) * CIRCLE_STAGGER + CIRCLE_DUR;
+    const spinTimer = window.setTimeout(() => setSettled(true), (circleLastEnd + 0.08) * 1000);
+    return () => window.clearTimeout(spinTimer);
+  }, [phase]);
+
+  useEffect(() => {
+    if (!settled) return;
+
+    const flipRandom = () => {
+      const idx = Math.floor(Math.random() * NUM_CARDS);
+      setFlippedIndex(idx);
+      setTimeout(() => setFlippedIndex(-1), 600);
+    };
+
+    flipTimerRef.current = setInterval(flipRandom, 1900);
+    return () => clearInterval(flipTimerRef.current);
+  }, [settled]);
+
+  const radius = isMobile ? RADIUS_MOBILE : RADIUS;
+  const cardW = isMobile ? CARD_W_MOBILE : CARD_W;
+  const cardH = isMobile ? CARD_H_MOBILE : CARD_H;
+
+  return (
+    <div
+      className="relative w-full flex flex-col items-center justify-center overflow-hidden"
+      style={{ height: isMobile ? "60vh" : "100vh" }}
+    >
+      {!isMobile && (
+        <motion.button
+          className="absolute flex items-center gap-2 cursor-none z-10"
+          style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "#999", top: 40, left: 60 }}
+          whileHover={{ color: darkMode ? "white" : "black" }}
+          onClick={onBack}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.28, delay: 0.15 }}
+        >
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+            <path d="M10 2L4 8L10 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <span className="text-xs uppercase tracking-[0.08em]">Back to projects</span>
+        </motion.button>
+      )}
+
+      <div
+        className="relative"
+        style={{
+          width: radius * 2 + cardW + 48,
+          height: radius * 2 + cardH + 48,
+        }}
+      >
+        <motion.div
+          className="absolute inset-0"
+          animate={settled ? { rotate: 360 } : undefined}
+          transition={settled ? { repeat: Infinity, duration: 26, ease: "linear" } : undefined}
+        >
+          {heroVideos.map((vid, i) => (
+            <RectangleVideoCard
+              key={vid}
+              src={vid}
+              index={i}
+              flipped={flippedIndex === i}
+              phase={phase}
+              isMobile={isMobile}
+            />
+          ))}
+        </motion.div>
+
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+          style={{ zIndex: 10 }}
+        >
+          <motion.h1
+            className="font-medium tracking-[-1.5px]"
+            style={{
+              fontSize: isMobile ? 28 : 52,
+              color: darkMode ? "white" : "black",
+              fontFamily: "'Instrument Sans', sans-serif",
+            }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.12, ease }}
+          >
+            Playground
+          </motion.h1>
+          <motion.span
+            className="tracking-[0.02em]"
+            style={{
+              fontSize: isMobile ? 12 : 15,
+              color: darkMode ? "rgba(255,255,255,0.4)" : "#999",
+              fontFamily: "'Instrument Sans', sans-serif",
+              marginTop: 6,
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.28, ease }}
+          >
+            (2019 - 2026)
+          </motion.span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function PlayPage({ darkMode, onBack }) {
+  const isMobile = useIsMobile();
+  const galleryItems = playItems;
+
+  return (
+    <motion.div
+      className="min-h-screen"
+      style={{
+        backgroundColor: darkMode ? "#0F0F0F" : "#f7f7f7",
+        backgroundImage: darkMode
+          ? "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)"
+          : "radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px)",
+        backgroundSize: "20px 20px",
+        transition: "background-color 0.2s ease",
+      }}
+      initial={{ opacity: 0, y: 60 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.6, ease }}
+    >
+      {isMobile && <MobileTopNav darkMode={darkMode} onBack={onBack} />}
+      <div style={isMobile ? { paddingTop: 57 } : {}}>
+        <PlayCircleHero darkMode={darkMode} onBack={onBack} />
+      </div>
+
+      <div className="w-full px-4 sm:px-6 md:px-10 lg:px-[60px] pt-[20px] pb-[20px]">
+        <motion.div
+          className="w-full"
+          style={{ columnCount: isMobile ? 2 : 3, columnGap: isMobile ? 8 : 12 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease }}
+        >
+          {galleryItems.map((item, i) => (
+            <motion.div
+              key={`${item.src}-${i}`}
+              className="rounded-[12px] overflow-hidden"
+              style={{ breakInside: "avoid", marginBottom: 12 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 + i * 0.03, ease }}
+            >
+              {item.type === "image" ? (
+                <img
+                  className="w-full h-auto block"
+                  src={item.src}
+                  alt=""
+                  loading="lazy"
+                />
+              ) : isMobile ? (
+                <LazyGalleryVideo src={item.src} darkMode={darkMode} />
+              ) : (
+                <video
+                  className="w-full h-auto block"
+                  src={item.src}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+              )}
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      <div className={isMobile ? "px-5" : "px-[60px]"}>
+        <Footer darkMode={darkMode} />
+      </div>
+      {!isMobile && <GlassCursor darkMode={darkMode} />}
+    </motion.div>
+  );
+}
