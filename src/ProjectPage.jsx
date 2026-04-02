@@ -765,7 +765,7 @@ function StatsSection({ section, darkMode, isMobile }) {
               <p
                 className="absolute font-medium leading-[1.4] tracking-[-0.44px]"
                 style={{
-                  fontSize: isMobile ? 18 : "clamp(14px, 1.4vw, 22px)",
+                  fontSize: isMobile ? 20 : "clamp(16px, 1.6vw, 24px)",
                   left: isMobile ? 24 : 28,
                   right: isMobile ? 24 : 28,
                   bottom: 28,
