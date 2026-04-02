@@ -1870,9 +1870,10 @@ function AboutPhotoPanel({ title, src, alt, accent, paper, darkMode, marginTop =
   return (
     <div className="relative shrink-0" style={{ width: w, marginTop: marginTop * vScale, marginLeft: marginLeft * vScale, zIndex }}>
       <span
-        className="absolute text-[12px] tracking-[-0.32px] leading-[1]"
-        style={{ top: -18, left: 8, color: darkMode ? "rgba(255,255,255,0.3)" : "#999" }}
+        className="absolute text-[12px] tracking-[-0.32px] leading-[1] flex items-center gap-1"
+        style={{ top: -18, left: 8, color: "#7A2ED6" }}
       >
+        <img src="/images/component.png" alt="" style={{ width: 10, height: 10 }} />
         {title}
       </span>
       <div className="relative overflow-visible" style={{ width: w, height: h }}>
@@ -1894,7 +1895,7 @@ function AboutPhotoPanel({ title, src, alt, accent, paper, darkMode, marginTop =
 }
 
 /** Purple text panels: same outer size as project cards (`PROJECT_CARD_FRAME_W` × `PROJECT_CARD_FRAME_H`). */
-function AboutTextPanel({ accent, paperA, paperB, bg, children, marginTop = 0, marginLeft = 0, vScale = 1 }) {
+function AboutTextPanel({ accent, paperA, paperB, bg, children, marginTop = 0, marginLeft = 0, vScale = 1, title }) {
   return (
     <div
       className="relative shrink-0 overflow-visible"
@@ -1905,6 +1906,15 @@ function AboutTextPanel({ accent, paperA, paperB, bg, children, marginTop = 0, m
         zoom: 1.2 * vScale,
       }}
     >
+      {title && (
+        <span
+          className="absolute text-[12px] tracking-[-0.32px] leading-[1] flex items-center gap-1"
+          style={{ top: -18, left: 8, color: "#7A2ED6" }}
+        >
+          <img src="/images/component.png" alt="" style={{ width: 10, height: 10 }} />
+          {title}
+        </span>
+      )}
       <div
         className="relative z-0 box-border flex flex-col justify-center overflow-x-hidden px-5 py-[30px]"
         style={{
@@ -2067,7 +2077,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
           vScale={vScale}
         />
 
-        <AboutTextPanel accent={accent} paperA={paper} paperB={paperAlt} bg={bg} marginTop={240} marginLeft={120} vScale={vScale}>
+        <AboutTextPanel accent={accent} paperA={paper} paperB={paperAlt} bg={bg} marginTop={240} marginLeft={120} vScale={vScale} title="Introduction">
           <div className="flex w-full max-w-full flex-col gap-3" style={{ fontFamily: font }}>
             <p className="w-full text-lg tracking-[-0.36px] leading-[1.2]" style={{ color: fg }}>
               Hello I&apos;m Queenie (:
@@ -2119,7 +2129,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
           </div>
         </AboutTextPanel>
 
-        <AboutTextPanel accent={accent} paperA={paper} paperB={paperAlt} bg={bg} marginLeft={60} marginTop={100} vScale={vScale}>
+        <AboutTextPanel accent={accent} paperA={paper} paperB={paperAlt} bg={bg} marginLeft={60} marginTop={100} vScale={vScale} title="Experiences">
           <div className="flex w-full max-w-full flex-col gap-8" style={{ fontFamily: font }}>
             <div className="flex flex-col gap-2">
               <p className="text-xs font-medium uppercase tracking-[0.1em] leading-[1.3]" style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999" }}>
