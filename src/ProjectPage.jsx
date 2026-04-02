@@ -1027,6 +1027,9 @@ function TextWithVideoSection({ section, darkMode, isMobile }) {
           />
         </div>
       )}
+      {isMobile && section.mobileImageAfter && (
+        <img src={section.mobileImageAfter} alt="" className="w-full rounded-[12px]" style={{ marginTop: 8 }} />
+      )}
     </div>
   );
 }

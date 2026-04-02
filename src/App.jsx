@@ -280,8 +280,9 @@ const projects = [
         marginTop: -35,
         heading: "Your Supplements, Delivered\u00A0Hands-Free",
         body: "Dandi reads your body and delivers what it needs. No pills. No\u00A0thinking.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145393/connect_1_yh0zzl.mp4",
+        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775169999/connect_2_pgqu3m.mp4",
         mobileVideoBg: "#f4e7d8",
+        mobileImageAfter: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775169548/dandi_earring_ynqooo.png",
       },
       {
         type: "text-with-video",
@@ -420,7 +421,7 @@ const projects = [
           {
             title: "Visibility Gap",
             body: "Designers feel lost in mainstream platforms where algorithms prioritize large brands.",
-            icon: "/visibility.png",
+            icon: "/images/case-studies/lume/assets/visibility.png",
           },
           {
             title: "Community & Support",
