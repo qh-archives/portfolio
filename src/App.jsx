@@ -103,7 +103,7 @@ const projects = [
       {
         type: "framework-cards",
         locked: true,
-        heading: "Messaging Framework",
+        heading: "Messaging",
         body: "Messaging framework was the biggest\u00A0challenge.",
         subtext: "I collaborated with content design to refine terminology like Low Price and Great Price so they felt clear and trustworthy, while also helping define which pricing strategies users actually wanted to see. Through multiple rounds of testing and iteration, we created a framework that paired the right message with the right logic that users wanted to see when comparing\u00A0prices.",
         cards: [
