@@ -1312,12 +1312,12 @@ function ConceptCollage({ section, darkMode, isMobile }) {
   const positions = [
     { width: "42%", top: 0, left: 0, zIndex: 3, rotate: -1 },
     { width: "50%", top: 40, right: 0, zIndex: 2, rotate: 1.5 },
-    { width: "18%", top: 320, left: "5%", zIndex: 5, rotate: -2 },
+    { width: "18%", top: 400, left: "0%", zIndex: 5, rotate: -2 },
     { width: "20%", top: 280, left: "25%", zIndex: 4, rotate: 1 },
     { width: "20%", top: 300, right: "15%", zIndex: 6, rotate: -1.5 },
-    { width: "20%", top: 500, left: "0%", zIndex: 3, rotate: 2 },
-    { width: "32%", top: 480, left: "32%", zIndex: 5, rotate: -0.5 },
-    { width: "30%", top: 520, right: "0%", zIndex: 10, rotate: 1.5 },
+    { width: "20%", top: 500, left: "20%", zIndex: 3, rotate: 2 },
+    { width: "15%", top: 400, left: "48%", zIndex: 5, rotate: -0.5 },
+    { width: "14%", top: 400, right: "5%", zIndex: 10, rotate: 1.5 },
     { width: "18%", top: 340, right: "2%", zIndex: 10, rotate: -2.5 },
   ];
 
@@ -1356,7 +1356,7 @@ function ConceptCollage({ section, darkMode, isMobile }) {
       </div>
       {isMobile ? (
         <div className="flex flex-col gap-4">
-          {section.images.map((img, i) => (
+          {section.images.filter((img) => !img.desktopOnly).map((img, i) => (
             <PreviewCard key={i} image={img.src} name={img.name} darkMode={darkMode} naturalRatio />
           ))}
         </div>
@@ -1644,7 +1644,7 @@ function FeatureGridSection({ section, darkMode, isMobile }) {
     <div
       className="flex flex-col lg:flex-row lg:items-start gap-10 lg:gap-16 xl:gap-20"
     >
-      <div className="flex flex-col gap-10" style={{ width: "clamp(200px, 35vw, 550px)", flexShrink: 0 }}>
+      <div className="flex flex-col gap-10" style={{ width: isMobile ? "100%" : "clamp(200px, 35vw, 550px)", flexShrink: 0 }}>
         {kicker && (
           <h3
             className="text-xs font-medium uppercase tracking-[0.1em] leading-[1.3]"

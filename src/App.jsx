@@ -69,9 +69,9 @@ const projects = [
       {
         type: "polaroid-spread",
         images: [
-          { src: "/images/case-studies/uber/photos/first-day.jpg", name: "First Day at Uber!" },
-          { src: "/images/case-studies/uber/photos/team-breakfast.jpg", name: "Design Team Breakfast" },
-          { src: "/images/case-studies/uber/photos/tech-social.jpg", name: "Uber Tech Social" },
+          { src: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775165345/first-day_tzrxmp.jpg", name: "First Day at Uber!" },
+          { src: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775165345/team-breakfast_pqqfvw.jpg", name: "Design Team Breakfast" },
+          { src: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775165345/tech-social_rek0gh.jpg", name: "Uber Tech Social" },
         ],
       },
       {
@@ -142,6 +142,8 @@ const projects = [
           { src: "/images/case-studies/uber/concept/6.png", name: "Market View" },
           { src: "/images/case-studies/uber/concept/7.png", name: "Historical View" },
           { src: "/images/case-studies/uber/concept/8.png", name: "Price Insight" },
+          { src: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775165498/5_jftcuc.png", name: "Concepts", desktopOnly: true },
+          { src: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775165498/2_gxkkgu.png", name: "Concepts", desktopOnly: true },
         ],
       },
       {
