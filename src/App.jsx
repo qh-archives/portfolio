@@ -2892,7 +2892,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
       </div>
 
       {/* ── Projects ── */}
-      <div id="projects" className="px-5 pb-10">
+      <div id="projects" className="px-5 pb-10" style={{ scrollMarginTop: 20 }}>
         <p className="text-xs font-medium uppercase tracking-[0.1em] mb-6" style={{ color: muted }}>Work</p>
         <div className="flex flex-col gap-8">
           {projects.map((project) => (

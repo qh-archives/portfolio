@@ -2324,7 +2324,18 @@ export default function ProjectPage({ project, darkMode, onBack }) {
           if (isFirstLocked) {
             return (
               <div key={i} ref={(el) => (sectionRefs.current[i] = el)}>
-                <PasswordGate darkMode={darkMode} onUnlock={() => setUnlocked(true)} isMobile={isMobile} />
+                <PasswordGate darkMode={darkMode} onUnlock={() => {
+                  setUnlocked(true);
+                  if (isMobile) {
+                    requestAnimationFrame(() => setTimeout(() => {
+                      const el = sectionRefs.current[i];
+                      if (el) {
+                        const top = el.getBoundingClientRect().top + window.scrollY - 100;
+                        window.scrollTo({ top, behavior: "smooth" });
+                      }
+                    }, 80));
+                  }
+                }} isMobile={isMobile} />
               </div>
             );
           }
