@@ -2645,31 +2645,30 @@ function CanvasContextMenu({ darkMode }) {
     <>
       <AnimatePresence>
         {toast && (
-          <motion.div
-            className="fixed left-1/2 z-[30000]"
-            style={{
-              bottom: 40,
-              transform: "translateX(-50%)",
-              backgroundColor: darkMode ? "#2c2c2c" : "#fff",
-              color: darkMode ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.85)",
-              border: `1px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
-              borderRadius: 8,
-              padding: "10px 18px",
-              fontSize: 13,
-              fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-              boxShadow: darkMode
-                ? "0 8px 30px rgba(0,0,0,0.5)"
-                : "0 8px 30px rgba(0,0,0,0.12)",
-              backdropFilter: "blur(20px)",
-              whiteSpace: "nowrap",
-            }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.2 }}
-          >
-            {toast}
-          </motion.div>
+          <div className="fixed bottom-10 left-0 right-0 z-[30000] flex justify-center pointer-events-none">
+            <motion.div
+              style={{
+                backgroundColor: darkMode ? "#2c2c2c" : "#fff",
+                color: darkMode ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.85)",
+                border: `1px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+                borderRadius: 8,
+                padding: "10px 18px",
+                fontSize: 13,
+                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                boxShadow: darkMode
+                  ? "0 8px 30px rgba(0,0,0,0.5)"
+                  : "0 8px 30px rgba(0,0,0,0.12)",
+                backdropFilter: "blur(20px)",
+                whiteSpace: "nowrap",
+              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.2 }}
+            >
+              {toast}
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
 
