@@ -2578,8 +2578,11 @@ function ExternalOverlay({ url, onClose }) {
   );
 }
 
+const CLIPBOARD_MSG = "Contact me if you like my work: queenie2000824@gmail.com";
+
 function CanvasContextMenu({ darkMode }) {
   const [menu, setMenu] = useState(null);
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     const handleContext = (e) => {
@@ -2597,7 +2600,21 @@ function CanvasContextMenu({ darkMode }) {
     };
   }, []);
 
-  if (!menu) return null;
+  const showToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 2500);
+  };
+
+  const handleItemClick = (label) => {
+    if (label === "Copy" || label === "Copy as SVG") {
+      navigator.clipboard.writeText(CLIPBOARD_MSG).then(() => {
+        showToast("Copied to clipboard!");
+      });
+    } else if (label === "Paste here") {
+      showToast(CLIPBOARD_MSG);
+    }
+    setMenu(null);
+  };
 
   const bg = darkMode ? "#2c2c2c" : "#ffffff";
   const border = darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)";
@@ -2623,56 +2640,88 @@ function CanvasContextMenu({ darkMode }) {
 
   const maxY = window.innerHeight - items.length * 30 - 20;
   const maxX = window.innerWidth - 220;
-  const x = Math.min(menu.x, maxX);
-  const y = Math.min(menu.y, maxY);
 
   return (
-    <motion.div
-      className="fixed"
-      style={{
-        left: x,
-        top: y,
-        zIndex: 20000,
-        minWidth: 200,
-        backgroundColor: bg,
-        border: `1px solid ${border}`,
-        borderRadius: 8,
-        padding: "4px 0",
-        boxShadow: darkMode
-          ? "0 8px 30px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3)"
-          : "0 8px 30px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.06)",
-        backdropFilter: "blur(20px)",
-        cursor: "default",
-      }}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.1 }}
-      onClick={(e) => e.stopPropagation()}
-    >
-      {items.map((item, i) =>
-        item === null ? (
-          <div key={i} style={{ height: 1, backgroundColor: separatorColor, margin: "4px 0" }} />
-        ) : (
-          <div
-            key={i}
-            className="flex items-center justify-between px-3 py-[5px] transition-colors duration-100"
+    <>
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            className="fixed left-1/2 z-[30000]"
             style={{
-              color: textColor,
+              bottom: 40,
+              transform: "translateX(-50%)",
+              backgroundColor: darkMode ? "#2c2c2c" : "#fff",
+              color: darkMode ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.85)",
+              border: `1px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+              borderRadius: 8,
+              padding: "10px 18px",
               fontSize: 13,
               fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
-              borderRadius: 4,
-              margin: "0 4px",
+              boxShadow: darkMode
+                ? "0 8px 30px rgba(0,0,0,0.5)"
+                : "0 8px 30px rgba(0,0,0,0.12)",
+              backdropFilter: "blur(20px)",
+              whiteSpace: "nowrap",
             }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = hoverBg}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
-            onClick={() => setMenu(null)}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2 }}
           >
-            <span>{item.label}</span>
-            <span style={{ color: dimColor, fontSize: 12, marginLeft: 24 }}>{item.shortcut}</span>
-          </div>
-        )
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {menu && (
+        <motion.div
+          className="fixed"
+          style={{
+            left: Math.min(menu.x, maxX),
+            top: Math.min(menu.y, maxY),
+            zIndex: 20000,
+            minWidth: 200,
+            backgroundColor: bg,
+            border: `1px solid ${border}`,
+            borderRadius: 8,
+            padding: "4px 0",
+            boxShadow: darkMode
+              ? "0 8px 30px rgba(0,0,0,0.5), 0 1px 3px rgba(0,0,0,0.3)"
+              : "0 8px 30px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.06)",
+            backdropFilter: "blur(20px)",
+            cursor: "default",
+          }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.1 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {items.map((item, i) =>
+            item === null ? (
+              <div key={i} style={{ height: 1, backgroundColor: separatorColor, margin: "4px 0" }} />
+            ) : (
+              <div
+                key={i}
+                className="flex items-center justify-between px-3 py-[5px] transition-colors duration-100"
+                style={{
+                  color: textColor,
+                  fontSize: 13,
+                  fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                  borderRadius: 4,
+                  margin: "0 4px",
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = hoverBg}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+                onClick={() => handleItemClick(item.label)}
+              >
+                <span>{item.label}</span>
+                <span style={{ color: dimColor, fontSize: 12, marginLeft: 24 }}>{item.shortcut}</span>
+              </div>
+            )
+          )}
+        </motion.div>
       )}
-    </motion.div>
+    </>
   );
 }
 
