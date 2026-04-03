@@ -3331,7 +3331,6 @@ export default function App() {
 
           {isMobile && <AboutMeStripSection id="about" mobile={true} darkMode={darkMode} skipIntro={skipLandingAnimations} scrollContainerRef={homeHorizontalScrollRef} />}
 
-          <GlassCursor darkMode={darkMode} />
           <CanvasContextMenu darkMode={darkMode} />
           <AnimatePresence>
             {externalOverlay && (
@@ -3345,6 +3344,7 @@ export default function App() {
         </motion.div>
       ) : null}
     </AnimatePresence>
+    <GlassCursor darkMode={darkMode} />
     </>
   );
 }
