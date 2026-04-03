@@ -50,7 +50,6 @@
 
 html {
   scroll-behavior: smooth;
-  cursor: none !important;
   overscroll-behavior: none;
   scrollbar-width: none;
 }
@@ -61,9 +60,13 @@ html::-webkit-scrollbar,
 }
 
 *, *::before, *::after {
-  cursor: none !important;
   -webkit-user-select: none;
   user-select: none;
+}
+
+@media (pointer: fine) {
+  html { cursor: none !important; }
+  *, *::before, *::after { cursor: none !important; }
 }
 
 body {

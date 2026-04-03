@@ -418,7 +418,7 @@ function PlayCircleHero({ darkMode, onBack, onAnimationDone }) {
           <motion.h1
             className="font-medium tracking-[-1.5px]"
             style={{
-              fontSize: isMobile ? 28 : 52,
+              fontSize: isMobile ? 26 : 52,
               color: darkMode ? "white" : "black",
               fontFamily: "'Instrument Sans', sans-serif",
             }}
@@ -547,7 +547,7 @@ export default function PlayPage({ darkMode, onBack }) {
       <div className={isMobile ? "px-5" : "px-[60px]"}>
         <Footer darkMode={darkMode} />
       </div>
-      {!isMobile && <GlassCursor darkMode={darkMode} />}
+      <GlassCursor darkMode={darkMode} />
     </motion.div>
   );
 }

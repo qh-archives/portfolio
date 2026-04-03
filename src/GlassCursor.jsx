@@ -12,6 +12,16 @@ export default function GlassCursor({ darkMode }) {
   const [visible, setVisible] = useState(false);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [selection, setSelection] = useState(null);
+  const [hasFinePointer, setHasFinePointer] = useState(() => window.matchMedia("(pointer: fine)").matches);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(pointer: fine)");
+    const update = (e) => setHasFinePointer(e.matches);
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  if (!hasFinePointer) return null;
 
   useEffect(() => {
     const handleMove = (e) => {
