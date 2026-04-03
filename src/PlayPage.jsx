@@ -212,12 +212,12 @@ const STACK_STEP_MOBILE = 24;
 const STACK_BOTTOM_Y = 240;
 const STACK_BOTTOM_Y_MOBILE = 120;
 
-const STACK_DUR = 0.52;
-const STACK_DELAY0 = 0.06;
-const STACK_STAGGER = 0.07;
-const CIRCLE_DUR = 0.62;
-const CIRCLE_STAGGER = 0.022;
-const PHASE_GAP = 0.1;
+const STACK_DUR = 0.7;
+const STACK_DELAY0 = 0.08;
+const STACK_STAGGER = 0.1;
+const CIRCLE_DUR = 0.9;
+const CIRCLE_STAGGER = 0.04;
+const PHASE_GAP = 0.15;
 
 function getThumbnail(videoUrl) {
   return videoUrl.replace("/video/upload/q_auto,f_auto/", "/video/upload/so_0,w_240,c_fill/").replace(/\.mp4$/, ".png");
@@ -248,26 +248,26 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
         marginLeft: -w / 2,
         marginTop: -h / 2,
       }}
-      initial={{ x: 0, y: offScreenY, opacity: 0, scale: 0.5, rotate: 0 }}
+      initial={{ x: 0, y: offScreenY, opacity: 0, scale: 0.6, rotate: 0 }}
       animate={
         isCircle
           ? { x: xCircle, y: yCircle, opacity: 1, scale: 1, rotate: rotationCircle }
           : inStack
             ? { x: 0, y: stackY, opacity: 1, scale: 1, rotate: 0 }
-            : { x: 0, y: offScreenY, opacity: 0, scale: 0.5, rotate: 0 }
+            : { x: 0, y: offScreenY, opacity: 0, scale: 0.6, rotate: 0 }
       }
       transition={
         isCircle
           ? {
               duration: CIRCLE_DUR,
               delay: index * CIRCLE_STAGGER,
-              ease: [0.22, 1, 0.36, 1],
+              ease: [0.25, 0.1, 0.25, 1],
             }
           : inStack
             ? {
                 duration: STACK_DUR,
                 delay: STACK_DELAY0 + index * STACK_STAGGER,
-                ease: [0.16, 1, 0.3, 1],
+                ease: [0.34, 1.2, 0.64, 1],
               }
             : { duration: 0 }
       }
