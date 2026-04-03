@@ -1982,8 +1982,8 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
                 <p className="text-[10px] font-medium uppercase tracking-[0.1em]" style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999" }}>Experience</p>
                 <div className="flex flex-col gap-2">
                   <AboutResumeRow leftBold="Uber | " leftMuted="Product Designer" date="2026 - Present" fg={fg} muted={muted} />
-                  <AboutResumeRow leftBold="Uber | " leftMuted="Product Designer Intern" date="Summer 2025" fg={fg} muted={muted} />
-                  <AboutResumeRow leftBold="NYU Tisch | " leftMuted="UX Course Teaching Assistant" date="Spring 2025" fg={fg} muted={muted} />
+                  <AboutResumeRow leftBold="NYU Tisch | " leftMuted="UX Course Teaching Assistant" date="Fall 2025" fg={fg} muted={muted} />
+                  <AboutResumeRow leftBold="Uber | " leftMuted="Product Design Intern" date="Summer 2025" fg={fg} muted={muted} />
                   <AboutResumeRow leftBold="Jason Wu | " leftMuted="Design Intern" date="Summer 2023" fg={fg} muted={muted} />
                 </div>
               </div>
@@ -2112,16 +2112,16 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
                   muted={muted}
                 />
                 <AboutResumeRow
-                  leftBold="Uber | "
-                  leftMuted="Product Designer Intern"
-                  date="Summer 2025"
+                  leftBold="NYU Tisch | "
+                  leftMuted="UX Course Teaching Assistant"
+                  date="Fall 2025"
                   fg={fg}
                   muted={muted}
                 />
                 <AboutResumeRow
-                  leftBold="NYU Tisch | "
-                  leftMuted="UX Course Teaching Assistant"
-                  date="Spring 2025"
+                  leftBold="Uber | "
+                  leftMuted="Product Design Intern"
+                  date="Summer 2025"
                   fg={fg}
                   muted={muted}
                 />
@@ -3015,8 +3015,8 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
             {[
               { section: "Experience", rows: [
                 { role: "Product Designer", company: "Uber", date: "2026 – Present" },
-                { role: "Product Designer Intern", company: "Uber", date: "Summer 2025" },
-                { role: "UX Course Teaching Assistant", company: "NYU Tisch", date: "Spring 2025" },
+                { role: "UX Course Teaching Assistant", company: "NYU Tisch", date: "Fall 2025" },
+                { role: "Product Design Intern", company: "Uber", date: "Summer 2025" },
                 { role: "Design Intern", company: "Jason Wu", date: "Summer 2023" },
               ]},
               { section: "Community", rows: [
