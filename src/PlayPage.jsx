@@ -176,17 +176,12 @@ const FORCE_RIGHT_MOBILE = new Set([
 ]);
 
 function splitIntoColumns(items, cols) {
-  const columns = Array.from({ length: cols }, () => []);
-  let col = 0;
-  for (const item of items) {
-    if (cols === 2 && FORCE_RIGHT_MOBILE.has(item.src) && col === 0) {
-      columns[1].push(item);
-    } else {
-      columns[col % cols].push(item);
-      col++;
-    }
-  }
-  return columns;
+  const forced = items.filter((item) => FORCE_RIGHT_MOBILE.has(item.src));
+  const rest = items.filter((item) => !FORCE_RIGHT_MOBILE.has(item.src));
+  const half = Math.ceil(rest.length / 2);
+  const left = rest.slice(0, half);
+  const right = [...forced, ...rest.slice(half)];
+  return [left, right];
 }
 
 /** Hero loop clips from public/images/play/creative-coding/Vid */
