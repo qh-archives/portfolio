@@ -233,7 +233,7 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
   const rotationCircle = (angle * 180) / Math.PI + 90;
   const inStack = index < STACK_NUM;
   const stackY = (isMobile ? STACK_BOTTOM_Y_MOBILE : STACK_BOTTOM_Y) - index * (isMobile ? STACK_STEP_MOBILE : STACK_STEP);
-  const offScreenY = isMobile ? window.innerHeight * 0.4 : 920;
+  const offScreenY = isMobile ? window.innerHeight * 0.7 : 920;
 
   const isCircle = phase === "circle";
 
