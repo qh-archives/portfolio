@@ -291,6 +291,7 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
               poster={getThumbnail(src)}
               className="w-full h-full object-cover"
               style={{ display: "block" }}
+              preload="auto"
               autoPlay
               loop
               muted
@@ -310,6 +311,7 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
               src={src}
               className="w-full h-full object-cover"
               style={{ display: "block", filter: "hue-rotate(28deg) saturate(1.15) contrast(1.05)" }}
+              preload="none"
               autoPlay
               loop
               muted
@@ -465,6 +467,10 @@ function PlayCircleHero({ darkMode, onBack }) {
 export default function PlayPage({ darkMode, onBack }) {
   const isMobile = useIsMobile();
   const galleryItems = playItems;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <motion.div
