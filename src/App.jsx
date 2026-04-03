@@ -3,8 +3,6 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useRef, useState, useEffect, useLayoutEffect, useCallback } from "react";
 import VectorTitle from "./VectorTitle";
 import GlassCursor from "./GlassCursor";
-import PullString from "./PullString";
-import LampImage from "./LampImage";
 import ProjectPage from "./ProjectPage";
 import PlayPage from "./PlayPage";
 import LoadingScreen from "./LoadingScreen";
@@ -733,37 +731,6 @@ function Navbar({ darkMode, onToggleDark }) {
         QUEENIE HSIAO
       </motion.p>
       <div className="flex items-center gap-2">
-        <motion.div
-          className="absolute top-[-55px] pointer-events-none"
-          style={{ right: "0px" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.6, ease }}
-        >
-          <LampImage
-            darkMode={darkMode}
-            className="h-[450px] w-auto"
-          />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.6, ease }}
-          style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, pointerEvents: "none" }}
-        >
-          <PullString
-            darkMode={darkMode}
-            onPull={onToggleDark}
-            style={{
-              position: "absolute",
-              top: "330px",
-              right: "570px",
-              zIndex: 51,
-              overflow: "visible",
-              pointerEvents: "auto",
-            }}
-          />
-        </motion.div>
         {navLinks.map((link, i) => (
           <motion.a
             key={link}
