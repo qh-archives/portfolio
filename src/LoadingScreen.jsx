@@ -70,9 +70,9 @@ export default function LoadingScreen({ onDone }) {
     const DOT_FADE_IN = 0.12;
 
     const RING_INTERVAL = isMobileViewport ? 500 : 1100;
-    const RING_SPEED = 400;
-    const RING_WIDTH = 120;
-    const RING_TAIL = 200;
+    const RING_SPEED = isMobileViewport ? 200 : 400;
+    const RING_WIDTH = isMobileViewport ? 80 : 120;
+    const RING_TAIL = isMobileViewport ? 120 : 200;
     /** Only two ripple waves from the center (second starts after RING_INTERVAL ms). */
     const MAX_RINGS = 2;
 
