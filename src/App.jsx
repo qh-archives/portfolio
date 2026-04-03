@@ -2849,7 +2849,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4"
         style={{ backgroundColor: bg, borderBottom: `1px solid ${border}`, backdropFilter: "blur(12px)" }}
       >
-        <a href="#home" className="text-[15px] tracking-[-0.3px]" style={{ color: fg, fontFamily: "'Tilt Warp', sans-serif", textDecoration: "none" }}>Queenie Hsiao</a>
+        <a href="#home" className="text-[15px] tracking-[-0.3px]" style={{ color: fg, fontFamily: "'Tilt Warp', sans-serif", textDecoration: "none" }} onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}>Queenie Hsiao</a>
         <button
           onClick={() => setMenuOpen((o) => !o)}
           className="flex items-center justify-center p-1"
@@ -2880,7 +2880,23 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
               href={href}
               className="text-[28px] tracking-[-0.5px] leading-[1.1]"
               style={{ color: fg, textDecoration: "none" }}
-              onClick={() => setMenuOpen(false)}
+              onClick={(e) => {
+                e.preventDefault();
+                setMenuOpen(false);
+                const id = href.replace("#", "");
+                if (id === "play") {
+                  window.location.hash = "#play";
+                  return;
+                }
+                if (id === "home") {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  return;
+                }
+                const el = document.getElementById(id);
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
             >
               {label.toLowerCase()}
             </a>
