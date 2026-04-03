@@ -2343,15 +2343,20 @@ export function MobileTopNav({ darkMode, onBack }) {
     setMenuOpen(false);
     onBack();
     window.location.hash = hash;
-    requestAnimationFrame(() => {
+    const scrollToHash = () => {
       const id = hash.replace("#", "");
+      if (id === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
       const el = document.getElementById(id);
       if (el) {
         el.scrollIntoView({ behavior: "smooth" });
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
-    });
+    };
+    requestAnimationFrame(() => setTimeout(scrollToHash, 80));
   };
 
   return (
@@ -2887,7 +2892,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
       </div>
 
       {/* ── Projects ── */}
-      <div className="px-5 pb-10">
+      <div id="projects" className="px-5 pb-10">
         <p className="text-xs font-medium uppercase tracking-[0.1em] mb-6" style={{ color: muted }}>Work</p>
         <div className="flex flex-col gap-8">
           {projects.map((project) => (
@@ -2941,7 +2946,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
       </div>
 
       {/* ── About ── */}
-      <div id="about" className="px-5 pb-10 pt-10" style={{ overflow: "visible" }}>
+      <div id="about" className="px-5 pb-10 pt-10" style={{ overflow: "visible", scrollMarginTop: 20 }}>
         <img src="https://res.cloudinary.com/dugdaifzh/image/upload/v1775178168/about_jo8ete.png" alt="Queenie" className="w-full object-contain mb-4" />
         <div className="relative" style={{ border: "1.5px solid #8A38F5", backgroundColor: darkMode ? "#141414" : "#fff", padding: "24px", overflow: "visible" }}>
           {[{ top: -6, left: -6 }, { top: -6, right: -6 }, { bottom: -6, left: -6 }, { bottom: -6, right: -6 }].map((pos, i) => (
