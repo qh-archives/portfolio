@@ -2309,22 +2309,24 @@ export function MobileTopNav({ darkMode, onBack }) {
   const handleNav = (hash) => {
     setMenuOpen(false);
     const id = hash.replace("#", "");
-    if (id === "home") {
-      onBack();
-      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 150);
+    if (id === "play") {
+      window.location.hash = "#play";
       return;
     }
     onBack();
-    window.location.hash = hash;
-    const scrollToHash = () => {
+    const tryScroll = (attempts = 0) => {
+      if (id === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
       const el = document.getElementById(id);
       if (el) {
         el.scrollIntoView({ behavior: "smooth" });
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else if (attempts < 10) {
+        setTimeout(() => tryScroll(attempts + 1), 100);
       }
     };
-    requestAnimationFrame(() => setTimeout(scrollToHash, 150));
+    setTimeout(tryScroll, 700);
   };
 
   return (
