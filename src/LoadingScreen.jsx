@@ -61,18 +61,15 @@ export default function LoadingScreen({ onDone }) {
       }
     }
 
-    const T_SWEEP   = 1800;
-    const T_BREATHE = 2700;
-    const T_MORE    = 3400;
-    const T_SETTLE  = 3800;
-    /** Shorter fade window (was ~800ms) so exit feels snappier. */
-    const T_FADE    = 4150;
+    const isMobileViewport = W < 768;
+    const T_SWEEP   = isMobileViewport ? 1200 : 1800;
+    const T_BREATHE = isMobileViewport ? 1600 : 2700;
+    const T_MORE    = isMobileViewport ? 2100 : 3400;
+    const T_SETTLE  = isMobileViewport ? 2400 : 3800;
+    const T_FADE    = isMobileViewport ? 2700 : 4150;
     const DOT_FADE_IN = 0.12;
 
-    // On mobile (small viewport) the rings cross the screen ~3× faster, so
-    // tighten the interval so both rings are visibly on-screen at the same time.
-    const isMobileViewport = W < 768;
-    const RING_INTERVAL = isMobileViewport ? 600 : 1100;
+    const RING_INTERVAL = isMobileViewport ? 500 : 1100;
     const RING_SPEED = 400;
     const RING_WIDTH = 120;
     const RING_TAIL = 200;
