@@ -272,35 +272,27 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
             : { duration: 0 }
       }
     >
-      <div
+      <motion.div
         style={{
           width: "100%",
           height: "100%",
-          perspective: 900,
+          overflow: "hidden",
         }}
+        animate={{ scaleX: flipped ? [1, 0, 1] : 1 }}
+        transition={flipped ? { duration: 0.5, times: [0, 0.45, 1], ease: [0.22, 1, 0.36, 1] } : { duration: 0.3 }}
       >
-        <motion.div
-          style={{
-            width: "100%",
-            height: "100%",
-            overflow: "hidden",
-          }}
-          animate={{ rotateY: flipped ? 180 : 0 }}
-          transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <video
-            src={src}
-            poster={getThumbnail(src)}
-            className="w-full h-full object-cover"
-            style={{ display: "block" }}
-            preload="auto"
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
-        </motion.div>
-      </div>
+        <video
+          src={src}
+          poster={getThumbnail(src)}
+          className="w-full h-full object-cover"
+          style={{ display: "block" }}
+          preload="auto"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      </motion.div>
     </motion.div>
   );
 }
