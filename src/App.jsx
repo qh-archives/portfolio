@@ -278,8 +278,8 @@ const projects = [
         type: "text-with-video",
         timelineHidden: true,
         marginTop: -35,
-        heading: "Your Supplements, Delivered\u00A0Hands-Free",
-        body: "Dandi reads your body and delivers what it needs. No pills. No\u00A0thinking.",
+          heading: "Your Supplements, Delivered\u00A0Hands-Free",
+          body: "Dandi reads your body and delivers what it needs. No pills. No\u00A0thinking.",
         video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775169999/connect_2_pgqu3m.mp4",
         mobileVideoBg: "#f4e7d8",
         mobileImageAfter: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775169548/dandi_earring_ynqooo.png",
@@ -802,20 +802,20 @@ function HorizontalNavLinks({ darkMode, skipIntro = false }) {
         const centerY = 120;
         const finalY = i * 50;
         return (
-          <motion.a
-            key={link}
-            href={`#${link}`}
+        <motion.a
+          key={link}
+          href={`#${link}`}
             onClick={(e) => {
               e.preventDefault();
               history.replaceState(null, "", `${window.location.pathname}#${link}`);
               window.dispatchEvent(new HashChangeEvent("hashchange"));
             }}
             className="text-[16px] font-bold tracking-[-0.32px] leading-[1.4] no-underline flex items-center justify-center absolute"
-            style={{
-              backgroundColor: darkMode ? "#0F0F0F" : "#F7F7F7",
-              border: `2px dashed ${borderColor}`,
-              width: navStyles[i].width,
-              padding: "8px 0",
+          style={{
+            backgroundColor: darkMode ? "#0F0F0F" : "#F7F7F7",
+            border: `2px dashed ${borderColor}`,
+            width: navStyles[i].width,
+            padding: "8px 0",
               left: 0,
               transformOrigin: "center center",
             }}
@@ -841,10 +841,10 @@ function HorizontalNavLinks({ darkMode, skipIntro = false }) {
               color: darkMode ? "white" : "black",
             }}
             transition={skipIntro ? { duration: 0 } : { duration: 0.65, delay: 0.1, ease }}
-            whileHover={{ color: "#0055FF" }}
-          >
-            {link}
-          </motion.a>
+          whileHover={{ color: "#0055FF" }}
+        >
+          {link}
+        </motion.a>
         );
       })}
     </div>
@@ -963,27 +963,27 @@ function RulerMarks({ darkMode, totalWidth, skipIntro = false }) {
           animate={{ scaleX: 1 }}
           transition={rulerTransition}
         >
-          {Array.from({ length: tickCount + 1 }, (_, i) => {
-            const x = i * tickSpacing;
-            const isMajor = i % 10 === 0;
-            const isMid = i % 5 === 0 && !isMajor;
-            const h = isMajor ? 18 : isMid ? 12 : 6;
-            return (
-              <div key={i} className="absolute" style={{ left: x, top: 0 }}>
-                <div style={{ width: 1, height: h, backgroundColor: color }} />
-                {isMajor && (
-                  <span
-                    className="absolute text-[8px]"
-                    style={{ left: 3, top: h + 2, color: labelColor, whiteSpace: "nowrap", fontFamily: "'SF Mono', 'Menlo', monospace" }}
-                  >
-                    {i}
-                  </span>
-                )}
-              </div>
-            );
-          })}
+        {Array.from({ length: tickCount + 1 }, (_, i) => {
+          const x = i * tickSpacing;
+          const isMajor = i % 10 === 0;
+          const isMid = i % 5 === 0 && !isMajor;
+          const h = isMajor ? 18 : isMid ? 12 : 6;
+          return (
+            <div key={i} className="absolute" style={{ left: x, top: 0 }}>
+              <div style={{ width: 1, height: h, backgroundColor: color }} />
+              {isMajor && (
+                <span
+                  className="absolute text-[8px]"
+                  style={{ left: 3, top: h + 2, color: labelColor, whiteSpace: "nowrap", fontFamily: "'SF Mono', 'Menlo', monospace" }}
+                >
+                  {i}
+                </span>
+              )}
+        </div>
+          );
+        })}
         </motion.div>
-      </div>
+        </div>
       <div className="absolute top-0 left-0 pointer-events-none" style={{ zIndex: 1, width: 32, height: "100%", overflow: "visible" }}>
         <motion.div
           className="w-full"
@@ -996,25 +996,25 @@ function RulerMarks({ darkMode, totalWidth, skipIntro = false }) {
               : { duration: 1.05, delay: 0.1, ease: [0.22, 1, 0.36, 1] }
           }
         >
-          {Array.from({ length: verticalTickCount + 1 }, (_, i) => {
-            const y = i * tickSpacing;
-            const isMajor = i % 10 === 0;
-            const isMid = i % 5 === 0 && !isMajor;
-            const w = isMajor ? 18 : isMid ? 12 : 6;
-            return (
-              <div key={i} className="absolute" style={{ top: y, left: 0 }}>
-                <div style={{ height: 1, width: w, backgroundColor: color }} />
-                {isMajor && (
-                  <span
-                    className="absolute text-[8px]"
-                    style={{ left: w + 2, top: 2, color: labelColor, whiteSpace: "nowrap", fontFamily: "'SF Mono', 'Menlo', monospace" }}
-                  >
-                    {i}
-                  </span>
-                )}
-              </div>
-            );
-          })}
+        {Array.from({ length: verticalTickCount + 1 }, (_, i) => {
+          const y = i * tickSpacing;
+          const isMajor = i % 10 === 0;
+          const isMid = i % 5 === 0 && !isMajor;
+          const w = isMajor ? 18 : isMid ? 12 : 6;
+          return (
+            <div key={i} className="absolute" style={{ top: y, left: 0 }}>
+              <div style={{ height: 1, width: w, backgroundColor: color }} />
+              {isMajor && (
+                <span
+                  className="absolute text-[8px]"
+                  style={{ left: w + 2, top: 2, color: labelColor, whiteSpace: "nowrap", fontFamily: "'SF Mono', 'Menlo', monospace" }}
+                >
+                  {i}
+                </span>
+              )}
+            </div>
+          );
+        })}
         </motion.div>
       </div>
     </>
@@ -1140,7 +1140,7 @@ function BusinessCardStack({ darkMode }) {
             <a href="https://www.linkedin.com/in/queenie-hsiao/" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="3" /><path d="M7 10v7M11 13v4m0-4c0-2 1.5-3 3.5-3S18 11 18 13v4" /><circle cx="7" cy="7" r="1" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
             </a>
-          </div>
+        </div>
           <a
             href="https://drive.google.com/file/d/1dxF8eWEmR0KLBCvMBKlGLBwY-DnP-jw8/view?usp=sharing"
             target="_blank"
@@ -1264,40 +1264,40 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
           ].map((card, ci) => (
             <motion.div
               key={ci}
-              className="absolute overflow-hidden"
-              style={{
+            className="absolute overflow-hidden"
+            style={{
                 width: 396, height: 240, top: card.top, left: card.left,
-                backgroundColor: darkMode ? "#1a1a1a" : "white",
-                border: `1.5px solid ${borderColor}`,
-              }}
+              backgroundColor: darkMode ? "#1a1a1a" : "white",
+              border: `1.5px solid ${borderColor}`,
+            }}
               initial={skipIntro ? false : { opacity: 0, y: -40, rotate: 0 }}
               animate={{ opacity: 1, y: 0, rotate: card.rotate }}
               transition={cardTransition(card.delay)}
-            >
-              <div className="px-6 pt-3">
-                <p className="text-[9px] uppercase tracking-[0.1em] leading-[1.6] mb-0" style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999", marginTop: 16 }}>
-                  If you like my work, contact me!
-                </p>
-                <div className="flex gap-2" style={{ marginTop: "7.2px" }}>
-                  <a href="https://instagram.com/hsiao_archive" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1.5" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
-                  </a>
-                  <a href="https://x.com/queenie_hsiao" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill={darkMode ? "white" : "black"}><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                  </a>
-                  <a href="https://www.linkedin.com/in/queenie-hsiao/" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="3" /><path d="M7 10v7M11 13v4m0-4c0-2 1.5-3 3.5-3S18 11 18 13v4" /><circle cx="7" cy="7" r="1" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
-                  </a>
-                </div>
-                <a
-                  href="https://drive.google.com/file/d/1dxF8eWEmR0KLBCvMBKlGLBwY-DnP-jw8/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-2 text-[13px] hover:opacity-60 transition-opacity"
-                  style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "#666", textDecoration: "underline" }}
-                >
-                  Download Resume ↓
+          >
+            <div className="px-6 pt-3">
+              <p className="text-[9px] uppercase tracking-[0.1em] leading-[1.6] mb-0" style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999", marginTop: 16 }}>
+                If you like my work, contact me!
+              </p>
+              <div className="flex gap-2" style={{ marginTop: "7.2px" }}>
+                <a href="https://instagram.com/hsiao_archive" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1.5" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
                 </a>
+                <a href="https://x.com/queenie_hsiao" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill={darkMode ? "white" : "black"}><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/queenie-hsiao/" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="3" /><path d="M7 10v7M11 13v4m0-4c0-2 1.5-3 3.5-3S18 11 18 13v4" /><circle cx="7" cy="7" r="1" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
+                </a>
+        </div>
+              <a
+                  href="https://drive.google.com/file/d/1dxF8eWEmR0KLBCvMBKlGLBwY-DnP-jw8/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-2 text-[13px] hover:opacity-60 transition-opacity"
+                style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "#666", textDecoration: "underline" }}
+              >
+                Download Resume ↓
+              </a>
                 <a
                   href="mailto:queenie2000824@gmail.com"
                   className="block text-[13px] mt-1 transition-colors duration-200"
@@ -1305,24 +1305,24 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
                   onMouseEnter={(e) => e.currentTarget.style.color = "#aaa"}
                   onMouseLeave={(e) => e.currentTarget.style.color = darkMode ? "rgba(255,255,255,0.5)" : "black"}
                 >
-                  queenie2000824@gmail.com
-                </a>
-              </div>
-              <p
+                queenie2000824@gmail.com
+              </a>
+            </div>
+            <p
                 className="absolute leading-[1] pointer-events-none"
-                style={{
-                  bottom: 6, left: 0, right: 0,
-                  textAlign: "center",
-                  color: "#0055FF",
-                  fontFamily: "'Mantou Sans', sans-serif",
-                  fontWeight: 400,
-                  fontSize: 120,
-                  transform: "rotate(-0.8deg)",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                蕭書映
-              </p>
+              style={{
+                bottom: 6, left: 0, right: 0,
+                textAlign: "center",
+                color: "#0055FF",
+                fontFamily: "'Mantou Sans', sans-serif",
+                fontWeight: 400,
+                fontSize: 120,
+                transform: "rotate(-0.8deg)",
+                whiteSpace: "nowrap",
+              }}
+            >
+              蕭書映
+            </p>
             </motion.div>
           ))}
           {[{ top: -6, left: -6 }, { top: -6, right: -6 }, { bottom: -6, left: -6 }, { bottom: -6, right: -6 }].map((pos, ci) => (
@@ -1367,7 +1367,7 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
                 <motion.span className="absolute" initial={skipIntro ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={tagTransition(0.18)} style={{ top: -5, right: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
                 <motion.span className="absolute" initial={skipIntro ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={tagTransition(0.18)} style={{ bottom: -5, left: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
                 <motion.span className="absolute" initial={skipIntro ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={tagTransition(0.18)} style={{ bottom: -5, right: -5, width: 10, height: 10, border: "1.5px solid black", backgroundColor: "#F7F7F7" }} />
-              </span>
+          </span>
             </motion.span>
           </span>
           <span className="block overflow-hidden" style={{ padding: "4px 0" }}>
@@ -2384,10 +2384,10 @@ export function MobileTopNav({ darkMode, onBack }) {
               {[0, 1, 2].map((i) => (
                 <span key={i} style={{ display: "block", width: 20, height: 0, borderTop: `1.5px solid ${fg}` }} />
               ))}
-            </span>
+          </span>
           )}
         </button>
-      </div>
+        </div>
       {menuOpen && (
         <div
           className="fixed left-0 right-0 z-[49]"
@@ -2446,13 +2446,13 @@ export function Footer({ darkMode }) {
             </React.Fragment>
           ))}
         </nav>
-        <a
-          href="mailto:queenie2000824@gmail.com"
+          <a
+            href="mailto:queenie2000824@gmail.com"
           className="text-[13px] transition-opacity duration-200 active:opacity-70"
           style={{ color: iconFill, textDecoration: "none" }}
-        >
-          queenie2000824@gmail.com
-        </a>
+          >
+            queenie2000824@gmail.com
+          </a>
         <div className="flex flex-row gap-5">
           {socialLinks.map(({ href, label }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer"
@@ -2477,7 +2477,7 @@ export function Footer({ darkMode }) {
             queenie2000824@gmail.com
           </a>
           <FooterNyTime muted={dim} />
-        </div>
+          </div>
         <div className="flex flex-col items-center justify-between">
           <nav className="flex items-center gap-1" aria-label="Footer">
             {footerNavLinks.map(({ href, label }, i) => (
@@ -3301,13 +3301,13 @@ export default function App() {
             ref={homeHorizontalScrollRef}
             className={isMobile ? "w-full overflow-x-auto overflow-y-hidden" : "flex-1 min-h-0 w-full overflow-x-auto overflow-y-hidden"}
             style={{ overscrollBehavior: "none", ...(isMobile ? { height: "100svh" } : {}) }}
-            onWheel={(e) => {
-              if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                e.currentTarget.scrollLeft += e.deltaY;
-              }
-            }}
-          >
-            <div
+          onWheel={(e) => {
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+              e.currentTarget.scrollLeft += e.deltaY;
+            }
+          }}
+        >
+          <div
               className="relative flex items-stretch gap-0 pr-[30px] pt-[30px] pb-0"
               style={{ height: "100%", width: "max-content", minWidth: "100vw" }}
             >

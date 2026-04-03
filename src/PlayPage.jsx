@@ -220,6 +220,7 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
   const rotationCircle = (angle * 180) / Math.PI + 90;
   const inStack = index < STACK_NUM;
   const stackY = (isMobile ? STACK_BOTTOM_Y_MOBILE : STACK_BOTTOM_Y) - index * (isMobile ? STACK_STEP_MOBILE : STACK_STEP);
+  const offScreenY = isMobile ? window.innerHeight * 0.4 : 920;
 
   const isCircle = phase === "circle";
 
@@ -234,13 +235,13 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
         marginLeft: -w / 2,
         marginTop: -h / 2,
       }}
-      initial={{ x: 0, y: 920, opacity: 0, scale: 0.5, rotate: 0 }}
+      initial={{ x: 0, y: offScreenY, opacity: 0, scale: 0.5, rotate: 0 }}
       animate={
         isCircle
           ? { x: xCircle, y: yCircle, opacity: 1, scale: 1, rotate: rotationCircle }
           : inStack
             ? { x: 0, y: stackY, opacity: 1, scale: 1, rotate: 0 }
-            : { x: 0, y: 920, opacity: 0, scale: 0.5, rotate: 0 }
+            : { x: 0, y: offScreenY, opacity: 0, scale: 0.5, rotate: 0 }
       }
       transition={
         isCircle
@@ -324,7 +325,7 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
   );
 }
 
-function PlayCircleHero({ darkMode, onBack }) {
+function PlayCircleHero({ darkMode, onBack, onAnimationDone }) {
   const isMobile = useIsMobile();
   const [flippedIndex, setFlippedIndex] = useState(-1);
   const [settled, setSettled] = useState(false);
@@ -340,7 +341,10 @@ function PlayCircleHero({ darkMode, onBack }) {
   useEffect(() => {
     if (phase !== "circle") return;
     const circleLastEnd = (NUM_CARDS - 1) * CIRCLE_STAGGER + CIRCLE_DUR;
-    const spinTimer = window.setTimeout(() => setSettled(true), (circleLastEnd + 0.08) * 1000);
+    const spinTimer = window.setTimeout(() => {
+      setSettled(true);
+      onAnimationDone?.();
+    }, (circleLastEnd + 0.08) * 1000);
     return () => window.clearTimeout(spinTimer);
   }, [phase]);
 
@@ -467,6 +471,7 @@ function PlayCircleHero({ darkMode, onBack }) {
 export default function PlayPage({ darkMode, onBack }) {
   const isMobile = useIsMobile();
   const galleryItems = playItems;
+  const [heroAnimDone, setHeroAnimDone] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -490,15 +495,20 @@ export default function PlayPage({ darkMode, onBack }) {
     >
       {isMobile && <MobileTopNav darkMode={darkMode} onBack={onBack} />}
       <div style={isMobile ? { paddingTop: 57 } : {}}>
-        <PlayCircleHero darkMode={darkMode} onBack={onBack} />
+        <PlayCircleHero darkMode={darkMode} onBack={onBack} onAnimationDone={() => setHeroAnimDone(true)} />
       </div>
 
-      <div className="w-full px-4 sm:px-6 md:px-10 lg:px-[60px] pt-[20px] pb-[20px]">
+      <motion.div
+        className="w-full px-4 sm:px-6 md:px-10 lg:px-[60px] pt-[20px] pb-[20px]"
+        initial={isMobile ? { opacity: 0 } : false}
+        animate={isMobile ? (heroAnimDone ? { opacity: 1 } : { opacity: 0 }) : { opacity: 1 }}
+        transition={{ duration: 0.6, ease }}
+      >
         <motion.div
           className="w-full"
           style={{ columnCount: isMobile ? 2 : 3, columnGap: isMobile ? 8 : 12 }}
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={(!isMobile || heroAnimDone) ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6, delay: 0.2, ease }}
           >
           {galleryItems.map((item, i) => (
@@ -532,7 +542,7 @@ export default function PlayPage({ darkMode, onBack }) {
               </motion.div>
             ))}
           </motion.div>
-      </div>
+      </motion.div>
 
       <div className={isMobile ? "px-5" : "px-[60px]"}>
         <Footer darkMode={darkMode} />
