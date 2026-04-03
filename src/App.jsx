@@ -2578,7 +2578,7 @@ function ExternalOverlay({ url, onClose }) {
   );
 }
 
-const CLIPBOARD_MSG = "Contact me if you like my work: queenie2000824@gmail.com";
+const CLIPBOARD_MSG = "Connect with me if you like my work!";
 
 function CanvasContextMenu({ darkMode }) {
   const [menu, setMenu] = useState(null);
