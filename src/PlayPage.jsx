@@ -395,8 +395,8 @@ function PlayCircleHero({ darkMode, onBack, onAnimationDone }) {
               fontFamily: "'Instrument Sans', sans-serif",
             }}
             initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 1.12, ease }}
+            animate={settled ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ duration: 0.6, ease }}
           >
             Playground
           </motion.h1>
@@ -409,16 +409,16 @@ function PlayCircleHero({ darkMode, onBack, onAnimationDone }) {
               marginTop: 6,
             }}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1.28, ease }}
+            animate={settled ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.15, ease }}
           >
             (2019 - 2026)
           </motion.span>
           <motion.div
             className="flex flex-col items-center gap-1 mt-6 cursor-pointer"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1.5, ease }}
+            animate={settled ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.3, ease }}
             onClick={() => {
               window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
             }}
