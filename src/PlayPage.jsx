@@ -324,7 +324,7 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
             <video
               src={src}
               className="w-full h-full object-cover"
-              style={{ display: "block", filter: "hue-rotate(28deg) saturate(1.15) contrast(1.05)" }}
+              style={{ display: "block" }}
               preload="none"
               autoPlay
               loop
