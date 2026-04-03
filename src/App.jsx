@@ -2057,7 +2057,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
       <div className="flex w-max max-w-none flex-row flex-nowrap items-start" style={{ gap: Math.round(16 * vScale) }}>
         <AboutPhotoPanel
           title="My Home, Taipei"
-          src="/images/about/taipei.jpg"
+          src="https://res.cloudinary.com/dugdaifzh/image/upload/v1775178157/taipei_iksdsk.jpg"
           alt="Taipei cityscape"
           accent={accent}
           paper={paper}
@@ -2067,7 +2067,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
         />
         <AboutPhotoPanel
           title="Queenie Hsiao"
-          src="/images/about/portrait.jpg"
+          src="https://res.cloudinary.com/dugdaifzh/image/upload/v1775178157/portrait_mptbin.jpg"
           alt="Queenie Hsiao"
           accent={accent}
           paper={paper}
@@ -2341,9 +2341,17 @@ export function MobileTopNav({ darkMode, onBack }) {
 
   const handleNav = (hash) => {
     setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "instant" });
-    window.location.hash = hash;
     onBack();
+    window.location.hash = hash;
+    requestAnimationFrame(() => {
+      const id = hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
   };
 
   return (
@@ -2933,8 +2941,8 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
       </div>
 
       {/* ── About ── */}
-      <div className="px-5 pb-10 pt-10" style={{ overflow: "visible" }}>
-        <img src="/images/about/me.png" alt="Queenie" className="w-full object-contain mb-4" />
+      <div id="about" className="px-5 pb-10 pt-10" style={{ overflow: "visible" }}>
+        <img src="https://res.cloudinary.com/dugdaifzh/image/upload/v1775178168/about_jo8ete.png" alt="Queenie" className="w-full object-contain mb-4" />
         <div className="relative" style={{ border: "1.5px solid #8A38F5", backgroundColor: darkMode ? "#141414" : "#fff", padding: "24px", overflow: "visible" }}>
           {[{ top: -6, left: -6 }, { top: -6, right: -6 }, { bottom: -6, left: -6 }, { bottom: -6, right: -6 }].map((pos, i) => (
             <span key={i} className="absolute pointer-events-none" style={{ ...pos, width: 12, height: 12, border: "1.5px solid #8A38F5", backgroundColor: bg, zIndex: 2 }} />
