@@ -134,7 +134,12 @@ export default function LoadingScreen({ onDone }) {
           if (type === 1) blueStr = 1;
           else if (type === 2) blueStr = Math.min(moreBlueFrac * 2.5, 1);
 
-          const dist = Math.hypot(finalX - cx, y - cy);
+          const rawDist = Math.hypot(finalX - cx, y - cy);
+          const angle = Math.atan2(y - cy, finalX - cx);
+          const waveDistort = isMobileViewport
+            ? Math.sin(angle * 3.5 + elapsed * 0.002) * 18 + Math.sin(angle * 7 + elapsed * 0.003) * 8
+            : 0;
+          const dist = rawDist + waveDistort;
           const dampen = 1 - Math.max(settleT, fadeT);
 
           let ringHit = 0;
@@ -157,7 +162,8 @@ export default function LoadingScreen({ onDone }) {
           }
           ringHit *= sv * dampen;
 
-          let sz = 0.9 + ringHit * 1.2;
+          const breathe = isMobileViewport ? Math.sin(elapsed * 0.004 + rawDist * 0.02) * 0.15 : 0;
+          let sz = 0.9 + ringHit * 1.2 + breathe;
           if (settleT > 0) sz = sz + (0.9 - sz) * settleT;
 
           const alphaBoost = 1 + ringHit * 1.5;
