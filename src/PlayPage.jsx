@@ -272,68 +272,27 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
             : { duration: 0 }
       }
     >
-      <div
+      <motion.div
         style={{
           width: "100%",
           height: "100%",
-          transformOrigin: "center center",
-          perspective: 900,
+          overflow: "hidden",
         }}
+        animate={{ scale: flipped ? 1.12 : 1, opacity: flipped ? 0.85 : 1 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
-        <motion.div
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "relative",
-            transformStyle: "preserve-3d",
-            borderRadius: 0,
-            overflow: "hidden",
-          }}
-          animate={{ rotateY: flipped ? 180 : 0 }}
-          transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backfaceVisibility: "hidden",
-              WebkitBackfaceVisibility: "hidden",
-            }}
-          >
-            <video
-              src={src}
-              poster={getThumbnail(src)}
-              className="w-full h-full object-cover"
-              style={{ display: "block" }}
-              preload="auto"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backfaceVisibility: "hidden",
-              WebkitBackfaceVisibility: "hidden",
-              transform: "rotateY(180deg)",
-            }}
-          >
-            <video
-              src={src}
-              className="w-full h-full object-cover"
-              style={{ display: "block" }}
-              preload="none"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-        </motion.div>
-      </div>
+        <video
+          src={src}
+          poster={getThumbnail(src)}
+          className="w-full h-full object-cover"
+          style={{ display: "block" }}
+          preload="auto"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      </motion.div>
     </motion.div>
   );
 }
