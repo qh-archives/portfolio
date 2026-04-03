@@ -171,6 +171,24 @@ function interleaveItems(...arrays) {
 }
 const playItems = interleaveItems(creativeItems, fashionItems, graphicItems);
 
+const FORCE_RIGHT_MOBILE = new Set([
+  "https://res.cloudinary.com/dugdaifzh/image/upload/v1775150816/Screen-Shot-2023-09-09-at-5.02.09-PM_cixkbv.png",
+]);
+
+function splitIntoColumns(items, cols) {
+  const columns = Array.from({ length: cols }, () => []);
+  let col = 0;
+  for (const item of items) {
+    if (cols === 2 && FORCE_RIGHT_MOBILE.has(item.src) && col === 0) {
+      columns[1].push(item);
+    } else {
+      columns[col % cols].push(item);
+      col++;
+    }
+  }
+  return columns;
+}
+
 /** Hero loop clips from public/images/play/creative-coding/Vid */
 const heroVideos = [
   "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145379/track_lscvkf.mp4",
@@ -504,16 +522,44 @@ export default function PlayPage({ darkMode, onBack }) {
         animate={isMobile ? (heroAnimDone ? { opacity: 1 } : { opacity: 0 }) : { opacity: 1 }}
         transition={{ duration: 0.6, ease }}
       >
-        <motion.div
-          className="w-full"
-          style={{ columnCount: isMobile ? 2 : 3, columnGap: isMobile ? 8 : 12 }}
+        {isMobile ? (
+          <motion.div
+            className="w-full flex gap-2"
             initial={{ opacity: 0, y: 30 }}
-            animate={(!isMobile || heroAnimDone) ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            animate={heroAnimDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6, delay: 0.2, ease }}
           >
-          {galleryItems.map((item, i) => (
+            {splitIntoColumns(galleryItems, 2).map((col, ci) => (
+              <div key={ci} className="flex-1 flex flex-col gap-2">
+                {col.map((item, i) => (
+                  <motion.div
+                    key={`${item.src}-${ci}-${i}`}
+                    className="rounded-[12px] overflow-hidden"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.1 + i * 0.03, ease }}
+                  >
+                    {item.type === "image" ? (
+                      <img className="w-full h-auto block" src={item.src} alt="" loading="lazy" />
+                    ) : (
+                      <LazyGalleryVideo src={item.src} darkMode={darkMode} />
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            className="w-full"
+            style={{ columnCount: 3, columnGap: 12 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease }}
+          >
+            {galleryItems.map((item, i) => (
               <motion.div
-              key={`${item.src}-${i}`}
+                key={`${item.src}-${i}`}
                 className="rounded-[12px] overflow-hidden"
                 style={{ breakInside: "avoid", marginBottom: 12 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -521,27 +567,18 @@ export default function PlayPage({ darkMode, onBack }) {
                 transition={{ duration: 0.4, delay: 0.1 + i * 0.03, ease }}
               >
                 {item.type === "image" ? (
-                  <img
-                    className="w-full h-auto block"
-                    src={item.src}
-                    alt=""
-                    loading="lazy"
-                  />
-              ) : isMobile ? (
-                <LazyGalleryVideo src={item.src} darkMode={darkMode} />
+                  <img className="w-full h-auto block" src={item.src} alt="" loading="lazy" />
                 ) : (
                   <video
                     className="w-full h-auto block"
                     src={item.src}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                    autoPlay loop muted playsInline
                   />
                 )}
               </motion.div>
             ))}
           </motion.div>
+        )}
       </motion.div>
 
       <div className={isMobile ? "px-5" : "px-[60px]"}>
