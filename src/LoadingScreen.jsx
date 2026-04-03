@@ -62,11 +62,11 @@ export default function LoadingScreen({ onDone }) {
     }
 
     const isMobileViewport = W < 768;
-    const T_SWEEP   = isMobileViewport ? 1200 : 1800;
-    const T_BREATHE = isMobileViewport ? 1600 : 2700;
-    const T_MORE    = isMobileViewport ? 2100 : 3400;
-    const T_SETTLE  = isMobileViewport ? 2400 : 3800;
-    const T_FADE    = isMobileViewport ? 2700 : 4150;
+    const T_SWEEP   = isMobileViewport ? 1500 : 1800;
+    const T_BREATHE = isMobileViewport ? 2100 : 2700;
+    const T_MORE    = isMobileViewport ? 2700 : 3400;
+    const T_SETTLE  = isMobileViewport ? 3100 : 3800;
+    const T_FADE    = isMobileViewport ? 3400 : 4150;
     const DOT_FADE_IN = 0.12;
 
     const RING_INTERVAL = isMobileViewport ? 500 : 1100;
