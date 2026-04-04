@@ -2436,7 +2436,18 @@ export default function ProjectPage({ project, darkMode, onBack }) {
         </div>
 
         <div className="px-5">
-          <Footer darkMode={darkMode} />
+          <Footer darkMode={darkMode} onNavigate={(href) => {
+            const id = href.replace("#", "");
+            if (id === "play") { window.location.hash = "#play"; return; }
+            onBack(project);
+            const tryScroll = (attempts = 0) => {
+              if (id === "home") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+              const el = document.getElementById(id);
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+              else if (attempts < 10) setTimeout(() => tryScroll(attempts + 1), 100);
+            };
+            setTimeout(tryScroll, 700);
+          }} />
         </div>
       </motion.div>
     );
@@ -2554,7 +2565,18 @@ export default function ProjectPage({ project, darkMode, onBack }) {
                     </div>
           </div>
       <div style={{ padding: "0 clamp(24px, 4vw, 60px)" }}>
-        <Footer darkMode={darkMode} />
+        <Footer darkMode={darkMode} onNavigate={(href) => {
+          const id = href.replace("#", "");
+          if (id === "play") { window.location.hash = "#play"; return; }
+          onBack(project);
+          const tryScroll = (attempts = 0) => {
+            if (id === "home") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+            else if (attempts < 10) setTimeout(() => tryScroll(attempts + 1), 100);
+          };
+          setTimeout(tryScroll, 700);
+        }} />
         </div>
       <GlassCursor darkMode={darkMode} />
     </motion.div>

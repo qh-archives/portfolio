@@ -2381,7 +2381,7 @@ export function MobileTopNav({ darkMode, onBack }) {
   );
 }
 
-export function Footer({ darkMode }) {
+export function Footer({ darkMode, onNavigate }) {
   const muted = darkMode ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.35)";
   const accent = darkMode ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.8)";
   const dim = darkMode ? "rgba(255,255,255,0.22)" : "rgba(0,0,0,0.18)";
@@ -2410,7 +2410,14 @@ export function Footer({ darkMode }) {
           {footerNavLinks.map(({ href, label }, i) => (
             <React.Fragment key={href}>
               {i > 0 && <span className="text-[10px] mx-1 select-none" style={{ color: dim }}>·</span>}
-              <a href={href} className="text-[13px] tracking-[0.02em] transition-opacity duration-200 active:opacity-60" style={{ color: accent, textDecoration: "none" }}>
+              <a href={href} className="text-[13px] tracking-[0.02em] transition-opacity duration-200 active:opacity-60" style={{ color: accent, textDecoration: "none" }}
+                onClick={(e) => {
+                  if (onNavigate) {
+                    e.preventDefault();
+                    onNavigate(href);
+                  }
+                }}
+              >
                 {label}
               </a>
             </React.Fragment>
@@ -3055,7 +3062,15 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
 
       {/* ── Footer ── */}
       <div className="mt-auto px-5">
-        <Footer darkMode={darkMode} />
+        <Footer darkMode={darkMode} onNavigate={(href) => {
+          const id = href.replace("#", "");
+          if (id === "play") { window.location.hash = "#play"; return; }
+          if (id === "home") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+          setTimeout(() => {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }, 100);
+        }} />
       </div>
     </div>
   );

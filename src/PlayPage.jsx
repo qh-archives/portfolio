@@ -536,7 +536,18 @@ export default function PlayPage({ darkMode, onBack }) {
       </motion.div>
 
       <div className={isMobile ? "px-5" : "px-[60px]"}>
-        <Footer darkMode={darkMode} />
+        <Footer darkMode={darkMode} onNavigate={(href) => {
+          const id = href.replace("#", "");
+          if (id === "play") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+          onBack();
+          const tryScroll = (attempts = 0) => {
+            if (id === "home") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+            else if (attempts < 10) setTimeout(() => tryScroll(attempts + 1), 100);
+          };
+          setTimeout(tryScroll, 700);
+        }} />
       </div>
       <GlassCursor darkMode={darkMode} />
     </motion.div>
