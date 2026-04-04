@@ -286,7 +286,7 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
           poster={getThumbnail(src)}
           className="w-full h-full object-cover"
           style={{ display: "block" }}
-          preload="auto"
+          preload="none"
           autoPlay
           loop
           muted
