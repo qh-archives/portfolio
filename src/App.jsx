@@ -624,6 +624,13 @@ const projects = [
       { label: "Timeline", value: "2025" },
       { label: "Role", value: "Product Design" },
     ],
+    techStack: [
+      { category: "Design", tools: ["Figma"] },
+      { category: "Frontend", tools: ["TypeScript", "React", "Vite"] },
+      { category: "Styling", tools: ["Tailwind CSS"] },
+      { category: "AI / Vision", tools: ["MediaPipe", "Hand Tracking"] },
+    ],
+    howToPlay: "Allow camera access and use your hand gesture in front of the camera to interact with the Carousel. Pinch with thumb and index finger on left hand to rotate carousel. Pinch with thumb and index finger on right hand to change carousel size, rotate right hand with the pinch to move carousel position.",
     caseStudy: [],
   },
   {
@@ -637,6 +644,12 @@ const projects = [
       { label: "Timeline", value: "2025" },
       { label: "Role", value: "Product Design" },
     ],
+    techStack: [
+      { category: "Design", tools: ["Figma"] },
+      { category: "Frontend", tools: ["TypeScript", "React", "Vite"] },
+      { category: "3D", tools: ["React Three Fiber", "Three.js"] },
+    ],
+    howToPlay: "Click and drag with your mouse, move your mouse around and see the liquid glass effect. Click again to disable it.",
     caseStudy: [
       { type: "hero", image: "/images/case-studies/flow-fi/hero.jpg", height: "auto", heroAspect: "16 / 9" },
       { type: "text", heading: "Overview", body: "Case study content coming soon." },
@@ -652,6 +665,11 @@ const projects = [
     meta: [
       { label: "Timeline", value: "2025" },
       { label: "Role", value: "Product Design" },
+    ],
+    techStack: [
+      { category: "Design", tools: ["Figma"] },
+      { category: "Frontend", tools: ["TypeScript", "React", "Vite"] },
+      { category: "Styling", tools: ["Tailwind CSS"] },
     ],
     caseStudy: [
       { type: "hero", image: "/images/case-studies/flow-fi/hero.jpg", height: "auto", heroAspect: "16 / 9" },
@@ -669,6 +687,12 @@ const projects = [
       { label: "Timeline", value: "2025" },
       { label: "Role", value: "Product Design" },
     ],
+    techStack: [
+      { category: "Design", tools: ["Figma"] },
+      { category: "Frontend", tools: ["React", "Vite"] },
+      { category: "3D", tools: ["Three.js"] },
+    ],
+    howToPlay: "Type something and press enter, drag the cursor around to see the text from different angles.",
     caseStudy: [
       { type: "hero", image: "/images/case-studies/flow-fi/hero.jpg", height: "auto", heroAspect: "16 / 9" },
       { type: "text", heading: "Overview", body: "Case study content coming soon." },
@@ -2479,8 +2503,9 @@ export function Footer({ darkMode, onNavigate }) {
   );
 }
 
-function ExternalOverlay({ url, onClose }) {
+function ExternalOverlay({ project, onClose }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const hasInfo = project.techStack || project.howToPlay;
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -2498,7 +2523,7 @@ function ExternalOverlay({ url, onClose }) {
       onClick={onClose}
     >
       <motion.div
-        className="relative overflow-hidden"
+        className="relative flex flex-col overflow-hidden"
         style={{
           boxShadow: isFullscreen ? "none" : "0 25px 60px rgba(0,0,0,0.4)",
           borderRadius: isFullscreen ? 0 : 16,
@@ -2509,47 +2534,83 @@ function ExternalOverlay({ url, onClose }) {
           scale: 1,
           y: 0,
           width: isFullscreen ? "100%" : "80%",
-          height: isFullscreen ? "100%" : "80%",
+          height: isFullscreen ? "100%" : "90%",
         }}
         exit={{ opacity: 0, scale: 0.92, y: 30 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          className="absolute top-4 left-4 z-10 w-8 h-8 flex items-center justify-center rounded-full cursor-none"
-          style={{ backgroundColor: "rgba(0,0,0,0.5)", color: "white" }}
-          onClick={() => setIsFullscreen((f) => !f)}
-        >
-          {isFullscreen ? (
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="5,1 5,5 1,5" />
-              <polyline points="9,13 9,9 13,9" />
+        <div className="relative flex-1 min-h-0">
+          <button
+            className="absolute top-4 left-4 z-10 w-8 h-8 flex items-center justify-center rounded-full cursor-none"
+            style={{ backgroundColor: "rgba(0,0,0,0.5)", color: "white" }}
+            onClick={() => setIsFullscreen((f) => !f)}
+          >
+            {isFullscreen ? (
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="5,1 5,5 1,5" />
+                <polyline points="9,13 9,9 13,9" />
+              </svg>
+            ) : (
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="1,5 1,1 5,1" />
+                <polyline points="13,9 13,13 9,13" />
+              </svg>
+            )}
+          </button>
+          <button
+            className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full cursor-none"
+            style={{ backgroundColor: "rgba(0,0,0,0.5)", color: "white" }}
+            onClick={onClose}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="1" y1="1" x2="13" y2="13" />
+              <line x1="13" y1="1" x2="1" y2="13" />
             </svg>
-          ) : (
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="1,5 1,1 5,1" />
-              <polyline points="13,9 13,13 9,13" />
-            </svg>
-          )}
-        </button>
-        <button
-          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full cursor-none"
-          style={{ backgroundColor: "rgba(0,0,0,0.5)", color: "white" }}
-          onClick={onClose}
-        >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <line x1="1" y1="1" x2="13" y2="13" />
-            <line x1="13" y1="1" x2="1" y2="13" />
-          </svg>
-        </button>
-        <iframe
-          src={url}
-          className="w-full h-full"
-          style={{ border: "none" }}
-          title="External project"
-          allow="camera; microphone; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-          allowFullScreen
-        />
+          </button>
+          <iframe
+            src={project.externalUrl}
+            className="w-full h-full"
+            style={{ border: "none" }}
+            title="External project"
+            allow="camera; microphone; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+            allowFullScreen
+          />
+        </div>
+
+        {hasInfo && !isFullscreen && (
+          <div
+            className="shrink-0 px-6 py-5 flex items-start justify-between"
+            style={{ backgroundColor: "#1a1a1a", borderTop: "1px solid rgba(255,255,255,0.08)" }}
+          >
+            {project.techStack && (
+              <div className="flex gap-x-10 gap-y-3 flex-wrap" style={{ flex: project.howToPlay ? "0 0 auto" : "1" }}>
+                {project.techStack.map((group) => (
+                  <div key={group.category} className="flex flex-col gap-1">
+                    <span className="text-[11px] uppercase tracking-[0.08em]" style={{ color: "rgba(255,255,255,0.35)" }}>
+                      {group.category}
+                    </span>
+                    {group.tools.map((tool) => (
+                      <span key={tool} className="text-[13px]" style={{ color: "rgba(255,255,255,0.7)" }}>
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )}
+            {project.howToPlay && (
+              <div className="flex flex-col gap-1 flex-1 ml-10">
+                <span className="text-[11px] uppercase tracking-[0.08em]" style={{ color: "rgba(255,255,255,0.35)" }}>
+                  How to interact
+                </span>
+                <span className="text-[13px] leading-[1.5]" style={{ color: "rgba(255,255,255,0.7)" }}>
+                  {project.howToPlay}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
       </motion.div>
     </motion.div>
   );
@@ -3135,7 +3196,7 @@ export default function App() {
 
   const selectProject = useCallback((project) => {
     if (project.externalUrl) {
-      setExternalOverlay(project.externalUrl);
+      setExternalOverlay(project);
       return;
     }
     if (CASE_STUDY_TITLES.includes(project.title)) {
@@ -3387,7 +3448,7 @@ export default function App() {
             {externalOverlay && (
               <ExternalOverlay
                 key="external-overlay"
-                url={externalOverlay}
+                project={externalOverlay}
                 onClose={() => setExternalOverlay(null)}
               />
             )}
