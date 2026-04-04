@@ -2229,7 +2229,7 @@ function HorizontalProjectsStrip({ darkMode, onSelectProject, skipIntro = false,
           {project.title === "Gravity Letters" && (
             <div className="shrink-0 relative" style={{ width: sc(632), minHeight: sc(640), marginLeft: sc(8) }}>
               <HangingScrollVideo
-                src="https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145379/track_lscvkf.mp4"
+                src="https://res.cloudinary.com/dugdaifzh/video/upload/v1775145378/1_bb3qni.mp4"
                 darkMode={darkMode}
                 scrollContainerRef={scrollContainerRef}
                 skipIntro={skipIntro}
