@@ -39,11 +39,8 @@ const creativeCodingVidFolder = [
   "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145374/14_lph1c8.mp4",
   "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145372/16_ohcl1b.mp4",
   "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145375/17_aoumzl.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145375/12_zf6ihe.mp4",
   "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145371/19_znhiyb.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145379/track_lscvkf.mp4",
   "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145366/Test_oh08am.mp4",
-  "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145379/track_lscvkf.mp4",
 ];
 
 const fashionImages = [
