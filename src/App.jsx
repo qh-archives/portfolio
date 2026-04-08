@@ -1172,12 +1172,15 @@ function BusinessCardStack({ darkMode }) {
 
 function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
   const [vw, setVw] = useState(() => window.innerWidth);
+  const [vh, setVh] = useState(() => window.innerHeight);
   useEffect(() => {
-    const update = () => setVw(window.innerWidth);
+    const update = () => { setVw(window.innerWidth); setVh(window.innerHeight); };
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
-  const s = vw / 1800; // scale factor relative to design width (1800 → 0.8× at 1440px)
+  const sw = vw / 1800;
+  const sh = vh / 1000;
+  const s = Math.min(sw, sh);
 
   const borderColor = darkMode ? "rgba(255,255,255,0.3)" : "black";
   const pathTransition = skipIntro
@@ -1223,7 +1226,7 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
         <HorizontalNavLinks darkMode={darkMode} skipIntro={skipIntro} />
       </div>
 
-      <div id="about-hero-card" className="absolute scroll-mt-0" style={{ left: Math.round(860 * s), top: Math.round(120 * s), zIndex: 10 }}>
+      <div id="about-hero-card" className="absolute scroll-mt-0" style={{ left: "48%", top: "clamp(60px, 8vh, 160px)", zIndex: 10 }}>
         <div
           className="relative"
           style={{ width: 456, height: 312, padding: 10, transformOrigin: "top left", transform: `scale(${1.254 * s}) rotate(-3deg)` }}
