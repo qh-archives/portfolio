@@ -130,12 +130,15 @@ export default function LoadingScreen({ onDone }) {
             : y;
 
           const type = dotType[idx];
+          const colorFade = Math.max(settleT, fadeT);
           let blueStr = 0;
-          if (type === 1) blueStr = 1;
-          else if (type === 2) blueStr = Math.min(moreBlueFrac * 2.5, 1);
+          if (colorFade < 1) {
+            if (type === 1) blueStr = 1 - colorFade;
+            else if (type === 2) blueStr = Math.min(moreBlueFrac * 2.5, 1) * (1 - colorFade);
+          }
 
           const dist = Math.hypot(finalX - cx, y - cy);
-          const dampen = 1 - Math.max(settleT, fadeT);
+          const dampen = 1 - colorFade;
 
           let ringHit = 0;
           for (let ri = 0; ri < MAX_RINGS; ri++) {
@@ -165,18 +168,13 @@ export default function LoadingScreen({ onDone }) {
           const TARGET_A = 0.07;
           let alpha, gi = 0, bi = 0;
           if (blueStr > 0) {
-            gi    = Math.round(85  * blueStr * (1 - settleT));
-            bi    = Math.round(255 * blueStr * (1 - settleT));
-            alpha = sv * (0.88 * blueStr * (1 - settleT) + TARGET_A * settleT) * alphaBoost;
+            gi    = Math.round(85  * blueStr);
+            bi    = Math.round(255 * blueStr);
+            alpha = sv * (0.88 * blueStr + TARGET_A * colorFade) * alphaBoost;
           } else {
-            alpha = sv * (0.38 + (TARGET_A - 0.38) * settleT) * alphaBoost;
+            alpha = sv * (0.38 + (TARGET_A - 0.38) * colorFade) * alphaBoost;
           }
 
-          if (fadeT > 0) {
-            gi = Math.round(gi * (1 - fadeT));
-            bi = Math.round(bi * (1 - fadeT));
-            alpha = alpha + (TARGET_A - alpha) * fadeT;
-          }
           if (alpha < 0.004) continue;
           ctx.fillStyle = `rgba(0,${gi},${bi},${alpha.toFixed(3)})`;
           ctx.beginPath();
