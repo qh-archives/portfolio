@@ -163,7 +163,7 @@ export default function LoadingScreen({ onDone }) {
           let sz = 0.9 + ringHit * 1.2;
           if (settleT > 0) sz = sz + (0.9 - sz) * settleT;
 
-          const alphaBoost = 1 + ringHit * 1.5;
+          const alphaBoost = 1 + ringHit * 1.5 * (1 - colorFade);
 
           const TARGET_A = 0.07;
           let alpha, gi = 0, bi = 0;
