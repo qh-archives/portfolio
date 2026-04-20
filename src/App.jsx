@@ -3413,12 +3413,18 @@ export default function App() {
         >
           <StickyTopRuler darkMode={darkMode} scrollRef={homeHorizontalScrollRef} skipIntro={skipLandingAnimations} />
           <div
-            ref={homeHorizontalScrollRef}
             className={isMobile ? "w-full overflow-x-auto overflow-y-hidden" : "flex-1 min-h-0 w-full overflow-x-auto overflow-y-hidden"}
             style={{ overscrollBehavior: "none", ...(isMobile ? { height: "100svh" } : {}) }}
-          onWheel={(e) => {
-            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-              e.currentTarget.scrollLeft += e.deltaY;
+          ref={(el) => {
+            homeHorizontalScrollRef.current = el;
+            if (el && !el.__wheelAttached) {
+              el.__wheelAttached = true;
+              el.addEventListener("wheel", (e) => {
+                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                  e.preventDefault();
+                  el.scrollLeft += e.deltaY;
+                }
+              }, { passive: false });
             }
           }}
         >
