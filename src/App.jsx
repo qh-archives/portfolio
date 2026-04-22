@@ -700,6 +700,11 @@ const projects = [
   },
 ];
 
+function getBunnyPoster(src) {
+  const m = src && src.match(/vz-[^/]+\.b-cdn\.net\/([a-f0-9-]+)\//);
+  return m ? `https://vz-53d1011b-a2d.b-cdn.net/${m[1]}/thumbnail.jpg` : undefined;
+}
+
 function LazyVideo({ src, className, style, ...props }) {
   const videoRef = useRef(null);
 
@@ -728,6 +733,7 @@ function LazyVideo({ src, className, style, ...props }) {
       className={className}
       style={style}
       src={src}
+      poster={props.poster || getBunnyPoster(src)}
       preload="auto"
       {...props}
     />
