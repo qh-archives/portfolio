@@ -67,9 +67,9 @@ const projects = [
       {
         type: "polaroid-spread",
         images: [
-          { src: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775165345/first-day_tzrxmp.jpg", name: "First Day at Uber!" },
-          { src: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775165345/team-breakfast_pqqfvw.jpg", name: "Design Team Breakfast" },
-          { src: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775165345/tech-social_rek0gh.jpg", name: "Uber Tech Social" },
+          { src: "https://queenie-works-images.b-cdn.net/first-day_tzrxmp.jpg", name: "First Day at Uber!" },
+          { src: "https://queenie-works-images.b-cdn.net/team-breakfast_pqqfvw.jpg", name: "Design Team Breakfast" },
+          { src: "https://queenie-works-images.b-cdn.net/tech-social_rek0gh.jpg", name: "Uber Tech Social" },
         ],
       },
       {
@@ -94,7 +94,7 @@ const projects = [
         type: "two-column-video",
         locked: true,
         leftHeading: "The Solution",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145424/slow-final_eblntl.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/9f8fea3d-0684-462b-b231-c46069ea086b/play_1080p.mp4",
         rightHeading: "Surface market comparison features to help consumers confidently recognize\u00A0value.",
         rightBody: "By highlighting when an item is priced lower than usual or compared to nearby stores, the feature reduces second-guessing, builds trust, and supports smarter\u00A0decision-making.",
       },
@@ -140,15 +140,15 @@ const projects = [
           { src: "/images/case-studies/uber/concept/6.png", name: "Market View" },
           { src: "/images/case-studies/uber/concept/7.png", name: "Historical View" },
           { src: "/images/case-studies/uber/concept/8.png", name: "Price Insight" },
-          { src: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775165498/5_jftcuc.png", name: "Concepts", desktopOnly: true },
-          { src: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775165498/2_gxkkgu.png", name: "Concepts", desktopOnly: true },
+          { src: "https://queenie-works-images.b-cdn.net/5_jftcuc.png", name: "Concepts", desktopOnly: true },
+          { src: "https://queenie-works-images.b-cdn.net/2_gxkkgu.png", name: "Concepts", desktopOnly: true },
         ],
       },
       {
         type: "two-column-video",
         locked: true,
         leftHeading: "Adding Motion",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145421/vid_d8zz1c.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/138eee87-27a3-4165-8ed2-ed19b3d78976/play_1080p.mp4",
         videoSide: "right",
         videoFrame: true,
         videoRadius: 12,
@@ -159,7 +159,7 @@ const projects = [
         type: "two-column-video",
         locked: true,
         leftHeading: "How It Works",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145421/uberfinal_qmqq7l.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/60132488-603f-4758-88b7-460309394703/play_480p.mp4",
         videoFrame: true,
         videoRadius: 12,
         rightHeading: "Compare your grocery prices with other stores within your\u00A0vicinity.",
@@ -204,7 +204,7 @@ const projects = [
   {
     title: "Dandi",
     year: "2026",
-    video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775146464/hero_ty418e.mp4",
+    video: "https://vz-53d1011b-a2d.b-cdn.net/f7507723-abb1-4b53-8576-5225e7751c61/play_1080p.mp4",
     description: "A bio-smart ear cuff and companion app for PCOS.",
     meta: [
       { label: "Timeline", value: "March 7 - 9, 2026" },
@@ -213,7 +213,7 @@ const projects = [
       { label: "Award", value: "FigBuild 2026 Winner\nMost Impact" },
     ],
     caseStudy: [
-      { type: "hero", video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775146464/hero_ty418e.mp4", height: "auto", heroAspect: "16 / 9" },
+      { type: "hero", video: "https://vz-53d1011b-a2d.b-cdn.net/f7507723-abb1-4b53-8576-5225e7751c61/play_1080p.mp4", height: "auto", heroAspect: "16 / 9" },
       {
         type: "persona",
         heading: "The Problem",
@@ -278,9 +278,9 @@ const projects = [
         marginTop: -35,
           heading: "Your Supplements, Delivered\u00A0Hands-Free",
           body: "Dandi reads your body and delivers what it needs. No pills. No\u00A0thinking.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/v1775169999/connect_2_pgqu3m.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/79323913-a5c8-482b-bc9c-5c06af7571aa/play_1080p.mp4",
         mobileVideoBg: "#f4e7d8",
-        mobileImageAfter: "https://res.cloudinary.com/dugdaifzh/image/upload/v1775169548/dandi_earring_ynqooo.png",
+        mobileImageAfter: "https://queenie-works-images.b-cdn.net/dandi_earring_ynqooo.png",
       },
       {
         type: "text-with-video",
@@ -288,7 +288,7 @@ const projects = [
         marginTop: -35,
         heading: "Care that Adapts to\u00A0You",
         body: "AI assistant that learns your body\u2019s patterns and adjusts your supplement schedule in real\u00A0time.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145397/realtime-data_lxx93f.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/75871ca2-83b9-4e34-aaa9-d6dceef82813/play_1080p.mp4",
         mobileVideoBg: "#eef2f8",
       },
       {
@@ -297,7 +297,7 @@ const projects = [
         marginTop: -35,
         heading: "You\u2019re Not\u00A0Alone",
         body: "Connect with your community, get expert-backed answers, and find support for what you\u2019re going\u00A0through.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145396/community_vclcws.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/e7f36830-0cf8-4b11-97c1-7d12ed8f6dfa/play_1080p.mp4",
         mobileVideoBg: "#f5ede8",
       },
       {
@@ -306,7 +306,7 @@ const projects = [
         marginTop: -35,
         heading: "Share With Your\u00A0Provider",
         body: "All of your health data shared, walk into an appointment backed with evidence instead of \u201CI just feel\u00A0off.\u201D",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145392/share_qkgfln.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/6a7ee2ad-275c-49fc-9946-84daac034d71/play_1080p.mp4",
         mobileVideoBg: "#eaf3ee",
       },
       {
@@ -373,7 +373,7 @@ const projects = [
   {
     title: "Lume",
     year: "2025",
-    video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145474/lume-card_sftzqm.mp4",
+    video: "https://vz-53d1011b-a2d.b-cdn.net/f3f6ffcb-c182-442a-b761-9f939637d9ff/play_1080p.mp4",
     imageStyle: { objectPosition: "center 40%" },
     description: "Helping fashion designers gain visibility and reach the right audience organically.",
     meta: [
@@ -383,7 +383,7 @@ const projects = [
       { label: "Tool", value: "Figma\nFigJam" },
     ],
     caseStudy: [
-      { type: "hero", video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145445/hero_ht0jkz.mp4", height: "auto", heroAspect: "16 / 9" },
+      { type: "hero", video: "https://vz-53d1011b-a2d.b-cdn.net/c4902c1d-646f-4c22-84e2-36f6aa7e33a6/play_1080p.mp4", height: "auto", heroAspect: "16 / 9" },
       { type: "text", heading: "The Problem", body: "Finding the right audience is hard\u2026", subtext: "Independent fashion designers struggle to gain visibility in a saturated market and without the same resources, marketing power, or established platforms as larger brands, their work often goes unseen by potential\u00A0customers." },
       {
         type: "stats",
@@ -496,7 +496,7 @@ const projects = [
         marginTop: -80,
         heading: "Easily discover designers from style\u00A0tags.",
         body: "Filter and narrow through by material, color, or concept to find niche and aligned styles. For You works like a social media feed \u2014 post your outfits, tag your designers and explore\u00A0styles.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145443/style-tags_shj4sm.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/a7af3da1-e98b-4da1-876e-b2d7ea637160/play_1080p.mp4",
         mobileVideoBg: "#f5ede8",
         mobileMarginTop: 0,
       },
@@ -506,7 +506,7 @@ const projects = [
         marginTop: -35,
         heading: "Post your style creation and tag\u00A0designers.",
         body: "Post your style creations, tag designers and stylized keywords for easier searching. A social media feed to explore and get\u00A0inspired.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145439/post_vhzfwl.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/6b27e946-2f29-48b4-8ae1-78fbcc6b11ab/play_1080p.mp4",
         mobileVideoBg: "#f0ece8",
         mobileMarginTop: 0,
       },
@@ -516,7 +516,7 @@ const projects = [
         marginTop: -35,
         heading: "Create moodboards and get\u00A0inspired.",
         body: "Turn inspiration into action with shoppable, style-matched suggestions. Create custom moodboards and pin your favorite pieces to organize and share your style\u00A0vision.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145436/moodboard_u5ts0q.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/2f934cbe-1232-4d5f-b9b2-d81ba175aba9/play_1080p.mp4",
         mobileVideoBg: "#ede8f0",
         mobileMarginTop: 0,
       },
@@ -526,7 +526,7 @@ const projects = [
         marginTop: -35,
         heading: "Simplify sales and track\u00A0performances.",
         body: "Monitor orders and revenue in real-time, identify your best-selling styles at a glance and get insights to improve and grow your\u00A0brand.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145432/insights_oyq156.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/4406c84a-fe7d-482c-a918-6b4c10d033b6/play_1080p.mp4",
         mobileVideoBg: "#e8edf0",
         mobileMarginTop: 0,
       },
@@ -555,7 +555,7 @@ const projects = [
   {
     title: "Flow-Fi",
     year: "2025",
-    video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145461/flowfi_xv31eg.mp4",
+    video: "https://vz-53d1011b-a2d.b-cdn.net/2754efec-41a2-49cc-90a6-0ea47cc9ddba/play_1080p.mp4",
     imageStyle: { objectPosition: "center center" },
     description: "AI-powered DeFi platform that automates liquidity management.",
     meta: [
@@ -565,10 +565,10 @@ const projects = [
       { label: "Tool", value: "Spline\nFigma" },
     ],
     caseStudy: [
-      { type: "hero", video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145415/Flowfi_1_sfj20o.mp4", height: "auto", heroAspect: "16 / 9" },
+      { type: "hero", video: "https://vz-53d1011b-a2d.b-cdn.net/ab12d869-954f-45c8-98fb-1b3e0fdfcc7c/play_1080p.mp4", height: "auto", heroAspect: "16 / 9" },
       { type: "text", heading: "The Problem", body: "DeFi users struggle with complex platforms and manual capital management, leading to costly mistakes and missed\u00A0opportunities.", subtext: "Managing liquidity across multiple protocols requires constant monitoring, rebalancing, and risk assessment\u2014tasks that are time-consuming and error-prone. Even experienced users often face impermanent loss, inefficient capital allocation, or missed yield opportunities due to the manual nature of the\u00A0process." },
       { type: "text", heading: "The Challenge" },
-      { type: "image", image: "https://res.cloudinary.com/dugdaifzh/image/upload/q_auto,f_auto/v1775145412/keychallenges_gbcpmt.png", timelineHidden: true, marginTop: -80 },
+      { type: "image", image: "https://queenie-works-images.b-cdn.net/keychallenges_gbcpmt.png", timelineHidden: true, marginTop: -80 },
       { type: "text", heading: "The Solution", body: "Flow-Fi automates the entire process. An AI agent handles rebalancing and capital allocation in real time, so users never have\u00A0to." },
       {
         type: "text-with-video",
@@ -576,7 +576,7 @@ const projects = [
         marginTop: -80,
         heading: "A landing page built to convert Flow-Fi\u2019s Web3-native design leads with\u00A0clarity",
         body: "A clean, futuristic interface with two focused CTAs that get users oriented and moving fast, without overwhelming them on\u00A0arrival.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145415/Flowfi_1_sfj20o.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/ab12d869-954f-45c8-98fb-1b3e0fdfcc7c/play_1080p.mp4",
         mobileVideoBg: "#e8ecf5",
         mobileMarginTop: 0,
       },
@@ -586,7 +586,7 @@ const projects = [
         marginTop: -48,
         heading: "Onboarding built for\u00A0first-timers",
         body: "A guided tutorial and \u201CFirst-Time User\u201D mode breaks down DeFi jargon into plain language, walking new users through key concepts step by step. Investing feels approachable from the very first\u00A0tap.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145416/FlowfiOnboarding_rzgsgl.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/83fcc1e6-d40e-4df7-b005-6a086721da66/play_1080p.mp4",
         mobileVideoBg: "#eaebf5",
         mobileMarginTop: 0,
       },
@@ -596,7 +596,7 @@ const projects = [
         marginTop: -48,
         heading: "Personalized risk\u00A0preferences",
         body: "Users choose their own risk level \u2014 low, medium, or high \u2014 giving the AI a clear lens to optimize liquidity strategies in real time. It keeps users in control while letting the automation do the heavy\u00A0lifting.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145412/FlowfiPersonalizeRisk_lcbd0w.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/60f6218f-eaf4-428e-8ea9-1bc69180abb4/play_1080p.mp4",
         mobileVideoBg: "#ebebf5",
         mobileMarginTop: 0,
       },
@@ -606,7 +606,7 @@ const projects = [
         marginTop: -48,
         heading: "AI-powered liquidity\u00A0recommendations",
         body: "Live market data from CoinGecko, Alchemy, and DeFi Llama is processed and surfaced as clear, actionable guidance \u2014 so users always know what\u2019s happening with their positions without needing to read raw pool\u00A0data.",
-        video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145415/AIOptimizedFlowfi_v3m7ee.mp4",
+        video: "https://vz-53d1011b-a2d.b-cdn.net/b92c5413-180f-475e-8803-5d922c80b0d4/play_1080p.mp4",
         mobileVideoBg: "#e8eef5",
         mobileMarginTop: 0,
       },
@@ -616,7 +616,7 @@ const projects = [
   {
     title: "Hand Gesture Carousel",
     year: "2026",
-    video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145464/hands_nnhfnf.mp4",
+    video: "https://vz-53d1011b-a2d.b-cdn.net/931a1bd5-88f0-4a37-af0c-0e63612c3502/play_1080p.mp4",
     imageStyle: { objectPosition: "center 75%" },
     description: "Coded with Three.JS and React",
     externalUrl: "https://project21-zeta.vercel.app/",
@@ -636,7 +636,7 @@ const projects = [
   {
     title: "Liquid Glass Cursor",
     year: "2025",
-    video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145464/project-4_wmxpf4.mp4",
+    video: "https://vz-53d1011b-a2d.b-cdn.net/09e21b0b-1314-40e7-beeb-6d5f8c2d1800/play_1080p.mp4",
     imageStyle: { objectPosition: "center center" },
     externalUrl: "https://refractionlens-sb1g.vercel.app/",
     description: "Coded with React Three Fiber",
@@ -658,7 +658,7 @@ const projects = [
   {
     title: "Digital Inspo Diary",
     year: "2026",
-    video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145470/inspo_xyejpx.mp4",
+    video: "https://vz-53d1011b-a2d.b-cdn.net/57e822d5-3551-4536-8e39-3ed023851107/play_1080p.mp4",
     imageStyle: { objectPosition: "center center" },
     externalUrl: "https://queenieinspo.com/",
     description: "Try it out at queenieinspo.com",
@@ -679,7 +679,7 @@ const projects = [
   {
     title: "Gravity Letters",
     year: "2025",
-    video: "https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145465/gravity_kruj0k.mp4",
+    video: "https://vz-53d1011b-a2d.b-cdn.net/35a43a2f-f27e-408b-a277-7efc40c8ce8f/play_1080p.mp4",
     imageStyle: { objectPosition: "center center" },
     externalUrl: "https://day15new.vercel.app/",
     description: "Coded with Three.JS",
@@ -2051,7 +2051,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
       <div className="flex w-max max-w-none flex-row flex-nowrap items-start" style={{ gap: Math.round(16 * vScale) }}>
         <AboutPhotoPanel
           title="My Home, Taipei"
-          src="https://res.cloudinary.com/dugdaifzh/image/upload/v1775178157/taipei_iksdsk.jpg"
+          src="https://queenie-works-images.b-cdn.net/taipei_iksdsk.jpg"
           alt="Taipei cityscape"
           accent={accent}
           paper={paper}
@@ -2061,7 +2061,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
         />
         <AboutPhotoPanel
           title="Queenie Hsiao"
-          src="https://res.cloudinary.com/dugdaifzh/image/upload/v1775178157/portrait_mptbin.jpg"
+          src="https://queenie-works-images.b-cdn.net/portrait_mptbin.jpg"
           alt="Queenie Hsiao"
           accent={accent}
           paper={paper}
@@ -2231,7 +2231,7 @@ function HorizontalProjectsStrip({ darkMode, onSelectProject, skipIntro = false,
           {i === 1 && (
             <div className="shrink-0 relative" style={{ width: sc(400), height: sc(520) }}>
               <HangingScrollVideo
-                src="https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145379/track_lscvkf.mp4"
+                src="https://vz-53d1011b-a2d.b-cdn.net/0ba899cd-12d5-42f3-92cb-9a57df341a2e/play_1080p.mp4"
                 darkMode={darkMode}
                 scrollContainerRef={scrollContainerRef}
                 skipIntro={skipIntro}
@@ -2241,7 +2241,7 @@ function HorizontalProjectsStrip({ darkMode, onSelectProject, skipIntro = false,
                 height={sc(370)}
               />
               <HangingScrollVideo
-                src="https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145368/7_jpicnc.mp4"
+                src="https://vz-53d1011b-a2d.b-cdn.net/55007d68-77b9-4532-97ae-fabf8eeeee5f/play_1080p.mp4"
                 darkMode={darkMode}
                 scrollContainerRef={scrollContainerRef}
                 skipIntro={skipIntro}
@@ -2256,7 +2256,7 @@ function HorizontalProjectsStrip({ darkMode, onSelectProject, skipIntro = false,
           {project.title === "Gravity Letters" && (
             <div className="shrink-0 relative" style={{ width: sc(632), minHeight: sc(640), marginLeft: sc(8) }}>
               <HangingScrollVideo
-                src="https://res.cloudinary.com/dugdaifzh/video/upload/v1775145378/1_bb3qni.mp4"
+                src="https://vz-53d1011b-a2d.b-cdn.net/3f0794ab-0282-4812-9b14-71cd6bb45e6e/play_1080p.mp4"
                 darkMode={darkMode}
                 scrollContainerRef={scrollContainerRef}
                 skipIntro={skipIntro}
@@ -2267,7 +2267,7 @@ function HorizontalProjectsStrip({ darkMode, onSelectProject, skipIntro = false,
                 zIndex={1}
               />
               <HangingScrollVideo
-                src="https://res.cloudinary.com/dugdaifzh/video/upload/q_auto,f_auto/v1775145369/5_rrdttw.mp4"
+                src="https://vz-53d1011b-a2d.b-cdn.net/4cdf4459-eadf-4888-bfc4-c7d8265f364e/play_1080p.mp4"
                 darkMode={darkMode}
                 scrollContainerRef={scrollContainerRef}
                 skipIntro={skipIntro}
@@ -3054,7 +3054,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
 
       {/* ── About ── */}
       <div id="about" className="px-5 pb-10 pt-10" style={{ overflow: "visible", scrollMarginTop: 20 }}>
-        <img src="https://res.cloudinary.com/dugdaifzh/image/upload/v1775178168/about_jo8ete.png" alt="Queenie" className="w-full object-contain mb-4" />
+        <img src="https://queenie-works-images.b-cdn.net/about_jo8ete.png" alt="Queenie" className="w-full object-contain mb-4" />
         <div className="relative" style={{ border: "1.5px solid #8A38F5", backgroundColor: darkMode ? "#141414" : "#fff", padding: "24px", overflow: "visible" }}>
           {[{ top: -6, left: -6 }, { top: -6, right: -6 }, { bottom: -6, left: -6 }, { bottom: -6, right: -6 }].map((pos, i) => (
             <span key={i} className="absolute pointer-events-none" style={{ ...pos, width: 12, height: 12, border: "1.5px solid #8A38F5", backgroundColor: bg, zIndex: 2 }} />
