@@ -470,7 +470,7 @@ export default function PlayPage({ darkMode, onBack }) {
         <PlayCircleHero darkMode={darkMode} onBack={onBack} onAnimationDone={() => setHeroAnimDone(true)} />
       </div>
 
-      <motion.div
+        <motion.div
         className="w-full px-4 sm:px-6 md:px-10 lg:px-[60px] pt-[20px] pb-[20px]"
         initial={isMobile ? { opacity: 0 } : false}
         animate={isMobile ? (heroAnimDone ? { opacity: 1 } : { opacity: 0 }) : { opacity: 1 }}
@@ -500,9 +500,9 @@ export default function PlayPage({ darkMode, onBack }) {
                     )}
                   </motion.div>
                 ))}
-              </div>
+            </div>
             ))}
-          </motion.div>
+        </motion.div>
         ) : (
           <motion.div
             className="w-full"

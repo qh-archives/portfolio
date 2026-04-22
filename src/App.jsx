@@ -2903,6 +2903,8 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
   const font = "'Instrument Sans', sans-serif";
   const [menuOpen, setMenuOpen] = useState(false);
 
+  useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
+
   const navLinks = [
     { label: "home", href: "#home" },
     { label: "projects", href: "#projects" },
