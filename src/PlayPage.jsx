@@ -218,7 +218,9 @@ const CIRCLE_STAGGER = 0.04;
 const PHASE_GAP = 0.15;
 
 function getThumbnail(videoUrl) {
-  return videoUrl.replace("/video/upload/q_auto,f_auto/", "/video/upload/so_0,w_240,c_fill/").replace(/\.mp4$/, ".png");
+  const match = videoUrl.match(/b-cdn\.net\/([a-f0-9-]+)\//);
+  if (match) return `https://vz-53d1011b-a2d.b-cdn.net/${match[1]}/thumbnail.jpg`;
+  return undefined;
 }
 
 function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
@@ -284,7 +286,7 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
           poster={getThumbnail(src)}
           className="w-full h-full object-cover"
           style={{ display: "block" }}
-          preload="none"
+          preload="metadata"
           autoPlay
           loop
           muted
