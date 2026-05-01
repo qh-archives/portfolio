@@ -2374,7 +2374,8 @@ export function MobileTopNav({ darkMode, onBack }) {
       >
         <button
           onClick={() => handleNav("#home")}
-          style={{ fontFamily: "'Tilt Warp', sans-serif", fontSize: 15, color: fg, background: "none", border: "none", padding: 0, cursor: "auto" }}
+          className="text-[15px] tracking-[-0.3px]"
+          style={{ fontFamily: "'Tilt Warp', sans-serif", color: fg, background: "none", border: "none", padding: 0, cursor: "auto" }}
         >
           Queenie Hsiao
         </button>
