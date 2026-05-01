@@ -444,8 +444,6 @@ export default function PlayPage({ darkMode, onBack }) {
   const isMobile = useIsMobile();
   const galleryItems = playItems;
   const [heroAnimDone, setHeroAnimDone] = useState(false);
-  const mountedRef = useRef(true);
-  useEffect(() => () => { mountedRef.current = false; }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -541,15 +539,8 @@ export default function PlayPage({ darkMode, onBack }) {
         <Footer darkMode={darkMode} onNavigate={(href) => {
           const id = href.replace("#", "");
           if (id === "play") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+          try { sessionStorage.setItem("portfolio:mobileScrollSection", id); } catch {}
           onBack();
-          const tryScroll = (attempts = 0) => {
-            if (!mountedRef.current) return;
-            if (id === "home") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
-            const el = document.getElementById(id);
-            if (el) el.scrollIntoView({ behavior: "smooth" });
-            else if (attempts < 10) setTimeout(() => tryScroll(attempts + 1), 100);
-          };
-          setTimeout(tryScroll, 700);
         }} />
       </div>
       <GlassCursor darkMode={darkMode} />

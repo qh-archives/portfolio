@@ -2265,8 +2265,6 @@ export default function ProjectPage({ project, darkMode, onBack }) {
   const nonHeroIndices = getNonHeroIndices(sections, unlocked);
   const sectionRefs = useRef([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const mountedRef = useRef(true);
-  useEffect(() => () => { mountedRef.current = false; }, []);
 
   const sectionToTimeline = React.useMemo(() => {
     const map = {};
@@ -2441,15 +2439,8 @@ export default function ProjectPage({ project, darkMode, onBack }) {
           <Footer darkMode={darkMode} onNavigate={(href) => {
             const id = href.replace("#", "");
             if (id === "play") { window.location.hash = "#play"; return; }
+            try { sessionStorage.setItem("portfolio:mobileScrollSection", id); } catch {}
             onBack(project);
-            const tryScroll = (attempts = 0) => {
-              if (!mountedRef.current) return;
-              if (id === "home") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
-              const el = document.getElementById(id);
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-              else if (attempts < 10) setTimeout(() => tryScroll(attempts + 1), 100);
-            };
-            setTimeout(tryScroll, 700);
           }} />
         </div>
       </motion.div>
@@ -2571,15 +2562,8 @@ export default function ProjectPage({ project, darkMode, onBack }) {
         <Footer darkMode={darkMode} onNavigate={(href) => {
           const id = href.replace("#", "");
           if (id === "play") { window.location.hash = "#play"; return; }
+          try { sessionStorage.setItem("portfolio:mobileScrollSection", id); } catch {}
           onBack(project);
-          const tryScroll = (attempts = 0) => {
-            if (!mountedRef.current) return;
-            if (id === "home") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
-            const el = document.getElementById(id);
-            if (el) el.scrollIntoView({ behavior: "smooth" });
-            else if (attempts < 10) setTimeout(() => tryScroll(attempts + 1), 100);
-          };
-          setTimeout(tryScroll, 700);
         }} />
         </div>
       <GlassCursor darkMode={darkMode} />

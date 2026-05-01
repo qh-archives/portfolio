@@ -2349,21 +2349,8 @@ export function MobileTopNav({ darkMode, onBack }) {
       window.location.hash = "#play";
       return;
     }
+    try { sessionStorage.setItem(SS_MOBILE_SCROLL_SECTION, id); } catch {}
     onBack();
-    const tryScroll = (attempts = 0) => {
-      if (!mountedRef.current) return;
-      if (id === "home") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
-      }
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      } else if (attempts < 10) {
-        setTimeout(() => tryScroll(attempts + 1), 100);
-      }
-    };
-    setTimeout(tryScroll, 700);
   };
 
   return createPortal(
@@ -2807,6 +2794,7 @@ function getPageFromHash() {
 }
 
 const SS_SCROLL_TO_PROJECT = "portfolio:scrollToProjectCard";
+const SS_MOBILE_SCROLL_SECTION = "portfolio:mobileScrollSection";
 
 /** Stable id for horizontal project frames (matches case study `project.title`). */
 function getProjectCardDomId(title) {
@@ -2909,7 +2897,27 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
   const font = "'Instrument Sans', sans-serif";
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
+  useLayoutEffect(() => {
+    let target = null;
+    try {
+      target = sessionStorage.getItem(SS_MOBILE_SCROLL_SECTION);
+      sessionStorage.removeItem(SS_MOBILE_SCROLL_SECTION);
+    } catch {}
+    if (!target || target === "home") {
+      window.scrollTo(0, 0);
+      return;
+    }
+    window.scrollTo(0, 0);
+    const tryScroll = (attempts = 0) => {
+      const el = document.getElementById(target);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      } else if (attempts < 10) {
+        setTimeout(() => tryScroll(attempts + 1), 100);
+      }
+    };
+    setTimeout(tryScroll, 300);
+  }, []);
 
   const navLinks = [
     { label: "home", href: "#home" },
