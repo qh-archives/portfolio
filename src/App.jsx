@@ -1,4 +1,5 @@
 import React from "react";
+import { createPortal } from "react-dom";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect, useLayoutEffect, useCallback } from "react";
 import VectorTitle from "./VectorTitle";
@@ -2331,6 +2332,8 @@ export function MobileTopNav({ darkMode, onBack }) {
   const fg = darkMode ? "#fff" : "#000";
   const border = darkMode ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
   const [menuOpen, setMenuOpen] = useState(false);
+  const mountedRef = useRef(true);
+  useEffect(() => () => { mountedRef.current = false; }, []);
 
   const navItems = [
     { label: "home", hash: "#home" },
@@ -2348,6 +2351,7 @@ export function MobileTopNav({ darkMode, onBack }) {
     }
     onBack();
     const tryScroll = (attempts = 0) => {
+      if (!mountedRef.current) return;
       if (id === "home") {
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
@@ -2362,7 +2366,7 @@ export function MobileTopNav({ darkMode, onBack }) {
     setTimeout(tryScroll, 700);
   };
 
-  return (
+  return createPortal(
     <>
       <div
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4"
@@ -2410,7 +2414,8 @@ export function MobileTopNav({ darkMode, onBack }) {
           </div>
         </div>
       )}
-    </>
+    </>,
+    document.body
   );
 }
 
@@ -2925,66 +2930,68 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
         transition: "background-color 0.2s ease",
       }}
     >
-      {/* ── Top nav ── */}
-      <div
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4"
-        style={{ backgroundColor: bg, borderBottom: `1px solid ${border}`, backdropFilter: "blur(12px)" }}
-      >
-        <a href="#home" className="text-[15px] tracking-[-0.3px]" style={{ color: fg, fontFamily: "'Tilt Warp', sans-serif", textDecoration: "none" }} onClick={(e) => { e.preventDefault(); setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 50); }}>Queenie Hsiao</a>
-        <button
-          onClick={() => setMenuOpen((o) => !o)}
-          className="flex items-center justify-center p-1"
-          style={{ width: 28, height: 28 }}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-        >
-          {menuOpen ? (
-            <span className="text-[18px] leading-none" style={{ color: fg }}>✕</span>
-          ) : (
-            <span className="flex flex-col gap-[5px] items-end">
-              {[0, 1, 2].map((i) => (
-                <span key={i} style={{ display: "block", width: 20, height: 0, borderTop: `1.5px solid ${fg}` }} />
-              ))}
-            </span>
-          )}
-        </button>
-      </div>
-
-      {/* ── Fixed dropdown menu ── */}
-      {menuOpen && (
-        <div
-          className="fixed left-0 right-0 z-[49] flex flex-col items-end px-5 py-6 gap-4"
-          style={{ top: 57, backgroundColor: bg, fontFamily: font }}
-        >
-          {navLinks.map(({ label, href }) => (
-            <a
-              key={label}
-              href={href}
-              className="text-[28px] tracking-[-0.5px] leading-[1.1]"
-              style={{ color: fg, textDecoration: "none" }}
-              onClick={(e) => {
-                e.preventDefault();
-                setMenuOpen(false);
-                const id = href.replace("#", "");
-                if (id === "play") {
-                  window.location.hash = "#play";
-                  return;
-                }
-                setTimeout(() => {
-                  if (id === "home") {
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                    return;
-                  }
-                  const el = document.getElementById(id);
-                  if (el) {
-                    el.scrollIntoView({ behavior: "smooth" });
-                  }
-                }, 100);
-              }}
+      {createPortal(
+        <>
+          <div
+            className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-4"
+            style={{ backgroundColor: bg, borderBottom: `1px solid ${border}`, backdropFilter: "blur(12px)" }}
+          >
+            <a href="#home" className="text-[15px] tracking-[-0.3px]" style={{ color: fg, fontFamily: "'Tilt Warp', sans-serif", textDecoration: "none" }} onClick={(e) => { e.preventDefault(); setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 50); }}>Queenie Hsiao</a>
+            <button
+              onClick={() => setMenuOpen((o) => !o)}
+              className="flex items-center justify-center p-1"
+              style={{ width: 28, height: 28 }}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
             >
-              {label.toLowerCase()}
-            </a>
-          ))}
-        </div>
+              {menuOpen ? (
+                <span className="text-[18px] leading-none" style={{ color: fg }}>✕</span>
+              ) : (
+                <span className="flex flex-col gap-[5px] items-end">
+                  {[0, 1, 2].map((i) => (
+                    <span key={i} style={{ display: "block", width: 20, height: 0, borderTop: `1.5px solid ${fg}` }} />
+                  ))}
+                </span>
+              )}
+            </button>
+          </div>
+          {menuOpen && (
+            <div
+              className="fixed left-0 right-0 z-[49] flex flex-col items-end px-5 py-6 gap-4"
+              style={{ top: 57, backgroundColor: bg, fontFamily: font }}
+            >
+              {navLinks.map(({ label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  className="text-[28px] tracking-[-0.5px] leading-[1.1]"
+                  style={{ color: fg, textDecoration: "none" }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMenuOpen(false);
+                    const id = href.replace("#", "");
+                    if (id === "play") {
+                      window.location.hash = "#play";
+                      return;
+                    }
+                    setTimeout(() => {
+                      if (id === "home") {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                        return;
+                      }
+                      const el = document.getElementById(id);
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }, 100);
+                  }}
+                >
+                  {label.toLowerCase()}
+                </a>
+              ))}
+            </div>
+          )}
+        </>,
+        document.body
       )}
 
       {/* ── Hero ── */}
