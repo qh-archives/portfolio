@@ -746,7 +746,11 @@ function StatsSection({ section, darkMode, isMobile }) {
                 src={card.bg}
                 alt=""
                 className="absolute pointer-events-none"
-                style={{ maxWidth: "none", ...card.bgStyle }}
+                style={{
+                  maxWidth: "none",
+                  ...card.bgStyle,
+                  width: `max(${card.bgStyle?.width || 696}px, calc(100% + ${Math.abs(card.bgStyle?.left || 0)}px))`,
+                }}
               />
               {card.illustration && (
                 <img
@@ -765,10 +769,10 @@ function StatsSection({ section, darkMode, isMobile }) {
               <p
                 className="absolute font-medium leading-[1.4] tracking-[-0.44px]"
                 style={{
-                  fontSize: isMobile ? 20 : "clamp(16px, 1.6vw, 24px)",
-                  left: isMobile ? 24 : 28,
-                  right: isMobile ? 24 : 28,
-                  bottom: 28,
+                  fontSize: isMobile ? 20 : "clamp(14px, 1.5vw, 24px)",
+                  left: isMobile ? 24 : "clamp(16px, 2vw, 28px)",
+                  right: isMobile ? 24 : "clamp(16px, 2vw, 28px)",
+                  bottom: isMobile ? 28 : "clamp(16px, 2vw, 28px)",
                   color: "black",
                   fontFamily: "'Instrument Sans', sans-serif"
                 }}
