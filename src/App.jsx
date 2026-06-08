@@ -1098,81 +1098,91 @@ function HeroSection({ darkMode }) {
 function BusinessCardStack({ darkMode }) {
   const borderColor = darkMode ? "rgba(255,255,255,0.3)" : "black";
   const cardBg = darkMode ? "#1a1a1a" : "white";
-  return (
-    <div className="relative" style={{ width: 340, height: 240 }}>
-      <div
-        className="absolute"
+  const [shuffle, setShuffle] = useState(0);
+
+  const slots = [
+    { top: 25, left: 20 },
+    { top: 20, left: 25 },
+    { top: 25, left: 30 },
+  ];
+  const rotations = [-3, 7, -1.5];
+
+  const handleShuffle = (e) => {
+    if (e.target.closest && e.target.closest("a")) return;
+    setShuffle((v) => v + 1);
+  };
+
+  const cardFace = (
+    <>
+      <div className="px-6 pt-3" style={{ marginTop: 6 }}>
+        <p className="text-[7px] uppercase tracking-[0.1em] leading-[1.6]" style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999" }}>
+          If you like my work, contact me!
+        </p>
+        <div className="flex gap-2" style={{ marginTop: "5px" }}>
+          <a href="https://instagram.com/hsiao_archive" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1.5" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
+          </a>
+          <a href="https://x.com/queenie_hsiao" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill={darkMode ? "white" : "black"}><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/queenie-hsiao/" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="3" /><path d="M7 10v7M11 13v4m0-4c0-2 1.5-3 3.5-3S18 11 18 13v4" /><circle cx="7" cy="7" r="1" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
+          </a>
+        </div>
+        <a
+          href="https://drive.google.com/file/d/1dxF8eWEmR0KLBCvMBKlGLBwY-DnP-jw8/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-1 text-[10px] hover:opacity-60 transition-opacity"
+          style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "#666", textDecoration: "underline" }}
+        >
+          Download Resume ↓
+        </a>
+        <a
+          href="mailto:queenie2000824@gmail.com"
+          className="block text-[10px] mt-0.5 underline underline-offset-[2px] hover:opacity-60 transition-opacity"
+          style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "black" }}
+        >
+          queenie2000824@gmail.com
+        </a>
+      </div>
+      <p
+        className="absolute leading-[1] pointer-events-none"
         style={{
-          width: 310, height: 190, top: 25, left: 20,
-          backgroundColor: cardBg, border: `1.5px solid ${borderColor}`,
-          transform: "rotate(-3deg)",
-        }}
-      />
-      <div
-        className="absolute"
-        style={{
-          width: 310, height: 190, top: 20, left: 25,
-          backgroundColor: cardBg, border: `1.5px solid ${borderColor}`,
-          transform: "rotate(7deg)",
-        }}
-      />
-      <div
-        className="absolute overflow-hidden"
-        style={{
-          width: 310, height: 190, top: 25, left: 30,
-          backgroundColor: cardBg, border: `1.5px solid ${borderColor}`,
-          transform: "rotate(-1.5deg)",
+          bottom: 10, left: 0, right: 0,
+          padding: "0 20px 0 20px",
+          fontSize: "clamp(60px, 25vw, 88px)",
+          fontWeight: 300,
+          color: "#05f",
+          fontFamily: "'Mantou Sans', sans-serif",
+          transform: "rotate(-0.8deg)",
+          display: "flex",
+          justifyContent: "space-evenly",
         }}
       >
-        <div className="px-6 pt-3" style={{ marginTop: 6 }}>
-          <p className="text-[7px] uppercase tracking-[0.1em] leading-[1.6]" style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999" }}>
-            If you like my work, contact me!
-          </p>
-          <div className="flex gap-2" style={{ marginTop: "5px" }}>
-            <a href="https://instagram.com/hsiao_archive" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1.5" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
-            </a>
-            <a href="https://x.com/queenie_hsiao" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill={darkMode ? "white" : "black"}><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="https://www.linkedin.com/in/queenie-hsiao/" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="3" /><path d="M7 10v7M11 13v4m0-4c0-2 1.5-3 3.5-3S18 11 18 13v4" /><circle cx="7" cy="7" r="1" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
-            </a>
-        </div>
-          <a
-            href="https://drive.google.com/file/d/1dxF8eWEmR0KLBCvMBKlGLBwY-DnP-jw8/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-1 text-[10px] hover:opacity-60 transition-opacity"
-            style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "#666", textDecoration: "underline" }}
+        {"蕭書映".split("").map((ch, i) => <span key={i}>{ch}</span>)}
+      </p>
+    </>
+  );
+
+  return (
+    <div className="relative" style={{ width: 340, height: 240, cursor: "pointer" }} onClick={handleShuffle}>
+      {[0, 1, 2].map((ci) => {
+        const slotIndex = (ci + shuffle) % 3;
+        const slot = slots[slotIndex];
+        return (
+          <motion.div
+            key={ci}
+            className="absolute overflow-hidden"
+            style={{ width: 310, height: 190, backgroundColor: cardBg, border: `1.5px solid ${borderColor}` }}
+            initial={false}
+            animate={{ top: slot.top, left: slot.left, rotate: rotations[ci], zIndex: slotIndex }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
           >
-            Download Resume ↓
-          </a>
-          <a
-            href="mailto:queenie2000824@gmail.com"
-            className="block text-[10px] mt-0.5 underline underline-offset-[2px] hover:opacity-60 transition-opacity"
-            style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "black" }}
-          >
-            queenie2000824@gmail.com
-          </a>
-        </div>
-        <p
-          className="absolute leading-[1]"
-          style={{
-            bottom: 10, left: 0, right: 0,
-            padding: "0 20px 0 20px",
-            fontSize: "clamp(60px, 25vw, 88px)",
-            fontWeight: 300,
-            color: "#05f",
-            fontFamily: "'Mantou Sans', sans-serif",
-            transform: "rotate(-0.8deg)",
-            display: "flex",
-            justifyContent: "space-evenly",
-          }}
-        >
-          {"蕭書映".split("").map((ch, i) => <span key={i}>{ch}</span>)}
-        </p>
-      </div>
+            {cardFace}
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
@@ -1188,6 +1198,11 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
   const sw = vw / 1800;
   const sh = vh / 1000;
   const s = Math.min(sw, sh);
+  const [shuffle, setShuffle] = useState(0);
+  const handleShuffle = (e) => {
+    if (e.target.closest && e.target.closest("a")) return;
+    setShuffle((v) => v + 1);
+  };
 
   const borderColor = darkMode ? "rgba(255,255,255,0.3)" : "black";
   const pathTransition = skipIntro
@@ -1236,7 +1251,8 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
       <div id="about-hero-card" className="absolute scroll-mt-0" style={{ left: "48%", top: "clamp(60px, 8vh, 160px)", zIndex: 10 }}>
         <div
           className="relative"
-          style={{ width: 456, height: 312, padding: 10, transformOrigin: "top left", transform: `scale(${1.254 * s}) rotate(-3deg)` }}
+          style={{ width: 456, height: 312, padding: 10, transformOrigin: "top left", transform: `scale(${1.254 * s}) rotate(-3deg)`, cursor: "pointer" }}
+          onClick={handleShuffle}
         >
           <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 5 }}>
             <motion.path
@@ -1259,21 +1275,25 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
             />
           </svg>
           {[
-            { top: 29, left: 24, rotate: -8, delay: 0.32 },
-            { top: 31, left: 22, rotate: 8, delay: 0.52 },
-            { top: 36, left: 26, rotate: -3, delay: 0.72 },
-          ].map((card, ci) => (
+            { top: 29, left: 24 },
+            { top: 31, left: 22 },
+            { top: 36, left: 26 },
+          ].map((slotPos, ci, slotArr) => {
+            const rotations = [-8, 8, -3];
+            const delays = [0.32, 0.52, 0.72];
+            const slot = slotArr[(ci + shuffle) % 3];
+            return (
             <motion.div
               key={ci}
             className="absolute overflow-hidden"
             style={{
-                width: 396, height: 240, top: card.top, left: card.left,
+                width: 396, height: 240,
               backgroundColor: darkMode ? "#1a1a1a" : "white",
               border: `1.5px solid ${borderColor}`,
             }}
-              initial={skipIntro ? false : { opacity: 0, y: -40, rotate: 0 }}
-              animate={{ opacity: 1, y: 0, rotate: card.rotate }}
-              transition={cardTransition(card.delay)}
+              initial={skipIntro ? false : { opacity: 0, y: -40, rotate: 0, top: slotPos.top, left: slotPos.left }}
+              animate={{ opacity: 1, y: 0, rotate: rotations[ci], top: slot.top, left: slot.left, zIndex: (ci + shuffle) % 3 }}
+              transition={shuffle === 0 ? cardTransition(delays[ci]) : { type: "spring", stiffness: 260, damping: 20 }}
           >
             <div className="px-6 pt-3">
               <p className="text-[9px] uppercase tracking-[0.1em] leading-[1.6] mb-0" style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999", marginTop: 16 }}>
@@ -1325,7 +1345,8 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
               蕭書映
             </p>
             </motion.div>
-          ))}
+            );
+          })}
           {[{ top: -6, left: -6 }, { top: -6, right: -6 }, { bottom: -6, left: -6 }, { bottom: -6, right: -6 }].map((pos, ci) => (
             <motion.span
               key={ci}
