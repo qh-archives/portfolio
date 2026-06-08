@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import GlassCursor from "./GlassCursor";
 import { Footer, MobileTopNav } from "./App";
@@ -156,10 +156,42 @@ function LazyGalleryVideo({ src, darkMode }) {
   );
 }
 
+const PILL_STYLE = {
+  fontSize: 11,
+  fontWeight: 500,
+  lineHeight: 1.15,
+  letterSpacing: "-0.1px",
+  padding: "5px 9px",
+  borderRadius: 999,
+  color: "#fff",
+  backgroundColor: "rgba(0,0,0,0.55)",
+  backdropFilter: "blur(6px)",
+};
+
 /** Bottom-left overlay: numbered ID badge (for identifying images) + up to two pill tags */
-function GalleryOverlay({ id }) {
+function GalleryOverlay({ id, isMobile = false }) {
   const tags = PLAY_IMAGE_TAGS[id];
   if (!SHOW_ID_BADGES && (!tags || tags.length === 0)) return null;
+
+  // Mobile: stacked vertically with the year above the (longer) title.
+  if (isMobile) {
+    if (!tags) return null;
+    const [title, year] = tags;
+    return (
+      <motion.div
+        className="absolute flex flex-col items-start gap-1 pointer-events-none"
+        style={{ left: 8, bottom: 8, zIndex: 2, fontFamily: "'Instrument Sans', sans-serif", maxWidth: "calc(100% - 16px)" }}
+        initial={{ opacity: 0, y: 6 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 6 }}
+        transition={{ duration: 0.25, ease }}
+      >
+        {year && <span style={PILL_STYLE}>{year}</span>}
+        {title && <span style={PILL_STYLE}>{title}</span>}
+      </motion.div>
+    );
+  }
+
   return (
     <div
       className="absolute flex items-center gap-1.5 pointer-events-none"
@@ -182,24 +214,86 @@ function GalleryOverlay({ id }) {
       )}
       {tags &&
         tags.filter(Boolean).map((tag, i) => (
-          <span
-            key={i}
-            style={{
-              fontSize: 11,
-              fontWeight: 500,
-              lineHeight: 1,
-              letterSpacing: "-0.1px",
-              padding: "5px 9px",
-              borderRadius: 999,
-              color: "#fff",
-              backgroundColor: "rgba(0,0,0,0.55)",
-              backdropFilter: "blur(6px)",
-            }}
-          >
+          <span key={i} style={PILL_STYLE}>
             {tag}
           </span>
         ))}
     </div>
+  );
+}
+
+/** Mobile lightbox: enlarged image/video + caption (description and year on one line), swipeable */
+function PlayLightbox({ item, onClose, onNext, onPrev }) {
+  const tags = PLAY_IMAGE_TAGS[item.id];
+  const [title, year] = tags || [];
+
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  const SWIPE_THRESHOLD = 60;
+  const handleDragEnd = (_e, info) => {
+    if (info.offset.x < -SWIPE_THRESHOLD || info.velocity.x < -400) onNext?.();
+    else if (info.offset.x > SWIPE_THRESHOLD || info.velocity.x > 400) onPrev?.();
+  };
+
+  return (
+    <motion.div
+      className="fixed inset-0 flex flex-col items-center justify-center"
+      style={{ zIndex: 200, backgroundColor: "rgba(0,0,0,0.94)", padding: 20 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25, ease }}
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute"
+        style={{ top: 18, right: 18, width: 34, height: 34, borderRadius: 999, display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "rgba(255,255,255,0.12)", color: "#fff", border: "none" }}
+        aria-label="Close"
+      >
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M3 3L13 13M13 3L3 13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
+      </button>
+
+      <motion.div
+        className="flex flex-col items-center"
+        style={{ maxWidth: "100%", touchAction: "pan-y" }}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.18}
+        onDragEnd={handleDragEnd}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <motion.div
+          key={item.id}
+          className="flex flex-col items-center"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.25, ease }}
+          style={{ maxWidth: "100%" }}
+        >
+          {item.type === "image" ? (
+            <img src={item.src} alt="" draggable={false} style={{ maxWidth: "100%", maxHeight: "72vh", objectFit: "contain", borderRadius: 12, display: "block", pointerEvents: "none" }} />
+          ) : (
+            <video src={item.src} autoPlay loop muted playsInline style={{ maxWidth: "100%", maxHeight: "72vh", borderRadius: 12, display: "block", pointerEvents: "none" }} />
+          )}
+          {tags && (
+            <div
+              className="flex items-baseline justify-center"
+              style={{ marginTop: 16, fontFamily: "'Instrument Sans', sans-serif", textAlign: "center", maxWidth: "90vw", flexWrap: "wrap", gap: 8 }}
+            >
+              {title && <span style={{ color: "#fff", fontSize: 16, fontWeight: 500, letterSpacing: "-0.2px" }}>{title}</span>}
+              {year && <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, letterSpacing: "0.02em" }}>{year}</span>}
+            </div>
+          )}
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -575,10 +669,21 @@ export default function PlayPage({ darkMode, onBack }) {
   const isMobile = useIsMobile();
   const [heroAnimDone, setHeroAnimDone] = useState(false);
   const [activeFilter, setActiveFilter] = useState("all");
+  const [activeTagId, setActiveTagId] = useState(null);
   const galleryItems =
     activeFilter === "all"
       ? playItems
       : playItems.filter((item) => item.category === activeFilter);
+  const activeIndex = activeTagId != null ? galleryItems.findIndex((it) => it.id === activeTagId) : -1;
+  const activeItem = activeIndex >= 0 ? galleryItems[activeIndex] : null;
+  const goNext = () => {
+    if (activeIndex < 0 || galleryItems.length === 0) return;
+    setActiveTagId(galleryItems[(activeIndex + 1) % galleryItems.length].id);
+  };
+  const goPrev = () => {
+    if (activeIndex < 0 || galleryItems.length === 0) return;
+    setActiveTagId(galleryItems[(activeIndex - 1 + galleryItems.length) % galleryItems.length].id);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -612,8 +717,8 @@ export default function PlayPage({ darkMode, onBack }) {
         transition={{ duration: 0.6, ease }}
       >
         <div
-          className="flex flex-wrap items-center gap-2 mb-5"
-          style={{ fontFamily: "'Instrument Sans', sans-serif" }}
+          className="flex items-center mb-5"
+          style={{ fontFamily: "'Instrument Sans', sans-serif", flexWrap: isMobile ? "nowrap" : "wrap", gap: isMobile ? 6 : 8 }}
         >
           {PLAY_FILTERS.map(({ id, label }) => {
             const active = activeFilter === id;
@@ -623,9 +728,10 @@ export default function PlayPage({ darkMode, onBack }) {
                 onClick={() => setActiveFilter(id)}
                 className="rounded-full transition-colors duration-200"
                 style={{
-                  fontSize: isMobile ? 12 : 13,
+                  fontSize: isMobile ? 10.5 : 13,
                   letterSpacing: "-0.2px",
-                  padding: isMobile ? "5px 12px" : "6px 14px",
+                  whiteSpace: "nowrap",
+                  padding: isMobile ? "5px 9px" : "6px 14px",
                   border: `1px solid ${active ? "transparent" : (darkMode ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)")}`,
                   backgroundColor: active
                     ? (darkMode ? "#fff" : "#000")
@@ -652,17 +758,17 @@ export default function PlayPage({ darkMode, onBack }) {
                 {col.map((item, i) => (
                   <motion.div
                     key={`${item.src}-${ci}-${i}`}
-                    className="relative rounded-[12px] overflow-hidden"
+                    className="relative rounded-[12px] overflow-hidden cursor-pointer"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.1 + i * 0.03, ease }}
+                    onClick={() => setActiveTagId((prev) => (prev === item.id ? null : item.id))}
                   >
                     {item.type === "image" ? (
                       <img className="w-full h-auto block" src={item.src} alt="" loading="lazy" />
                     ) : (
                       <LazyGalleryVideo src={item.src} darkMode={darkMode} />
                     )}
-                    <GalleryOverlay id={item.id} />
                   </motion.div>
                 ))}
             </div>
@@ -710,6 +816,12 @@ export default function PlayPage({ darkMode, onBack }) {
         }} />
       </div>
       <GlassCursor darkMode={darkMode} />
+
+      <AnimatePresence>
+        {isMobile && activeItem && (
+          <PlayLightbox item={activeItem} onClose={() => setActiveTagId(null)} onNext={goNext} onPrev={goPrev} />
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
