@@ -1138,13 +1138,15 @@ function BusinessCardStack({ darkMode }) {
         >
           Download Resume ↓
         </a>
-        <a
-          href="mailto:queenie2000824@gmail.com"
-          className="block text-[10px] mt-0.5 underline underline-offset-[2px] hover:opacity-60 transition-opacity"
-          style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "black" }}
-        >
-          queenie2000824@gmail.com
-        </a>
+        <div className="mt-0.5">
+          <a
+            href="mailto:queenie2000824@gmail.com"
+            className="inline-block text-[10px] underline underline-offset-[2px] hover:opacity-60 transition-opacity"
+            style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "black" }}
+          >
+            queenie2000824@gmail.com
+          </a>
+        </div>
       </div>
       <p
         className="absolute leading-[1] pointer-events-none"
@@ -1319,15 +1321,17 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
               >
                 Download Resume ↓
               </a>
+                <div className="mt-1">
                 <a
                   href="mailto:queenie2000824@gmail.com"
-                  className="block text-[13px] mt-1 transition-colors duration-200"
+                  className="inline-block text-[13px] transition-colors duration-200"
                   style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "black" }}
                   onMouseEnter={(e) => e.currentTarget.style.color = "#aaa"}
                   onMouseLeave={(e) => e.currentTarget.style.color = darkMode ? "rgba(255,255,255,0.5)" : "black"}
                 >
                 queenie2000824@gmail.com
               </a>
+                </div>
             </div>
             <p
                 className="absolute leading-[1] pointer-events-none"
@@ -1410,7 +1414,7 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
 
       <motion.div
         className="absolute flex items-center gap-2 pointer-events-none"
-        style={{ right: Math.round(100 * s), bottom: Math.round(280 * s) }}
+        style={{ right: Math.round(100 * s), bottom: Math.round(345 * s) }}
         animate={{ x: [0, 8, 0] }}
         transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -2011,7 +2015,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
               <p className="text-lg tracking-[-0.36px] leading-[1.2]" style={{ color: fg }}>Hello I&apos;m Queenie (:</p>
               <div className="text-sm tracking-[-0.28px] leading-[1.6]" style={{ color: fg }}>
                 <p className="mb-2">I&apos;m an interdisciplinary designer with a love for motion, creative tools, and the small moments that make a product feel delightful.</p>
-                <p className="mb-2">I&apos;m currently pursuing my Master&apos;s in HCI at NYU and I&apos;ve brought my craft to companies like Uber, designing experiences that connect people and culture.</p>
+                <p className="mb-2">I&apos;m currently designing at Uber, designing experiences that connect people and culture.</p>
                 <p className="mb-1">Outside of design I&apos;m</p>
                 <ul className="list-disc pl-5 flex flex-col gap-0.5">
                   <li>Sending problems up a bouldering wall</li>
@@ -2111,8 +2115,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
                 product feel delightful.
               </p>
               <p className="mb-2 mt-2">
-                I&apos;m currently pursuing my Master&apos;s in HCI at NYU and I&apos;ve brought my craft to companies like Uber,
-                designing experiences that connect people and culture.
+                I&apos;m currently designing at Uber, designing experiences that connect people and culture.
               </p>
               <p className="mb-0 mt-4">Outside of design I&apos;m:</p>
               <ul className="mb-0 mt-1 list-disc pl-6">
@@ -3111,7 +3114,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
                 I'm an interdisciplinary designer with a love for motion, creative tools, and the small moments that make a product feel delightful.
               </p>
               <p className="text-[14px] leading-[1.6] mt-2" style={{ color: fg }}>
-                I'm currently pursuing my Master's in HCI at NYU and I've brought my craft to companies like Uber, designing experiences that connect people and culture.
+                I'm currently designing at Uber, designing experiences that connect people and culture.
               </p>
               <p className="text-[14px] leading-[1.6] mt-2" style={{ color: fg }}>Outside of design I'm sending problems up a bouldering wall, chasing the perfect matcha, building interactive worlds with code, and finding beauty in things that move me.</p>
               <p className="text-[14px] leading-[1.6] mt-3" style={{ color: fg }}>

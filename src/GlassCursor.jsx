@@ -4,14 +4,11 @@ const CROSSHAIR_SIZE = 36;
 
 export default function GlassCursor({ darkMode }) {
   const crosshairRef = useRef(null);
-  const selectionRef = useRef(null);
   const posRef = useRef({ x: -300, y: -300 });
   const targetRef = useRef({ x: -300, y: -300 });
   const rafRef = useRef(null);
-  const dragStartRef = useRef(null);
   const [visible, setVisible] = useState(false);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const [selection, setSelection] = useState(null);
   const [hasFinePointer, setHasFinePointer] = useState(() => window.matchMedia("(pointer: fine)").matches);
 
   useEffect(() => {
@@ -32,35 +29,10 @@ export default function GlassCursor({ darkMode }) {
       document.elementFromPoint(e.clientX, e.clientY);
       if (crosshairRef.current) crosshairRef.current.style.display = "";
       setCoords({ x: Math.round(e.clientX), y: Math.round(e.clientY) });
-
-      if (dragStartRef.current) {
-        const sx = dragStartRef.current.x;
-        const sy = dragStartRef.current.y;
-        setSelection({
-          x: Math.min(sx, e.clientX),
-          y: Math.min(sy, e.clientY),
-          w: Math.abs(e.clientX - sx),
-          h: Math.abs(e.clientY - sy),
-        });
-      }
-    };
-
-    const handleDown = (e) => {
-      const el = e.target;
-      if (el.closest("a, button, [data-vector-title], video, input, textarea")) return;
-      dragStartRef.current = { x: e.clientX, y: e.clientY };
-      setSelection(null);
-    };
-
-    const handleUp = () => {
-      dragStartRef.current = null;
-      setTimeout(() => setSelection(null), 300);
     };
 
     const handleLeave = () => {
       setVisible(false);
-      dragStartRef.current = null;
-      setSelection(null);
     };
 
     const animate = () => {
@@ -79,15 +51,11 @@ export default function GlassCursor({ darkMode }) {
     };
 
     window.addEventListener("mousemove", handleMove);
-    window.addEventListener("mousedown", handleDown);
-    window.addEventListener("mouseup", handleUp);
     document.addEventListener("mouseleave", handleLeave);
     rafRef.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener("mousemove", handleMove);
-      window.removeEventListener("mousedown", handleDown);
-      window.removeEventListener("mouseup", handleUp);
       document.removeEventListener("mouseleave", handleLeave);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
@@ -127,23 +95,6 @@ export default function GlassCursor({ darkMode }) {
           </text>
         </svg>
       </div>
-
-      {selection && selection.w > 2 && selection.h > 2 && (
-        <div
-          ref={selectionRef}
-          style={{
-            position: "fixed",
-            left: selection.x,
-            top: selection.y,
-            width: selection.w,
-            height: selection.h,
-            backgroundColor: "rgba(0, 85, 255, 0.08)",
-            border: "1px solid rgba(0, 85, 255, 0.5)",
-            pointerEvents: "none",
-            zIndex: 9999,
-          }}
-        />
-      )}
     </>
   );
 }
