@@ -95,10 +95,17 @@ const graphicDesignItems = [
   "/images/play/graphic-design/winter-show-poster.png",
 ];
 
-function galleryItemFromSrc(src) {
+function galleryItemFromSrc(src, category) {
   const isImage = /\.(png|jpe?g|gif|webp|avif|bmp|svg)$/i.test(src);
-  return isImage ? { src, type: "image" } : { src };
+  return isImage ? { src, type: "image", category } : { src, category };
 }
+
+const PLAY_FILTERS = [
+  { id: "all", label: "All" },
+  { id: "creative-coding", label: "Creative Coding" },
+  { id: "fashion", label: "Fashion Design" },
+  { id: "graphic-design", label: "Graphic Design" },
+];
 
 /** Loads and plays a video only when it enters the viewport */
 function LazyGalleryVideo({ src, darkMode }) {
@@ -149,12 +156,59 @@ function LazyGalleryVideo({ src, darkMode }) {
   );
 }
 
+/** Bottom-left overlay: numbered ID badge (for identifying images) + up to two pill tags */
+function GalleryOverlay({ id }) {
+  const tags = PLAY_IMAGE_TAGS[id];
+  if (!SHOW_ID_BADGES && (!tags || tags.length === 0)) return null;
+  return (
+    <div
+      className="absolute flex items-center gap-1.5 pointer-events-none"
+      style={{ left: 10, bottom: 10, zIndex: 2, fontFamily: "'Instrument Sans', sans-serif", flexWrap: "wrap", maxWidth: "calc(100% - 20px)" }}
+    >
+      {SHOW_ID_BADGES && (
+        <span
+          style={{
+            fontSize: 11,
+            fontWeight: 700,
+            lineHeight: 1,
+            padding: "4px 7px",
+            borderRadius: 999,
+            color: "#fff",
+            backgroundColor: "rgba(255,0,80,0.92)",
+          }}
+        >
+          #{id}
+        </span>
+      )}
+      {tags &&
+        tags.filter(Boolean).map((tag, i) => (
+          <span
+            key={i}
+            style={{
+              fontSize: 11,
+              fontWeight: 500,
+              lineHeight: 1,
+              letterSpacing: "-0.1px",
+              padding: "5px 9px",
+              borderRadius: 999,
+              color: "#fff",
+              backgroundColor: "rgba(0,0,0,0.55)",
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            {tag}
+          </span>
+        ))}
+    </div>
+  );
+}
+
 const creativeItems = [
-  galleryItemFromSrc("https://vz-53d1011b-a2d.b-cdn.net/07c41375-1a9f-43a5-8391-eb8b2d73b0d9/play_1080p.mp4"),
-  ...creativeCodingVidFolder.map(galleryItemFromSrc),
+  galleryItemFromSrc("https://vz-53d1011b-a2d.b-cdn.net/07c41375-1a9f-43a5-8391-eb8b2d73b0d9/play_1080p.mp4", "creative-coding"),
+  ...creativeCodingVidFolder.map((src) => galleryItemFromSrc(src, "creative-coding")),
 ];
-const fashionItems = fashionImages.map(galleryItemFromSrc);
-const graphicItems = graphicDesignItems.map(galleryItemFromSrc);
+const fashionItems = fashionImages.map((src) => galleryItemFromSrc(src, "fashion"));
+const graphicItems = graphicDesignItems.map((src) => galleryItemFromSrc(src, "graphic-design"));
 
 /** Interleave all categories so they're visually mixed across columns */
 function interleaveItems(...arrays) {
@@ -167,7 +221,84 @@ function interleaveItems(...arrays) {
   }
   return result;
 }
-const playItems = interleaveItems(creativeItems, fashionItems, graphicItems);
+const playItems = interleaveItems(creativeItems, fashionItems, graphicItems).map(
+  (item, i) => ({ ...item, id: i })
+);
+
+/**
+ * Two pill tags shown at the bottom-left of each image.
+ * Key = image id (the number badge shown on each image).
+ * Fill in with: [id]: ["Tag one", "Tag two"],
+ */
+const PLAY_IMAGE_TAGS = {
+  0: ["Experimenting with React Three Fiber", "2026"],
+  1: ["Parsons Junior Fashion Design Project", "2022"],
+  2: ["UXC NYU Branding Work", "2025"],
+  3: ["Swift UI Eye Tracking", "2026"],
+  4: ["Parsons Junior Fashion Design Project", "2022"],
+  5: ["Color Design Concept", "2024"],
+  6: ["News Fact Check Concept Exploration", "2025"],
+  7: ["Parsons Junior Fashion Design Project", "2022"],
+  8: ["After Effects Motion Design", "2024"],
+  9: ["Swift UI Lottery Concept", "2025"],
+  10: ["Parsons Junior Fashion Design Project", "2022"],
+  11: ["Color Design", "2024"],
+  12: ["Swift UI Core Motion App Concept", "2026"],
+  13: ["Parsons Junior Fashion Design Project", "2022"],
+  14: ["UXC NYU Branding Work", "2025"],
+  15: ["Swift UI Concept", "2025"],
+  16: ["Parsons Junior Fashion Design Project", "2022"],
+  17: ["NYU Winter Show Poster", "2024"],
+  18: ["Swift UI Mood Tracking App Concept", "2025"],
+  19: ["Parsons Junior Fashion Design Project", "2022"],
+  20: ["Pokemon Card Shader Swift UI", "2025"],
+  21: ["Parsons Junior Fashion Design Project", "2022"],
+  22: ["Gallery Concept", "2025"],
+  23: ["Parsons Junior Fashion Design Project", "2022"],
+  24: ["Exploration with Liquid Glass", "2025"],
+  25: ["Sia Thau Parsons Thesis Project", "2023"],
+  26: ["Pomodoro Clock Concept", "2025"],
+  27: ["Sia Thau Parsons Thesis Project", "2023"],
+  28: ["Exploration with Liquid Glass", "2025"],
+  29: ["Sia Thau Parsons Thesis Project", "2023"],
+  30: ["Ripple Effect on Swift UI", "2025"],
+  31: ["Sia Thau Parsons Thesis Project", "2023"],
+  32: ["Ripple Gallery with React", "2025"],
+  33: ["Sia Thau Parsons Thesis Project", "2023"],
+  34: ["Note App Concept", "2025"],
+  35: ["Sia Thau Parsons Thesis Project", "2023"],
+  36: ["What Remains... NYU Thesis Exploration", "2026"],
+  37: ["Sia Thau Parsons Thesis Project", "2023"],
+  38: ["Gallery Concept", "2025"],
+  39: ["Sia Thau Parsons Thesis Project", "2023"],
+  40: ["What Remains... NYU Thesis Vision Pro Exploration", "2026"],
+  41: ["Sia Thau Parsons Thesis Project", "2023"],
+  42: ["Motion Design Concept", "2026"],
+  43: ["Sia Thau Parsons Thesis Project", "2023"],
+  44: ["Sia Thau Parsons Thesis Project", "2023"],
+  45: ["Sia Thau Parsons Thesis Project", "2023"],
+  46: ["Sia Thau Parsons Thesis Project", "2023"],
+  47: ["Sia Thau Parsons Thesis Project", "2023"],
+  48: ["Sia Thau Parsons Thesis Project", "2023"],
+  49: ["Sia Thau Parsons Thesis Project", "2023"],
+  50: ["Sia Thau Parsons Thesis Project", "2023"],
+  51: ["Sia Thau Parsons Thesis Project", "2023"],
+  52: ["Sia Thau Parsons Thesis Project", "2023"],
+  53: ["Sia Thau Parsons Thesis Project", "2023"],
+  54: ["Sia Thau Parsons Thesis Project", "2023"],
+  55: ["Sia Thau Parsons Thesis Project", "2023"],
+  56: ["Sia Thau Parsons Thesis Project", "2023"],
+  57: ["Jason Wu Ready-to-Wear", "Spring 2024"],
+  58: ["Jason Wu Ready-to-Wear", "Spring 2024"],
+  59: ["Private Policy Ready-to-Wear", "Spring 2023"],
+  60: ["Private Policy Ready-to-Wear", "Spring 2023"],
+  61: ["Jason Wu Ready-to-Wear", "Spring 2024"],
+  62: ["Sia Thau Parsons Thesis Project", "2023"],
+  63: ["Jason Wu Ready-to-Wear", "Spring 2024"],
+};
+
+/** Toggle to show/hide the numbered ID badge used to identify images. */
+const SHOW_ID_BADGES = false;
 
 const FORCE_RIGHT_MOBILE = new Set([
   "https://queenie-works-images.b-cdn.net/Screen-Shot-2023-09-09-at-5.02.09-PM_cixkbv.png",
@@ -442,8 +573,12 @@ function PlayCircleHero({ darkMode, onBack, onAnimationDone }) {
 
 export default function PlayPage({ darkMode, onBack }) {
   const isMobile = useIsMobile();
-  const galleryItems = playItems;
   const [heroAnimDone, setHeroAnimDone] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("all");
+  const galleryItems =
+    activeFilter === "all"
+      ? playItems
+      : playItems.filter((item) => item.category === activeFilter);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -476,6 +611,35 @@ export default function PlayPage({ darkMode, onBack }) {
         animate={isMobile ? (heroAnimDone ? { opacity: 1 } : { opacity: 0 }) : { opacity: 1 }}
         transition={{ duration: 0.6, ease }}
       >
+        <div
+          className="flex flex-wrap items-center gap-2 mb-5"
+          style={{ fontFamily: "'Instrument Sans', sans-serif" }}
+        >
+          {PLAY_FILTERS.map(({ id, label }) => {
+            const active = activeFilter === id;
+            return (
+              <button
+                key={id}
+                onClick={() => setActiveFilter(id)}
+                className="rounded-full transition-colors duration-200"
+                style={{
+                  fontSize: isMobile ? 12 : 13,
+                  letterSpacing: "-0.2px",
+                  padding: isMobile ? "5px 12px" : "6px 14px",
+                  border: `1px solid ${active ? "transparent" : (darkMode ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.12)")}`,
+                  backgroundColor: active
+                    ? (darkMode ? "#fff" : "#000")
+                    : "transparent",
+                  color: active
+                    ? (darkMode ? "#000" : "#fff")
+                    : (darkMode ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.6)"),
+                }}
+              >
+                {label}
+              </button>
+            );
+          })}
+        </div>
         {isMobile ? (
           <motion.div
             className="w-full flex gap-2"
@@ -488,7 +652,7 @@ export default function PlayPage({ darkMode, onBack }) {
                 {col.map((item, i) => (
                   <motion.div
                     key={`${item.src}-${ci}-${i}`}
-                    className="rounded-[12px] overflow-hidden"
+                    className="relative rounded-[12px] overflow-hidden"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.1 + i * 0.03, ease }}
@@ -498,6 +662,7 @@ export default function PlayPage({ darkMode, onBack }) {
                     ) : (
                       <LazyGalleryVideo src={item.src} darkMode={darkMode} />
                     )}
+                    <GalleryOverlay id={item.id} />
                   </motion.div>
                 ))}
             </div>
@@ -514,7 +679,7 @@ export default function PlayPage({ darkMode, onBack }) {
             {galleryItems.map((item, i) => (
               <motion.div
                 key={`${item.src}-${i}`}
-                className="rounded-[12px] overflow-hidden"
+                className="relative rounded-[12px] overflow-hidden"
                 style={{ breakInside: "avoid", marginBottom: 12 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -529,6 +694,7 @@ export default function PlayPage({ darkMode, onBack }) {
                     autoPlay loop muted playsInline
                   />
                 )}
+                <GalleryOverlay id={item.id} />
               </motion.div>
             ))}
           </motion.div>
