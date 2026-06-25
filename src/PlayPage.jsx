@@ -440,7 +440,7 @@ const STACK_DELAY0 = 0.08;
 const STACK_STAGGER = 0.1;
 const CIRCLE_DUR = 0.9;
 const CIRCLE_STAGGER = 0.04;
-const PHASE_GAP = 0.15;
+const PHASE_GAP = -0.12;
 
 function getThumbnail(videoUrl) {
   const match = videoUrl.match(/b-cdn\.net\/([a-f0-9-]+)\//);
@@ -484,15 +484,17 @@ function RectangleVideoCard({ src, index, flipped, phase, isMobile }) {
       transition={
         isCircle
           ? {
-              duration: CIRCLE_DUR,
+              type: "spring",
+              visualDuration: CIRCLE_DUR,
+              bounce: 0.38,
               delay: index * CIRCLE_STAGGER,
-              ease: [0.25, 0.1, 0.25, 1],
             }
           : inStack
             ? {
-                duration: STACK_DUR,
+                type: "spring",
+                visualDuration: STACK_DUR,
+                bounce: 0.26,
                 delay: STACK_DELAY0 + index * STACK_STAGGER,
-                ease: [0.34, 1.2, 0.64, 1],
               }
             : { duration: 0 }
       }

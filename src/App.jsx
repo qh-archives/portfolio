@@ -1098,6 +1098,7 @@ function HeroSection({ darkMode }) {
 function BusinessCardStack({ darkMode }) {
   const borderColor = darkMode ? "rgba(255,255,255,0.3)" : "black";
   const cardBg = darkMode ? "#1a1a1a" : "white";
+  const linkColor = darkMode ? "rgba(255,255,255,0.5)" : "#666";
   const [shuffle, setShuffle] = useState(0);
 
   const slots = [
@@ -1108,7 +1109,7 @@ function BusinessCardStack({ darkMode }) {
   const rotations = [-3, 7, -1.5];
 
   const handleShuffle = (e) => {
-    if (e.target.closest && e.target.closest("a")) return;
+    if (e.target.closest && e.target.closest("a, button")) return;
     setShuffle((v) => v + 1);
   };
 
@@ -1134,18 +1135,19 @@ function BusinessCardStack({ darkMode }) {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block mt-1 text-[10px] hover:opacity-60 transition-opacity"
-          style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "#666", textDecoration: "underline" }}
+          style={{ color: linkColor, textDecoration: "underline" }}
         >
-          Download Resume ↓
+          Download Resume
         </a>
         <div className="mt-0.5">
-          <a
-            href="mailto:queenie2000824@gmail.com"
+          <button
+            type="button"
+            onClick={copyEmailAddress}
             className="inline-block text-[10px] underline underline-offset-[2px] hover:opacity-60 transition-opacity"
-            style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "black" }}
+            style={{ color: linkColor, background: "none", border: "none", padding: 0, cursor: "pointer" }}
           >
             queenie2000824@gmail.com
-          </a>
+          </button>
         </div>
       </div>
       <p
@@ -1189,6 +1191,71 @@ function BusinessCardStack({ darkMode }) {
   );
 }
 
+const CONTACT_EMAIL = "queenie2000824@gmail.com";
+let _emailToastTrigger = null;
+
+/** Copy the contact email to the clipboard and fire the global "Email copied!" toast. */
+function copyEmailAddress(e) {
+  if (e) {
+    e.preventDefault?.();
+    e.stopPropagation?.();
+  }
+  navigator.clipboard?.writeText(CONTACT_EMAIL);
+  _emailToastTrigger?.();
+}
+
+/** Mounted once at the app root; shows the toast whenever any email link is clicked. */
+function GlobalEmailToast({ darkMode }) {
+  const [copied, setCopied] = useState(false);
+  const timerRef = useRef(null);
+  useEffect(() => {
+    _emailToastTrigger = () => {
+      setCopied(true);
+      clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setCopied(false), 2500);
+    };
+    return () => {
+      _emailToastTrigger = null;
+      clearTimeout(timerRef.current);
+    };
+  }, []);
+  return <EmailCopiedToast show={copied} darkMode={darkMode} />;
+}
+
+/** Bottom-center toast matching the right-click context menu's copy confirmation. */
+function EmailCopiedToast({ show, darkMode }) {
+  return (
+    <AnimatePresence>
+      {show && (
+        <div className="fixed bottom-10 left-0 right-0 z-[30000] flex justify-center pointer-events-none">
+          <motion.div
+            style={{
+              backgroundColor: darkMode ? "#2c2c2c" : "#fff",
+              color: darkMode ? "rgba(255,255,255,0.85)" : "rgba(0,0,0,0.85)",
+              border: `1px solid ${darkMode ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+              borderRadius: 8,
+              padding: "10px 18px",
+              fontSize: 13,
+              fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+              boxShadow: darkMode
+                ? "0 8px 30px rgba(0,0,0,0.5)"
+                : "0 8px 30px rgba(0,0,0,0.12)",
+              backdropFilter: "blur(20px)",
+              whiteSpace: "nowrap",
+            }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2 }}
+          >
+            Email copied!
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
   const [vw, setVw] = useState(() => window.innerWidth);
   const [vh, setVh] = useState(() => window.innerHeight);
@@ -1202,7 +1269,7 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
   const s = Math.min(sw, sh);
   const [shuffle, setShuffle] = useState(0);
   const handleShuffle = (e) => {
-    if (e.target.closest && e.target.closest("a")) return;
+    if (e.target.closest && e.target.closest("a, button")) return;
     setShuffle((v) => v + 1);
   };
 
@@ -1319,18 +1386,17 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
                 className="inline-block mt-2 text-[13px] hover:opacity-60 transition-opacity"
                 style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "#666", textDecoration: "underline" }}
               >
-                Download Resume ↓
+                Download Resume
               </a>
                 <div className="mt-1">
-                <a
-                  href="mailto:queenie2000824@gmail.com"
-                  className="inline-block text-[13px] transition-colors duration-200"
-                  style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "black" }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = "#aaa"}
-                  onMouseLeave={(e) => e.currentTarget.style.color = darkMode ? "rgba(255,255,255,0.5)" : "black"}
+                <button
+                  type="button"
+                  onClick={copyEmailAddress}
+                  className="inline-block text-[13px] underline hover:opacity-60 transition-opacity"
+                  style={{ color: darkMode ? "rgba(255,255,255,0.5)" : "#666", background: "none", border: "none", padding: 0, cursor: "pointer" }}
                 >
                 queenie2000824@gmail.com
-              </a>
+              </button>
                 </div>
             </div>
             <p
@@ -1831,6 +1897,7 @@ function FigJamPostIt({ rotate = -2, width = 420, scrollContainerRef, isMobile =
       {/* Email link overlay — positioned over "queenie2000824@gmail.com" */}
       <a
         href="mailto:queenie2000824@gmail.com"
+        onClick={copyEmailAddress}
         className="absolute"
         style={{
           top: "55%",
@@ -2025,7 +2092,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
                 </ul>
                 <p className="mt-4">
                   Say hello at{" "}
-                  <a href="mailto:queenie2000824@gmail.com" className="underline underline-offset-[3px]" style={{ color: fg }}>queenie2000824@gmail.com</a>
+                  <a href="mailto:queenie2000824@gmail.com" onClick={copyEmailAddress} className="underline underline-offset-[3px]" style={{ color: fg }}>queenie2000824@gmail.com</a>
                   {" "}or via{" "}
                   <a href="https://www.linkedin.com/in/queenie-hsiao/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-[3px]" style={{ color: fg }}>LinkedIn</a>.
                 </p>
@@ -2048,7 +2115,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
               </div>
               <div className="flex flex-col gap-2">
                 <p className="text-[10px] font-medium uppercase tracking-[0.1em]" style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999" }}>Community</p>
-                <AboutResumeRow leftBold="UXC NYU |" leftMuted=" Co-Founder & President" date="Fall 2024 - Present" fg={fg} muted={muted} />
+                <AboutResumeRow leftBold="UXC NYU |" leftMuted=" Co-Founder & President" date="2024 - 2026" fg={fg} muted={muted} />
               </div>
               <div className="flex flex-col gap-2">
                 <p className="text-[10px] font-medium uppercase tracking-[0.1em]" style={{ color: darkMode ? "rgba(255,255,255,0.4)" : "#999" }}>Education</p>
@@ -2142,7 +2209,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
                   Instagram
                 </a>
                 . Say hello at{" "}
-                <a href="mailto:queenie2000824@gmail.com" className="underline underline-offset-[3px] hover:opacity-70" style={{ color: fg }}>
+                <a href="mailto:queenie2000824@gmail.com" onClick={copyEmailAddress} className="underline underline-offset-[3px] hover:opacity-70" style={{ color: fg }}>
                   queenie2000824@gmail.com
                 </a>{" "}
                 or via{" "}
@@ -2199,7 +2266,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
               <AboutResumeRow
                 leftBold="UXC NYU |"
                 leftMuted=" Co-Founder & President"
-                date="Fall 2024 - Present"
+                date="2024 - 2026"
                 fg={fg}
                 muted={muted}
               />
@@ -2475,6 +2542,7 @@ export function Footer({ darkMode, onNavigate }) {
         </nav>
           <a
             href="mailto:queenie2000824@gmail.com"
+            onClick={copyEmailAddress}
           className="text-[13px] transition-opacity duration-200 active:opacity-70"
           style={{ color: iconFill, textDecoration: "none" }}
           >
@@ -2500,7 +2568,7 @@ export function Footer({ darkMode, onNavigate }) {
       <div className="hidden lg:grid grid-cols-3 py-10 gap-y-8">
         <div className="flex flex-col gap-3">
           <p className="text-[11px] uppercase tracking-[0.08em] font-medium" style={{ color: accent }}>Queenie Hsiao</p>
-          <a href="mailto:queenie2000824@gmail.com" className="cursor-none text-[13px] transition-opacity duration-200 hover:opacity-70" style={{ color: muted, textDecoration: "none" }}>
+          <a href="mailto:queenie2000824@gmail.com" onClick={copyEmailAddress} className="cursor-none text-[13px] transition-opacity duration-200 hover:opacity-70" style={{ color: muted, textDecoration: "none" }}>
             queenie2000824@gmail.com
           </a>
           <FooterNyTime muted={dim} />
@@ -3123,7 +3191,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
                 {" "}or{" "}
                 <a href="https://instagram.com/hsiao_archive" target="_blank" rel="noopener noreferrer" className="underline underline-offset-[3px]" style={{ color: fg }}>Instagram</a>
                 . Say hello at{" "}
-                <a href="mailto:queenie2000824@gmail.com" className="underline underline-offset-[3px]" style={{ color: fg }}>queenie2000824@gmail.com</a>
+                <a href="mailto:queenie2000824@gmail.com" onClick={copyEmailAddress} className="underline underline-offset-[3px]" style={{ color: fg }}>queenie2000824@gmail.com</a>
                 {" "}or via{" "}
                 <a href="https://www.linkedin.com/in/queenie-hsiao/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-[3px]" style={{ color: fg }}>LinkedIn</a>.
               </p>
@@ -3139,7 +3207,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
                 { role: "Design Intern", company: "Jason Wu", date: "Summer 2023" },
               ]},
               { section: "Community", rows: [
-                { role: "Co-Founder & President", company: "UXC NYU", date: "Fall 2024 – Present" },
+                { role: "Co-Founder & President", company: "UXC NYU", date: "2024 – 2026" },
               ]},
               { section: "Education", rows: [
                 { role: "MPS @ ITP", company: "New York University", date: "2024 – 2026" },
@@ -3514,6 +3582,7 @@ export default function App() {
       ) : null}
     </AnimatePresence>
     <GlassCursor darkMode={darkMode} />
+    <GlobalEmailToast darkMode={darkMode} />
     </>
   );
 }
