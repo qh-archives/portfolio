@@ -43,7 +43,7 @@ function useVScale() {
   return scale;
 }
 
-const projects = [
+export const projects = [
   {
     title: "Uber",
     year: "2025",
@@ -3485,6 +3485,7 @@ export default function App() {
           project={currentPage.project}
           darkMode={darkMode}
           onBack={goHome}
+          onSelectProject={selectProject}
         />
       ) : currentPage.page === "play" ? (
         <PlayPage

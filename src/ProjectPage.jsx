@@ -1,7 +1,123 @@
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import GlassCursor from "./GlassCursor";
-import { Footer, MobileTopNav } from "./App";
+import { Footer, MobileTopNav, projects } from "./App";
+
+/** Fixed display order for the case-study "See More" cards. */
+const SEE_MORE_ORDER = ["Uber", "Dandi", "Lume", "Flow-Fi"];
+
+/** Smaller version of the landing-page framed project card, used in the See More section. */
+function SeeMoreCard({ project, index, darkMode, onClick }) {
+  const borderColor = darkMode ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.8)";
+  const [hovered, setHovered] = useState(false);
+  const activeBorder = hovered ? "#0055FF" : borderColor;
+  return (
+    <div
+      className="cursor-pointer relative"
+      style={{ flex: "1 1 0", minWidth: 0 }}
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="relative w-full">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ border: `2px solid ${activeBorder}`, transition: "border-color 0.3s ease" }}
+        />
+        {[{ top: -7, left: -7 }, { top: -7, right: -7 }, { bottom: -7, left: -7 }, { bottom: -7, right: -7 }].map((pos, i) => (
+          <div
+            key={i}
+            className="absolute transition-all duration-300"
+            style={{ ...pos, width: 12, height: 12, border: `2px solid ${activeBorder}`, backgroundColor: darkMode ? "#1a1a1a" : "#F7F7F7", zIndex: 4 }}
+          />
+        ))}
+        <div className="overflow-hidden" style={{ border: "2px solid transparent" }}>
+          <div className="w-full" style={{ aspectRatio: "16 / 10" }}>
+            {project.video ? (
+              <video className="w-full h-full object-cover" src={project.video} style={project.imageStyle} autoPlay loop muted playsInline />
+            ) : (
+              <img alt={project.title} className="w-full h-full object-cover" src={project.image} style={project.imageStyle} />
+            )}
+          </div>
+          <div className="px-4 flex flex-col justify-start" style={{ paddingTop: 10, paddingBottom: 12, height: 84 }}>
+            <div className="flex items-center gap-1">
+              <span style={{ fontSize: 18, letterSpacing: "-0.5px", lineHeight: 1.2, color: darkMode ? "white" : "black" }}>{project.title}</span>
+              {project.year && (
+                <>
+                  <span style={{ width: 4, height: 4, borderRadius: "50%", display: "inline-block", margin: "0 4px", backgroundColor: darkMode ? "rgba(255,255,255,0.4)" : "#676767" }} />
+                  <span style={{ fontSize: 18, letterSpacing: "-0.5px", lineHeight: 1.2, color: darkMode ? "rgba(255,255,255,0.4)" : "#676767" }}>{project.year}</span>
+                </>
+              )}
+            </div>
+            {project.description && (
+              <p
+                style={{
+                  fontSize: 13,
+                  letterSpacing: "-0.2px",
+                  lineHeight: 1.4,
+                  marginTop: 4,
+                  color: darkMode ? "rgba(255,255,255,0.5)" : "black",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                  overflow: "hidden",
+                }}
+              >
+                {project.description}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** "See More" section shown at the bottom of each case study with the other case studies. */
+function SeeMoreSection({ currentTitle, darkMode, onSelectProject, isMobile }) {
+  const others = SEE_MORE_ORDER
+    .filter((t) => t !== currentTitle)
+    .map((t) => projects.find((p) => p.title === t))
+    .filter(Boolean);
+  if (others.length === 0) return null;
+
+  const go = (p) => {
+    if (onSelectProject) onSelectProject(p);
+    else window.location.hash = `#project/${encodeURIComponent(p.title.toLowerCase())}`;
+  };
+
+  return (
+    <motion.section
+      className="w-full"
+      style={{ marginTop: isMobile ? 100 : 180 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease }}
+    >
+      <div
+        className="flex items-center gap-3"
+        style={{ marginBottom: isMobile ? 24 : 32, justifyContent: isMobile ? "flex-start" : "flex-end" }}
+      >
+        <span
+          className="uppercase"
+          style={{ fontSize: 12, letterSpacing: "0.1em", color: darkMode ? "rgba(255,255,255,0.4)" : "#999", fontFamily: "'Instrument Sans', sans-serif" }}
+        >
+          See More Projects
+        </span>
+        <div className="flex-1" style={{ height: 1, backgroundColor: darkMode ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.12)" }} />
+      </div>
+      <div
+        className="flex"
+        style={{ gap: isMobile ? 28 : 40, flexDirection: isMobile ? "column" : "row", justifyContent: "space-between" }}
+      >
+        {others.map((p, i) => (
+          <SeeMoreCard key={p.title} project={p} index={i} darkMode={darkMode} onClick={() => go(p)} />
+        ))}
+      </div>
+    </motion.section>
+  );
+}
 
 
 function isTouchTablet() {
@@ -2261,7 +2377,7 @@ function SplitSection({ section, darkMode }) {
   );
 }
 
-export default function ProjectPage({ project, darkMode, onBack }) {
+export default function ProjectPage({ project, darkMode, onBack, onSelectProject }) {
   const isMobile = useIsMobile();
   const sections = project.caseStudy || [];
   const [unlocked, setUnlocked] = useState(false);
@@ -2286,7 +2402,7 @@ export default function ProjectPage({ project, darkMode, onBack }) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [project.title]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -2389,10 +2505,10 @@ export default function ProjectPage({ project, darkMode, onBack }) {
       <motion.div
         className="min-h-screen"
         style={{ backgroundColor: darkMode ? "#0F0F0F" : "#f7f7f7" }}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.5, ease }}
+        initial={{ opacity: 0, scale: 0.99 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.45, ease }}
       >
         {/* Mobile top bar */}
         <MobileTopNav darkMode={darkMode} onBack={() => { window.scrollTo({ top: 0, behavior: "instant" }); onBack(project); }} />
@@ -2437,6 +2553,15 @@ export default function ProjectPage({ project, darkMode, onBack }) {
           </div>
 
           {renderSections()}
+
+          {SEE_MORE_ORDER.includes(project.title) && (
+            <SeeMoreSection
+              currentTitle={project.title}
+              darkMode={darkMode}
+              onSelectProject={onSelectProject}
+              isMobile
+            />
+          )}
         </div>
 
         <div className="px-5">
@@ -2457,10 +2582,10 @@ export default function ProjectPage({ project, darkMode, onBack }) {
       style={{
         backgroundColor: darkMode ? "#0F0F0F" : "#f7f7f7",
       }}
-      initial={{ opacity: 0, y: 60 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -30 }}
-      transition={{ duration: 0.6, ease }}
+      initial={{ opacity: 0, scale: 0.99 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.45, ease }}
     >
       <div className="flex">
         <motion.div
@@ -2560,6 +2685,14 @@ export default function ProjectPage({ project, darkMode, onBack }) {
           </div>
 
           {renderSections()}
+
+          {SEE_MORE_ORDER.includes(project.title) && (
+            <SeeMoreSection
+              currentTitle={project.title}
+              darkMode={darkMode}
+              onSelectProject={onSelectProject}
+            />
+          )}
                     </div>
           </div>
       <div style={{ padding: "0 clamp(24px, 4vw, 60px)" }}>
