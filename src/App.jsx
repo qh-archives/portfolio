@@ -657,27 +657,6 @@ export const projects = [
     ],
   },
   {
-    title: "Digital Inspo Diary",
-    year: "2026",
-    video: "https://vz-53d1011b-a2d.b-cdn.net/57e822d5-3551-4536-8e39-3ed023851107/play_1080p.mp4",
-    imageStyle: { objectPosition: "center center" },
-    externalUrl: "https://queenieinspo.com/",
-    description: "Try it out at queenieinspo.com",
-    meta: [
-      { label: "Timeline", value: "2025" },
-      { label: "Role", value: "Product Design" },
-    ],
-    techStack: [
-      { category: "Design", tools: ["Figma"] },
-      { category: "Frontend", tools: ["TypeScript", "React", "Vite"] },
-      { category: "Styling", tools: ["Tailwind CSS"] },
-    ],
-    caseStudy: [
-      { type: "hero", image: "/images/case-studies/flow-fi/hero.jpg", height: "auto", heroAspect: "16 / 9" },
-      { type: "text", heading: "Overview", body: "Case study content coming soon." },
-    ],
-  },
-  {
     title: "Gravity Letters",
     year: "2025",
     video: "https://vz-53d1011b-a2d.b-cdn.net/35a43a2f-f27e-408b-a277-7efc40c8ce8f/play_1080p.mp4",
