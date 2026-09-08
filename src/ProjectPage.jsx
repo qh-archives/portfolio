@@ -89,7 +89,7 @@ function SeeMoreSection({ currentTitle, darkMode, onSelectProject, isMobile }) {
   return (
     <motion.section
       className="w-full"
-      style={{ marginTop: isMobile ? 110 : 198 }}
+      style={{ marginTop: isMobile ? 132 : 238 }}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
