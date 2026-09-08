@@ -2514,7 +2514,7 @@ export default function ProjectPage({ project, darkMode, onBack, onSelectProject
         <MobileTopNav darkMode={darkMode} onBack={() => { window.scrollTo({ top: 0, behavior: "instant" }); onBack(project); }} />
 
         {/* Content */}
-        <div className="px-5 pb-24" style={{ paddingTop: "calc(57px + 32px)" }}>
+        <div className="px-5 pb-[67px]" style={{ paddingTop: "calc(57px + 32px)" }}>
           <div className="flex flex-col gap-6 mb-10">
             <motion.h1
               className="text-[28px] font-medium tracking-[-0.56px] leading-[1.2]"
@@ -2643,7 +2643,7 @@ export default function ProjectPage({ project, darkMode, onBack, onSelectProject
           </div>
         </motion.div>
 
-        <div className="flex-1 pt-[40px] pb-[200px]" style={{ paddingLeft: "clamp(32px, 9vw, 140px)", paddingRight: "clamp(32px, 9vw, 140px)" }}>
+        <div className="flex-1 pt-[40px] pb-[140px]" style={{ paddingLeft: "clamp(32px, 9vw, 140px)", paddingRight: "clamp(32px, 9vw, 140px)" }}>
 
           <div className="flex flex-col gap-10 mb-16">
             <motion.h1

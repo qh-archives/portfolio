@@ -2134,7 +2134,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
           accent={accent}
           paper={paper}
           darkMode={darkMode}
-          marginTop={170}
+          marginTop={153}
           vScale={vScale}
         />
         <AboutPhotoPanel
@@ -2370,7 +2370,7 @@ const footerNavLinks = [
 ];
 
 /** Bump when you ship meaningful site changes */
-const FOOTER_LAST_UPDATED = "March 30, 2026";
+const FOOTER_LAST_UPDATED = "September 8, 2026";
 
 function FooterNyTime({ muted }) {
   const [now, setNow] = useState(() => new Date());
