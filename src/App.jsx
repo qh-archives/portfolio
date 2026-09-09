@@ -2139,7 +2139,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
         />
         <AboutPhotoPanel
           title="Queenie Hsiao"
-          src="https://queenie-works-images.b-cdn.net/portrait_mptbin.jpg"
+          src="/images/about/Queenie.jpg"
           alt="Queenie Hsiao"
           accent={accent}
           paper={paper}
@@ -3149,7 +3149,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
 
       {/* ── About ── */}
       <div id="about" className="px-5 pb-10 pt-10" style={{ overflow: "visible", scrollMarginTop: 20 }}>
-        <img src="https://queenie-works-images.b-cdn.net/about_jo8ete.png" alt="Queenie" className="w-full object-contain mb-4" />
+        <img src="/images/about/me2.png" alt="Queenie" className="w-full object-contain mb-4" />
         <div className="relative" style={{ border: "1.5px solid #8A38F5", backgroundColor: darkMode ? "#141414" : "#fff", padding: "24px", overflow: "visible" }}>
           {[{ top: -6, left: -6 }, { top: -6, right: -6 }, { bottom: -6, left: -6 }, { bottom: -6, right: -6 }].map((pos, i) => (
             <span key={i} className="absolute pointer-events-none" style={{ ...pos, width: 12, height: 12, border: "1.5px solid #8A38F5", backgroundColor: bg, zIndex: 2 }} />
