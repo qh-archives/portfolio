@@ -1099,7 +1099,7 @@ function BusinessCardStack({ darkMode }) {
           If you like my work, contact me!
         </p>
         <div className="flex gap-2" style={{ marginTop: "5px" }}>
-          <a href="https://instagram.com/hsiao_archive" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
+          <a href="https://www.instagram.com/things.by.qh" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1.5" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
           </a>
           <a href="https://x.com/queenie_hsiao" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
@@ -1348,7 +1348,7 @@ function HeroSectionHorizontal({ darkMode, skipIntro = false }) {
                 If you like my work, contact me!
               </p>
               <div className="flex gap-2" style={{ marginTop: "7.2px" }}>
-                <a href="https://instagram.com/hsiao_archive" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
+                <a href="https://www.instagram.com/things.by.qh" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={darkMode ? "white" : "black"} strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="5" /><circle cx="17.5" cy="6.5" r="1.5" fill={darkMode ? "white" : "black"} stroke="none" /></svg>
                 </a>
                 <a href="https://x.com/queenie_hsiao" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
@@ -2184,7 +2184,7 @@ function AboutMeStripSection({ darkMode, skipIntro = false, scrollContainerRef, 
                   X
                 </a>{" "}
                 or{" "}
-                <a href="https://instagram.com/hsiao_archive" target="_blank" rel="noopener noreferrer" className="underline underline-offset-[3px] hover:opacity-70" style={{ color: fg }}>
+                <a href="https://www.instagram.com/things.by.qh" target="_blank" rel="noopener noreferrer" className="underline underline-offset-[3px] hover:opacity-70" style={{ color: fg }}>
                   Instagram
                 </a>
                 . Say hello at{" "}
@@ -2487,7 +2487,7 @@ export function Footer({ darkMode, onNavigate }) {
   const socialLinks = [
     { href: "https://www.linkedin.com/in/queenie-hsiao/", label: "LinkedIn" },
     { href: "https://x.com/queenie_hsiao", label: "Twitter (X)" },
-    { href: "https://instagram.com/hsiao_archive", label: "Instagram" },
+    { href: "https://www.instagram.com/things.by.qh", label: "Instagram" },
   ];
 
   return (
@@ -3168,7 +3168,7 @@ function MobileHomePage({ darkMode, toggleDark, selectProject }) {
                 You can see more of my work on{" "}
                 <a href="https://x.com/queenie_hsiao" target="_blank" rel="noopener noreferrer" className="underline underline-offset-[3px]" style={{ color: fg }}>X</a>
                 {" "}or{" "}
-                <a href="https://instagram.com/hsiao_archive" target="_blank" rel="noopener noreferrer" className="underline underline-offset-[3px]" style={{ color: fg }}>Instagram</a>
+                <a href="https://www.instagram.com/things.by.qh" target="_blank" rel="noopener noreferrer" className="underline underline-offset-[3px]" style={{ color: fg }}>Instagram</a>
                 . Say hello at{" "}
                 <a href="mailto:queenie2000824@gmail.com" onClick={copyEmailAddress} className="underline underline-offset-[3px]" style={{ color: fg }}>queenie2000824@gmail.com</a>
                 {" "}or via{" "}
